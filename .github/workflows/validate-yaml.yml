@@ -1,0 +1,31 @@
+name: Validate YAML Data
+
+on:
+  push:
+    paths:
+      - 'data/**/*.yaml'
+      - 'data/**/*.yml'
+  pull_request:
+    paths:
+      - 'data/**/*.yaml'
+      - 'data/**/*.yml'
+
+jobs:
+  validate:
+    name: Validate YAML Schema
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Run YAML schema validator
+        run: python .github/scripts/validate_yaml.py
