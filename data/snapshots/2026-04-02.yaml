@@ -1,0 +1,65 @@
+# Snapshot: April 2, 2026
+# Captures the state of all tracked models and scores at this point in time
+# Used for historical comparison and timeline features
+
+snapshot_date: 2026-04-02
+notes: "Initial snapshot. GLM-5.1 released March 27 but coding scores unverified."
+
+leaderboard:
+  - rank: 1
+    model: Gemini 3.1 Pro
+    provider: google
+    intelligence_index: 57
+  - rank: 1
+    model: GPT-5.4
+    provider: openai
+    intelligence_index: 57
+  - rank: 3
+    model: GPT-5.3 Codex
+    provider: openai
+    intelligence_index: 54
+  - rank: 4
+    model: Claude Opus 4.6
+    provider: anthropic
+    intelligence_index: 53
+  - rank: 5
+    model: Claude Sonnet 4.6
+    provider: anthropic
+    intelligence_index: 52
+  - rank: 6
+    model: GPT-5.2
+    provider: openai
+    intelligence_index: 51
+  - rank: 7
+    model: GLM-5
+    provider: zai
+    intelligence_index: 50
+  - rank: 7
+    model: Claude Opus 4.5
+    provider: anthropic
+    intelligence_index: 50
+  - rank: 7
+    model: MiniMax-M2.7
+    provider: minimax
+    intelligence_index: 50
+  - rank: 10
+    model: MiMo-V2-Pro
+    provider: xiaomi
+    intelligence_index: 49
+  - rank: 11
+    model: Grok 4.20 Beta
+    provider: xai
+    intelligence_index: 48
+
+category_winners:
+  reasoning: Gemini 3.1 Pro  # ARC-AGI-2: 77.1%
+  science: Gemini 3.1 Pro  # GPQA Diamond: 94.3%
+  coding_swe: Claude Opus 4.6  # SWE-Bench: 80.8%
+  coding_terminal: GPT-5.3 Codex  # Terminal-Bench: 77.3% (own harness)
+  coding_competitive: Gemini 3.1 Pro  # LiveCodeBench: 2887 Elo
+  math: GPT-5.4 Pro  # FrontierMath: 50.0%
+  knowledge_work: Claude Sonnet 4.6  # GDPval-AA: 1633 Elo
+  web_research: Claude Opus 4.6  # BrowseComp: 86.8%
+  long_context: Gemini 3.1 Pro  # MRCR v2: 84.9% (tied w/ Sonnet 4.6)
+  best_value: GLM-5  # Intelligence 50 at $1.55/M
+  fastest: Grok 4.20 Beta  # 248 t/s

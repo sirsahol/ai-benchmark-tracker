@@ -1,0 +1,66 @@
+provider:
+  name: Z.ai (formerly Zhipu AI)
+  brand_color: "#6C5CE7"
+  website: https://z.ai
+  notes: "World's first publicly traded foundation model company (HK IPO Jan 2026, $6.6B valuation)"
+
+models:
+  - id: glm-5.1
+    name: GLM-5.1
+    released: 2026-03-27
+    type: open-source (MIT, weights coming)
+    context_window: 200k
+    max_output: 131k
+    pricing:
+      coding_plan_monthly: "$3–$30"
+      notes: "API pricing TBD; inherits GLM-5 base API pricing"
+    architecture:
+      total_params: 744B
+      architecture: MoE
+      experts_total: 256
+      experts_active: 8
+      active_params: "~40–44B"
+      training_hardware: "Huawei Ascend 910B (100,000 chips, zero NVIDIA)"
+      training_data: 28.5T tokens
+      attention: DeepSeek Sparse Attention (DSA)
+    scores:
+      coding_eval_claude_code: 45.3
+    verification:
+      status: unverified
+      notes: "Coding score (45.3, 94.6% of Opus 4.6) is self-reported by Z.ai using Claude Code harness. Not yet independently verified as of April 2, 2026."
+      source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
+
+  - id: glm-5
+    name: GLM-5
+    released: 2026-02-10
+    type: open-source (MIT)
+    context_window: 200k
+    max_output: 131k
+    pricing:
+      input_per_m: 1.00
+      output_per_m: 3.20
+    architecture:
+      total_params: 744B
+      architecture: MoE
+      experts_total: 256
+      experts_active: 8
+      training_hardware: "Huawei Ascend 910B"
+    scores:
+      intelligence_index: 50
+      speed_tps: 68
+      swe_bench_verified: 77.8
+      terminal_bench_2: 56.2
+      browsecomp: 75.9
+      coding_eval_claude_code: 35.4
+    verification:
+      swe_bench_verified: "Independently validated — highest open-weight score"
+      intelligence_index: "First open-weight model to breach 50 threshold"
+
+  - id: glm-4.7
+    name: GLM-4.7
+    released: 2025-12-01
+    type: open-source (MIT)
+    context_window: 128k
+    scores:
+      intelligence_index: 42
+    notes: "Previous flagship; used as Opus/Sonnet mapping target in Z.ai/Antigravity"

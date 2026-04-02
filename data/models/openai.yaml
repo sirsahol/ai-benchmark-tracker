@@ -1,0 +1,66 @@
+provider:
+  name: OpenAI
+  brand_color: "#10A37F"
+  website: https://openai.com
+
+models:
+  - id: gpt-5.4
+    name: GPT-5.4
+    released: 2026-03-15
+    type: proprietary
+    context_window: 1.05M
+    pricing:
+      composite_per_m: 5.63
+    scores:
+      intelligence_index: 57
+      speed_tps: 80
+      swe_bench_verified: 76.9
+      frontier_math: 47.6
+      gdpval: 83.0
+
+  - id: gpt-5.3-codex
+    name: GPT-5.3 Codex
+    released: 2026-02-05
+    type: proprietary
+    context_window: 400k
+    pricing:
+      composite_per_m: 4.81
+    scores:
+      intelligence_index: 54
+      speed_tps: 73
+      terminal_bench_2: 77.3
+      swe_bench_pro: 56.8
+      weird_ml_v2: 79.3
+
+  - id: gpt-5.2
+    name: GPT-5.2
+    released: 2025-12-01
+    type: proprietary
+    context_window: 400k
+    pricing:
+      composite_per_m: 4.81
+    scores:
+      intelligence_index: 51
+      speed_tps: 70
+      arc_agi_2: 52.9
+      gpqa_diamond: 91.4
+      swe_bench_verified: 80.0
+      terminal_bench_2: 54.0
+      hle_with_tools: 45.5
+      frontier_math: 40.7
+      gdpval_aa_elo: 1462
+      browsecomp: 65.8
+      livecode_bench_elo: 2393
+      mrcr_v2_128k: 83.8
+
+  - id: gpt-5.1
+    name: GPT-5.1
+    released: 2025-09-01
+    type: proprietary
+    context_window: 200k
+    pricing:
+      input_per_m: 1.25
+      output_per_m: 10.00
+    scores:
+      intelligence_index: 48
+      speed_tps: 83

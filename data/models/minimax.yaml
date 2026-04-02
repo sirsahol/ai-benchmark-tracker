@@ -1,0 +1,16 @@
+provider:
+  name: MiniMax
+  brand_color: "#FF6B6B"
+  website: https://minimax.io
+
+models:
+  - id: minimax-m2.7
+    name: MiniMax-M2.7
+    released: 2026-01-15
+    type: proprietary
+    context_window: 205k
+    pricing:
+      composite_per_m: 0.53
+    scores:
+      intelligence_index: 50
+      speed_tps: 45

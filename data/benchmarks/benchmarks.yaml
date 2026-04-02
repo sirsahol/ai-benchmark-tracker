@@ -1,0 +1,106 @@
+# Benchmark Definitions
+# Each benchmark is identified by its key (e.g., arc_agi_2)
+# Categories: reasoning, science, coding, math, knowledge_work, long_context, agentic
+
+benchmarks:
+  arc_agi_2:
+    name: ARC-AGI-2
+    category: reasoning
+    description: Novel abstract reasoning puzzles — tests genuine pattern inference, not recall
+    unit: percent
+    higher_is_better: true
+    source: ARC Prize
+    url: https://arcprize.org
+
+  gpqa_diamond:
+    name: GPQA Diamond
+    category: science
+    description: 198 PhD-level science questions (biology, chemistry, physics)
+    unit: percent
+    higher_is_better: true
+    source: Multiple (Google DeepMind, LM Council)
+
+  swe_bench_verified:
+    name: SWE-Bench Verified
+    category: coding
+    description: 500 human-curated GitHub issues — model must fix real code and pass unit tests
+    unit: percent
+    higher_is_better: true
+    source: SWE-bench project
+    url: https://www.swebench.com
+
+  terminal_bench_2:
+    name: Terminal-Bench 2.0
+    category: coding
+    description: Agentic terminal coding — file editing, commands, debugging via terminal
+    unit: percent
+    higher_is_better: true
+    source: Anthropic, Google DeepMind
+    notes: "Harness varies by provider (Terminus-2 vs Codex CLI)"
+
+  hle_with_tools:
+    name: "Humanity's Last Exam (with tools)"
+    category: reasoning
+    description: 2,500 expert academic questions from ~1,000 contributors
+    unit: percent
+    higher_is_better: true
+    source: Center for AI Safety
+    url: https://lastexam.ai
+
+  frontier_math:
+    name: FrontierMath
+    category: math
+    description: Research-level mathematics (undergrad through research-level), manually graded
+    unit: percent
+    higher_is_better: true
+    source: Epoch AI
+
+  gdpval_aa_elo:
+    name: GDPval-AA Elo
+    category: knowledge_work
+    description: 44 knowledge work occupations from top 9 US GDP industries, human-rated
+    unit: elo
+    higher_is_better: true
+    source: Artificial Analysis
+
+  browsecomp:
+    name: BrowseComp
+    category: knowledge_work
+    description: Locating hard-to-find information online (autonomous web research)
+    unit: percent
+    higher_is_better: true
+    source: OpenAI
+
+  livecode_bench_elo:
+    name: LiveCodeBench Pro
+    category: coding
+    description: Competitive programming from Codeforces, ICPC, IOI
+    unit: elo
+    higher_is_better: true
+    source: Google DeepMind
+
+  mrcr_v2_128k:
+    name: MRCR v2 (8-needle 128k)
+    category: long_context
+    description: Needle-in-a-haystack retrieval across 128k token context
+    unit: percent
+    higher_is_better: true
+    source: Multiple
+
+  coding_eval_claude_code:
+    name: "Coding Eval (Claude Code Harness)"
+    category: coding
+    description: "Coding evaluation using Claude Code as test framework"
+    unit: points
+    higher_is_better: true
+    source: Z.ai
+    notes: "Not a standard benchmark — Z.ai's internal evaluation. GLM scores are self-reported."
+
+  intelligence_index:
+    name: Artificial Analysis Intelligence Index
+    category: composite
+    description: Synthesis metric incorporating 10 evaluations (agentic, coding, scientific reasoning)
+    unit: score
+    higher_is_better: true
+    source: Artificial Analysis
+    url: https://artificialanalysis.ai

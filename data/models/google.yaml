@@ -1,0 +1,52 @@
+provider:
+  name: Google DeepMind
+  brand_color: "#4285F4"
+  website: https://deepmind.google
+
+models:
+  - id: gemini-3.1-pro
+    name: Gemini 3.1 Pro
+    released: 2026-02-19
+    type: proprietary
+    context_window: 1M
+    max_output: 65k
+    pricing:
+      input_per_m: 2.00
+      output_per_m: 12.00
+    architecture:
+      thinking_levels: [minimal, low, medium, high]
+      notes: "Preview; 75% prompt caching discounts; video/audio/image input"
+    scores:
+      intelligence_index: 57
+      speed_tps: 109
+      arc_agi_2: 77.1
+      gpqa_diamond: 94.3
+      swe_bench_verified: 80.6
+      terminal_bench_2: 68.5
+      hle_with_tools: 51.4
+      browsecomp: 85.9
+      livecode_bench_elo: 2887
+      mrcr_v2_128k: 84.9
+      mmmlu: 92.6
+      apex_agents: 33.5
+      mcp_atlas: 69.2
+      scicode: 59
+
+  - id: gemini-3-pro
+    name: Gemini 3 Pro
+    released: 2025-11-01
+    type: proprietary
+    context_window: 1M
+    pricing:
+      input_per_m: 2.00
+      output_per_m: 12.00
+    scores:
+      intelligence_index: 48
+      speed_tps: 121
+      arc_agi_2: 31.1
+      gpqa_diamond: 92.6
+      swe_bench_verified: 76.2
+      terminal_bench_2: 56.9
+      hle_with_tools: 45.8
+      livecode_bench_elo: 2439
+      mrcr_v2_128k: 77.0

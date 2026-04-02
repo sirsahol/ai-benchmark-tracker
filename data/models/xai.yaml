@@ -1,0 +1,30 @@
+provider:
+  name: xAI
+  brand_color: "#E8E8E8"
+  website: https://x.ai
+
+models:
+  - id: grok-4.20-beta
+    name: Grok 4.20 Beta
+    released: 2026-02-17
+    type: proprietary
+    context_window: 2M
+    pricing:
+      composite_per_m: 3.00
+    architecture:
+      notes: "Four AI agents running in parallel; new architecture"
+    scores:
+      intelligence_index: 48
+      speed_tps: 248
+      arc_agi_2: 16
+      gpqa_diamond: 88
+
+  - id: grok-4
+    name: Grok 4
+    released: 2025-08-01
+    type: proprietary
+    context_window: 2M
+    scores:
+      gpqa_diamond: 87.5
+      aime_2025: 92.0
+      simple_qa: 95.0

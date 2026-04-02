@@ -1,0 +1,66 @@
+provider:
+  name: Anthropic
+  brand_color: "#D4A27F"
+  website: https://www.anthropic.com
+
+models:
+  - id: claude-opus-4.6
+    name: Claude Opus 4.6
+    released: 2026-02-05
+    type: proprietary
+    context_window: 1M (beta)
+    max_output: 128k
+    pricing:
+      input_per_m: 5.00
+      output_per_m: 25.00
+    architecture:
+      notes: "1M context in beta; premium pricing for >200k input ($10/$37.50)"
+    scores:
+      intelligence_index: 53
+      speed_tps: 43
+      arc_agi_2: 68.8
+      gpqa_diamond: 90.5
+      swe_bench_verified: 80.8
+      terminal_bench_2: 65.4
+      hle_with_tools: 53.1
+      frontier_math: 40.7
+      gdpval_aa_elo: 1606
+      browsecomp: 86.8
+      mrcr_v2_128k: 84.0
+      coding_eval_claude_code: 47.9
+      biglaw_bench: 90.2
+
+  - id: claude-sonnet-4.6
+    name: Claude Sonnet 4.6
+    released: 2026-02-17
+    type: proprietary
+    context_window: 1M (beta)
+    max_output: 64k
+    pricing:
+      input_per_m: 3.00
+      output_per_m: 15.00
+    scores:
+      intelligence_index: 52
+      speed_tps: 68
+      arc_agi_2: 60.4
+      gpqa_diamond: 89.9
+      swe_bench_verified: 79.6
+      terminal_bench_2: 59.1
+      hle_with_tools: 49.0
+      gdpval_aa_elo: 1633
+      mrcr_v2_128k: 84.9
+
+  - id: claude-opus-4.5
+    name: Claude Opus 4.5
+    released: 2025-10-22
+    type: proprietary
+    context_window: 200k
+    max_output: 64k
+    pricing:
+      input_per_m: 5.00
+      output_per_m: 25.00
+    scores:
+      intelligence_index: 50
+      speed_tps: 50
+      swe_bench_verified: 76.7
+      browsecomp: 67.8
