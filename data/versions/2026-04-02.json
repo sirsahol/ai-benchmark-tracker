@@ -1,0 +1,1614 @@
+{
+  "meta": {
+    "built_at": "2026-04-02T22:08:19.041228Z",
+    "schema_version": "3",
+    "model_count": 21,
+    "benchmark_count": 12
+  },
+  "benchmarks": {
+    "arc_agi_2": {
+      "name": "ARC-AGI-2",
+      "category": "reasoning",
+      "description": "Novel abstract reasoning puzzles \u2014 tests genuine pattern inference, not recall",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "ARC Prize",
+      "url": "https://arcprize.org"
+    },
+    "gpqa_diamond": {
+      "name": "GPQA Diamond",
+      "category": "science",
+      "description": "198 PhD-level science questions (biology, chemistry, physics)",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "Multiple (Google DeepMind, LM Council)"
+    },
+    "swe_bench_verified": {
+      "name": "SWE-Bench Verified",
+      "category": "coding",
+      "description": "500 human-curated GitHub issues \u2014 model must fix real code and pass unit tests",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "SWE-bench project",
+      "url": "https://www.swebench.com"
+    },
+    "terminal_bench_2": {
+      "name": "Terminal-Bench 2.0",
+      "category": "coding",
+      "description": "Agentic terminal coding \u2014 file editing, commands, debugging via terminal",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "Anthropic, Google DeepMind",
+      "notes": "Harness varies by provider (Terminus-2 vs Codex CLI)"
+    },
+    "hle_with_tools": {
+      "name": "Humanity's Last Exam (with tools)",
+      "category": "reasoning",
+      "description": "2,500 expert academic questions from ~1,000 contributors",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "Center for AI Safety",
+      "url": "https://lastexam.ai"
+    },
+    "frontier_math": {
+      "name": "FrontierMath",
+      "category": "math",
+      "description": "Research-level mathematics (undergrad through research-level), manually graded",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "Epoch AI"
+    },
+    "gdpval_aa_elo": {
+      "name": "GDPval-AA Elo",
+      "category": "knowledge_work",
+      "description": "44 knowledge work occupations from top 9 US GDP industries, human-rated",
+      "unit": "elo",
+      "higher_is_better": true,
+      "source": "Artificial Analysis"
+    },
+    "browsecomp": {
+      "name": "BrowseComp",
+      "category": "knowledge_work",
+      "description": "Locating hard-to-find information online (autonomous web research)",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "OpenAI"
+    },
+    "livecode_bench_elo": {
+      "name": "LiveCodeBench Pro",
+      "category": "coding",
+      "description": "Competitive programming from Codeforces, ICPC, IOI",
+      "unit": "elo",
+      "higher_is_better": true,
+      "source": "Google DeepMind"
+    },
+    "mrcr_v2_128k": {
+      "name": "MRCR v2 (8-needle 128k)",
+      "category": "long_context",
+      "description": "Needle-in-a-haystack retrieval across 128k token context",
+      "unit": "percent",
+      "higher_is_better": true,
+      "source": "Multiple"
+    },
+    "coding_eval_claude_code": {
+      "name": "Coding Eval (Claude Code Harness)",
+      "category": "coding",
+      "description": "Coding evaluation using Claude Code as test framework",
+      "unit": "points",
+      "higher_is_better": true,
+      "source": "Z.ai",
+      "notes": "Not a standard benchmark \u2014 Z.ai's internal evaluation. GLM scores are self-reported."
+    },
+    "intelligence_index": {
+      "name": "Artificial Analysis Intelligence Index",
+      "category": "composite",
+      "description": "Synthesis metric incorporating 10 evaluations (agentic, coding, scientific reasoning)",
+      "unit": "score",
+      "higher_is_better": true,
+      "source": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai"
+    }
+  },
+  "providers": {
+    "anthropic": {
+      "name": "Anthropic",
+      "brand_color": "#D4A27F",
+      "website": "https://www.anthropic.com"
+    },
+    "google": {
+      "name": "Google DeepMind",
+      "brand_color": "#4285F4",
+      "website": "https://deepmind.google"
+    },
+    "meta": {
+      "name": "Meta",
+      "brand_color": "#0668E1",
+      "website": "https://llama.meta.com"
+    },
+    "minimax": {
+      "name": "MiniMax",
+      "brand_color": "#FF6B6B",
+      "website": "https://minimax.io"
+    },
+    "moonshot": {
+      "name": "Moonshot AI",
+      "brand_color": "#0F3460",
+      "website": "https://www.moonshot.cn"
+    },
+    "openai": {
+      "name": "OpenAI",
+      "brand_color": "#10A37F",
+      "website": "https://openai.com"
+    },
+    "xai": {
+      "name": "xAI",
+      "brand_color": "#E8E8E8",
+      "website": "https://x.ai"
+    },
+    "zai": {
+      "name": "Z.ai (formerly Zhipu AI)",
+      "brand_color": "#6C5CE7",
+      "website": "https://z.ai",
+      "notes": "World's first publicly traded foundation model company (HK IPO Jan 2026, $6.6B valuation). On US Entity List since Jan 2025 \u2014 trains entirely on Huawei Ascend hardware."
+    }
+  },
+  "models": [
+    {
+      "id": "llama-4-scout",
+      "name": "Llama 4 Scout",
+      "released": "2025-04-01",
+      "type": "open-source",
+      "context_window": "10M",
+      "tags": [
+        "open-weight",
+        "fast",
+        "long-context",
+        "tool-use"
+      ],
+      "pricing": {
+        "input_per_m": 0.08,
+        "output_per_m": 0.3
+      },
+      "architecture": {
+        "notes": "10M context window \u2014 largest of any tracked model. MoE architecture."
+      },
+      "scores": {
+        "speed_tps": {
+          "value": 2600,
+          "self_reported": false,
+          "benchmark_date": "2025-04-01",
+          "source": "https://www.siliconflow.com/articles/benchmark",
+          "notes": "Fastest model tracked \u2014 2600 t/s"
+        },
+        "mmlu": {
+          "value": 79.6,
+          "self_reported": false,
+          "benchmark_date": "2025-04-01",
+          "source": "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout",
+          "notes": null
+        },
+        "mmlu_pro": {
+          "value": 74.3,
+          "self_reported": false,
+          "benchmark_date": "2025-04-01",
+          "source": "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "meta",
+      "provider_name": "Meta",
+      "provider_color": "#0668E1"
+    },
+    {
+      "id": "llama-4-maverick",
+      "name": "Llama 4 Maverick",
+      "released": "2025-04-01",
+      "type": "open-source",
+      "context_window": "10M",
+      "tags": [
+        "open-weight",
+        "long-context"
+      ],
+      "pricing": {
+        "input_per_m": 0.2,
+        "output_per_m": 0.6
+      },
+      "scores": {
+        "speed_tps": {
+          "value": 1260,
+          "self_reported": false,
+          "benchmark_date": "2025-04-01",
+          "source": "https://www.siliconflow.com/articles/benchmark",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "meta",
+      "provider_name": "Meta",
+      "provider_color": "#0668E1"
+    },
+    {
+      "id": "kimi-k2",
+      "name": "Kimi K2",
+      "released": "2025-07-01",
+      "type": "open-source",
+      "context_window": "128k",
+      "superseded_by": "kimi-k2.5",
+      "tags": [
+        "open-weight",
+        "coding",
+        "math",
+        "agentic"
+      ],
+      "pricing": {
+        "input_per_m": 0.15,
+        "output_per_m": 0.6
+      },
+      "architecture": {
+        "notes": "First major Kimi frontier release; trillion-parameter MoE; strong math reasoning"
+      },
+      "scores": {
+        "swe_bench_verified": {
+          "value": 65.8,
+          "self_reported": false,
+          "benchmark_date": "2025-07-11",
+          "source": "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free",
+          "notes": "Independently verified on official SWE-Bench leaderboard"
+        },
+        "livecode_bench": {
+          "value": 53.7,
+          "self_reported": false,
+          "benchmark_date": "2025-07-11",
+          "source": "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free",
+          "notes": null
+        },
+        "math_500": {
+          "value": 97.0,
+          "self_reported": false,
+          "benchmark_date": "2025-07-11",
+          "source": "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free",
+          "notes": "Kimi K2 Thinking variant leads LiveCodeBench among open-weight models per Vellum"
+        }
+      },
+      "verification": {
+        "status": "verified",
+        "notes": "SWE-Bench and LiveCodeBench verified via official leaderboards"
+      },
+      "provider_id": "moonshot",
+      "provider_name": "Moonshot AI",
+      "provider_color": "#0F3460"
+    },
+    {
+      "id": "grok-4",
+      "name": "Grok 4",
+      "released": "2025-08-01",
+      "type": "proprietary",
+      "context_window": "2M",
+      "superseded_by": "grok-4.20-beta",
+      "tags": [
+        "reasoning",
+        "math",
+        "long-context"
+      ],
+      "pricing": {
+        "composite_per_m": 2.0
+      },
+      "scores": {
+        "gpqa_diamond": {
+          "value": 87.5,
+          "self_reported": false,
+          "benchmark_date": "2025-08-01",
+          "source": "https://www.siliconflow.com/articles/benchmark",
+          "notes": null
+        },
+        "aime_2025": {
+          "value": 92.0,
+          "self_reported": false,
+          "benchmark_date": "2025-08-01",
+          "source": "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout",
+          "notes": null
+        },
+        "simple_qa": {
+          "value": 95.0,
+          "self_reported": false,
+          "benchmark_date": "2025-08-01",
+          "source": "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "partially_verified"
+      },
+      "provider_id": "xai",
+      "provider_name": "xAI",
+      "provider_color": "#E8E8E8"
+    },
+    {
+      "id": "glm-5.1",
+      "name": "GLM-5.1",
+      "released": "2026-03-27",
+      "type": "open-source",
+      "context_window": "200k",
+      "max_output": "131k",
+      "tags": [
+        "open-weight",
+        "coding",
+        "agentic",
+        "efficient"
+      ],
+      "pricing": {
+        "coding_plan_monthly_usd": "$3\u2013$30",
+        "notes": "API pricing TBD; MIT license \u2014 self-hostable at zero per-token cost"
+      },
+      "architecture": {
+        "total_params": "744B",
+        "architecture": "MoE",
+        "experts_total": 256,
+        "experts_active": 8,
+        "active_params": "~40\u201344B",
+        "training_hardware": "100,000 \u00d7 Huawei Ascend 910B (zero NVIDIA)",
+        "training_data_tokens": "28.5T (inherited from GLM-5 base)",
+        "attention": "DeepSeek Sparse Attention (DSA)",
+        "notes": "Post-training update on GLM-5 base \u2014 not a full retrain. Significant improvements in agentic instruction-following and long-running tasks."
+      },
+      "scores": {
+        "coding_eval_claude_code": {
+          "value": 45.3,
+          "self_reported": true,
+          "benchmark_date": "2026-03-27",
+          "source": "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026",
+          "notes": "Self-reported by Z.ai using Claude Code harness (non-standard). 94.6% of Claude Opus 4.6 (47.9). 28% improvement over GLM-5 (35.4). Independent verification pending."
+        }
+      },
+      "verification": {
+        "status": "unverified",
+        "notes": "Coding score (45.3 = 94.6% of Opus 4.6) is entirely self-reported. Claude Code harness is unconventional and not directly comparable to SWE-Bench or Terminal-Bench. No independent evaluation published as of April 2, 2026. Expected within weeks."
+      },
+      "provider_id": "zai",
+      "provider_name": "Z.ai (formerly Zhipu AI)",
+      "provider_color": "#6C5CE7"
+    },
+    {
+      "id": "gemini-3.1-pro",
+      "name": "Gemini 3.1 Pro",
+      "released": "2026-02-19",
+      "type": "proprietary",
+      "context_window": "1M",
+      "max_output": "65k",
+      "tags": [
+        "flagship",
+        "reasoning",
+        "science",
+        "coding",
+        "agentic",
+        "long-context"
+      ],
+      "pricing": {
+        "input_per_m": 2.0,
+        "output_per_m": 12.0,
+        "notes": "Same price as Gemini 3 Pro \u2014 major capability upgrade at no cost increase"
+      },
+      "architecture": {
+        "thinking_levels": [
+          "minimal",
+          "low",
+          "medium",
+          "high"
+        ],
+        "notes": "Preview as of April 2026; 75% prompt caching discounts; video/audio/image/speech input; output truncation fixed vs 3 Pro"
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 57,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "arc_agi_2": {
+          "value": 77.1,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "ARC Prize verified \u2014 highest recorded score on this benchmark"
+        },
+        "gpqa_diamond": {
+          "value": 94.3,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Highest ever recorded on GPQA Diamond per PCMag"
+        },
+        "swe_bench_verified": {
+          "value": 80.6,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "terminal_bench_2": {
+          "value": 68.5,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Terminus-2 harness"
+        },
+        "hle_with_tools": {
+          "value": 51.4,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "browsecomp": {
+          "value": 85.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://almcorp.com/blog/gemini-3-1-pro-complete-guide/",
+          "notes": null
+        },
+        "livecode_bench_elo": {
+          "value": 2887,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "mrcr_v2_128k": {
+          "value": 84.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "mmmlu": {
+          "value": 92.6,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "apex_agents": {
+          "value": 33.5,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Long-horizon professional tasks \u2014 82% relative improvement vs 3 Pro"
+        },
+        "mcp_atlas": {
+          "value": 69.2,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "scicode": {
+          "value": 59,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "swe_bench_pro": {
+          "value": 54.2,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "gdpval_aa_elo": {
+          "value": 1317,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Weaker than Claude on expert knowledge work despite leading raw benchmarks"
+        }
+      },
+      "verification": {
+        "status": "verified",
+        "notes": "All scores from official Google DeepMind model card"
+      },
+      "provider_id": "google",
+      "provider_name": "Google DeepMind",
+      "provider_color": "#4285F4"
+    },
+    {
+      "id": "gpt-5.4",
+      "name": "GPT-5.4",
+      "released": "2026-03-15",
+      "type": "proprietary",
+      "context_window": "1.05M",
+      "tags": [
+        "flagship",
+        "math",
+        "coding",
+        "reasoning"
+      ],
+      "pricing": {
+        "composite_per_m": 5.63
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 57,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "swe_bench_verified": {
+          "value": 76.9,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": null
+        },
+        "frontier_math": {
+          "value": 47.6,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": null
+        },
+        "gdpval": {
+          "value": 83.0,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "openai",
+      "provider_name": "OpenAI",
+      "provider_color": "#10A37F"
+    },
+    {
+      "id": "gpt-5.3-codex",
+      "name": "GPT-5.3 Codex",
+      "released": "2026-02-05",
+      "type": "proprietary",
+      "context_window": "400k",
+      "tags": [
+        "coding",
+        "terminal",
+        "agentic"
+      ],
+      "pricing": {
+        "composite_per_m": 4.81
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 54,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "terminal_bench_2": {
+          "value": 77.3,
+          "self_reported": true,
+          "benchmark_date": "2026-02-05",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Self-reported by OpenAI using Codex CLI harness \u2014 not comparable to Terminus-2 harness used by others"
+        },
+        "swe_bench_pro": {
+          "value": 56.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "weird_ml_v2": {
+          "value": 79.3,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "partially_verified",
+        "notes": "Terminal-Bench 2.0 score uses Codex CLI harness (self-reported); not directly comparable to Terminus-2 results"
+      },
+      "provider_id": "openai",
+      "provider_name": "OpenAI",
+      "provider_color": "#10A37F"
+    },
+    {
+      "id": "claude-opus-4.6",
+      "name": "Claude Opus 4.6",
+      "released": "2026-02-05",
+      "type": "proprietary",
+      "context_window": "1M (beta)",
+      "max_output": "128k",
+      "tags": [
+        "flagship",
+        "long-context",
+        "agentic",
+        "coding",
+        "knowledge-work"
+      ],
+      "pricing": {
+        "input_per_m": 5.0,
+        "output_per_m": 25.0,
+        "notes": "Premium pricing ($10/$37.50) applies for prompts exceeding 200k tokens"
+      },
+      "architecture": {
+        "notes": "1M context in beta; adaptive thinking; effort controls; compaction support"
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 53,
+          "self_reported": false,
+          "benchmark_date": "2026-02-09",
+          "source": "https://artificialanalysis.ai/models/claude-opus-4-6-adaptive",
+          "notes": null
+        },
+        "arc_agi_2": {
+          "value": 68.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Measured with max effort and 120k thinking budget"
+        },
+        "gpqa_diamond": {
+          "value": 90.5,
+          "self_reported": false,
+          "benchmark_date": "2026-02-05",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": "32k thinking budget"
+        },
+        "swe_bench_verified": {
+          "value": 80.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-05",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": "Averaged over 25 trials; 81.42% with prompt modification"
+        },
+        "terminal_bench_2": {
+          "value": 65.4,
+          "self_reported": false,
+          "benchmark_date": "2026-02-05",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": "Terminus-2 harness"
+        },
+        "hle_with_tools": {
+          "value": 53.1,
+          "self_reported": false,
+          "benchmark_date": "2026-02-05",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": null
+        },
+        "frontier_math": {
+          "value": 40.7,
+          "self_reported": false,
+          "benchmark_date": "2026-02-09",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": "Max effort mode"
+        },
+        "gdpval_aa_elo": {
+          "value": 1606,
+          "self_reported": false,
+          "benchmark_date": "2026-02-09",
+          "source": "https://www.linkedin.com/pulse/claude-opus-46-takes-first-place-full-artificial-analysis-jw6dc",
+          "notes": null
+        },
+        "browsecomp": {
+          "value": 86.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-05",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": "Multi-agent harness with web search + compaction"
+        },
+        "mrcr_v2_128k": {
+          "value": 84.0,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "biglaw_bench": {
+          "value": 90.2,
+          "self_reported": false,
+          "benchmark_date": "2026-02-05",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": null
+        },
+        "coding_eval_claude_code": {
+          "value": 47.9,
+          "self_reported": true,
+          "benchmark_date": "2026-03-27",
+          "source": "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026",
+          "notes": "Used as baseline by Z.ai for GLM-5.1 comparison; score is from Anthropic's own harness"
+        }
+      },
+      "verification": {
+        "status": "verified",
+        "notes": "All major scores verified by Artificial Analysis and Google DeepMind model card"
+      },
+      "provider_id": "anthropic",
+      "provider_name": "Anthropic",
+      "provider_color": "#D4A27F"
+    },
+    {
+      "id": "claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "released": "2026-02-17",
+      "type": "proprietary",
+      "context_window": "1M (beta)",
+      "max_output": "64k",
+      "tags": [
+        "balanced",
+        "long-context",
+        "coding",
+        "knowledge-work",
+        "fast"
+      ],
+      "pricing": {
+        "input_per_m": 3.0,
+        "output_per_m": 15.0
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 52,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "arc_agi_2": {
+          "value": 60.4,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 89.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "swe_bench_verified": {
+          "value": 79.6,
+          "self_reported": false,
+          "benchmark_date": "2026-02-17",
+          "source": "https://www.datastudios.org/post/claude-sonnet-4-6-vs-opus-4-6-2026-comparison-capability-split-output-ceilings-long-context-beha",
+          "notes": null
+        },
+        "terminal_bench_2": {
+          "value": 59.1,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "hle_with_tools": {
+          "value": 49.0,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "gdpval_aa_elo": {
+          "value": 1633,
+          "self_reported": false,
+          "benchmark_date": "2026-02-17",
+          "source": "https://designforonline.com/the-best-ai-models-so-far-in-2026/",
+          "notes": "Leads entire GDPval-AA field \u2014 above Opus 4.6"
+        },
+        "mrcr_v2_128k": {
+          "value": 84.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "anthropic",
+      "provider_name": "Anthropic",
+      "provider_color": "#D4A27F"
+    },
+    {
+      "id": "gpt-5.2",
+      "name": "GPT-5.2",
+      "released": "2025-12-01",
+      "type": "proprietary",
+      "context_window": "400k",
+      "superseded_by": "gpt-5.4",
+      "tags": [
+        "reasoning",
+        "coding",
+        "science"
+      ],
+      "pricing": {
+        "composite_per_m": 4.81
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 51,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "arc_agi_2": {
+          "value": 52.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 91.4,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "swe_bench_verified": {
+          "value": 80.0,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "terminal_bench_2": {
+          "value": 54.0,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": "Terminus-2 harness"
+        },
+        "hle_with_tools": {
+          "value": 45.5,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "frontier_math": {
+          "value": 40.7,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": null
+        },
+        "gdpval_aa_elo": {
+          "value": 1462,
+          "self_reported": false,
+          "benchmark_date": "2026-02-09",
+          "source": "https://www.anthropic.com/news/claude-opus-4-6",
+          "notes": null
+        },
+        "browsecomp": {
+          "value": 65.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ",
+          "notes": null
+        },
+        "livecode_bench_elo": {
+          "value": 2393,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "mrcr_v2_128k": {
+          "value": 83.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "openai",
+      "provider_name": "OpenAI",
+      "provider_color": "#10A37F"
+    },
+    {
+      "id": "claude-opus-4.5",
+      "name": "Claude Opus 4.5",
+      "released": "2025-10-22",
+      "type": "proprietary",
+      "context_window": "200k",
+      "max_output": "64k",
+      "superseded_by": "claude-opus-4.6",
+      "tags": [
+        "flagship",
+        "coding",
+        "agentic"
+      ],
+      "pricing": {
+        "input_per_m": 5.0,
+        "output_per_m": 25.0
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 50,
+          "self_reported": false,
+          "benchmark_date": "2026-02-09",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "swe_bench_verified": {
+          "value": 76.7,
+          "self_reported": false,
+          "benchmark_date": "2026-02-09",
+          "source": "https://lmcouncil.ai/benchmarks",
+          "notes": null
+        },
+        "browsecomp": {
+          "value": 67.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "anthropic",
+      "provider_name": "Anthropic",
+      "provider_color": "#D4A27F"
+    },
+    {
+      "id": "minimax-m2.7",
+      "name": "MiniMax-M2.7",
+      "released": "2026-03-18",
+      "type": "proprietary",
+      "context_window": "205k",
+      "tags": [
+        "agentic",
+        "coding",
+        "efficient",
+        "self-improving"
+      ],
+      "pricing": {
+        "input_per_m": 0.3,
+        "output_per_m": 1.2
+      },
+      "architecture": {
+        "notes": "30% capability improvement via 100+ autonomous self-training rounds. Up to 50x cheaper than Claude Opus 4.6."
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 50,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 87.4,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "hle_no_tools": {
+          "value": 28.1,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "swe_bench_pro": {
+          "value": 56.22,
+          "self_reported": false,
+          "benchmark_date": "2026-03-21",
+          "source": "https://www.geeky-gadgets.com/minimax-m27-benchmark-results/",
+          "notes": "World of AI independent testing \u2014 outperforms Gemini 3.1 Pro on SWE-Bench Pro"
+        },
+        "terminal_bench_2": {
+          "value": 57.0,
+          "self_reported": false,
+          "benchmark_date": "2026-03-21",
+          "source": "https://www.geeky-gadgets.com/minimax-m27-benchmark-results/",
+          "notes": "Independent test by World of AI"
+        },
+        "scicode": {
+          "value": 47.0,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "ifbench": {
+          "value": 75.7,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "tau_bench_v2": {
+          "value": 84.8,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "pinch_bench": {
+          "value": 86.2,
+          "self_reported": false,
+          "benchmark_date": "2026-03-19",
+          "source": "https://www.reddit.com/r/LocalLLaMA/comments/1rxwcda/benchmarked_minimax_m27_through_2_benchmarks/",
+          "notes": "5th overall, within 1.2 points of Claude Opus 4.6 (87.4)"
+        }
+      },
+      "verification": {
+        "status": "partially_verified",
+        "notes": "SWE-Bench Pro and Terminal-Bench from World of AI independent testing. GPQA/HLE from LLMBase aggregation."
+      },
+      "provider_id": "minimax",
+      "provider_name": "MiniMax",
+      "provider_color": "#FF6B6B"
+    },
+    {
+      "id": "glm-5",
+      "name": "GLM-5",
+      "released": "2026-02-10",
+      "type": "open-source",
+      "context_window": "200k",
+      "max_output": "131k",
+      "superseded_by": "glm-5.1",
+      "tags": [
+        "open-weight",
+        "coding",
+        "agentic",
+        "efficient",
+        "flagship"
+      ],
+      "pricing": {
+        "input_per_m": 1.0,
+        "output_per_m": 3.2,
+        "notes": "5x cheaper input and ~8x cheaper output vs Claude Opus 4.6"
+      },
+      "architecture": {
+        "total_params": "744B",
+        "architecture": "MoE",
+        "experts_total": 256,
+        "experts_active": 8,
+        "training_hardware": "Huawei Ascend 910B",
+        "training_data_tokens": "28.5T"
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 50,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": "First open-weight model to breach the 50 threshold on Artificial Analysis Intelligence Index"
+        },
+        "swe_bench_verified": {
+          "value": 77.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ",
+          "notes": "Independently validated \u2014 highest SWE-Bench score among all open-weight models"
+        },
+        "terminal_bench_2": {
+          "value": 56.2,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://llm-stats.com/blog/research/glm-5-launch",
+          "notes": null
+        },
+        "browsecomp": {
+          "value": 75.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ",
+          "notes": "With context management; outperforms GPT-5.2 (65.8)"
+        },
+        "coding_eval_claude_code": {
+          "value": 35.4,
+          "self_reported": true,
+          "benchmark_date": "2026-03-27",
+          "source": "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026",
+          "notes": "Self-reported baseline used in GLM-5.1 comparison"
+        }
+      },
+      "verification": {
+        "status": "partially_verified",
+        "notes": "SWE-Bench Verified (77.8%) and Intelligence Index (50) independently confirmed. Coding eval and BrowseComp scores are self-reported or from aggregators."
+      },
+      "provider_id": "zai",
+      "provider_name": "Z.ai (formerly Zhipu AI)",
+      "provider_color": "#6C5CE7"
+    },
+    {
+      "id": "gemini-3-pro",
+      "name": "Gemini 3 Pro",
+      "released": "2025-11-01",
+      "type": "proprietary",
+      "context_window": "1M",
+      "superseded_by": "gemini-3.1-pro",
+      "tags": [
+        "flagship",
+        "science",
+        "long-context"
+      ],
+      "pricing": {
+        "input_per_m": 2.0,
+        "output_per_m": 12.0
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 48,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "arc_agi_2": {
+          "value": 31.1,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 92.6,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "swe_bench_verified": {
+          "value": 76.2,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "terminal_bench_2": {
+          "value": 56.9,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "hle_with_tools": {
+          "value": 45.8,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "livecode_bench_elo": {
+          "value": 2439,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "mrcr_v2_128k": {
+          "value": 77.0,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+          "notes": null
+        },
+        "browsecomp": {
+          "value": 59.2,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://almcorp.com/blog/gemini-3-1-pro-complete-guide/",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "google",
+      "provider_name": "Google DeepMind",
+      "provider_color": "#4285F4"
+    },
+    {
+      "id": "kimi-k2.5",
+      "name": "Kimi K2.5",
+      "released": "2026-02-01",
+      "type": "open-source",
+      "context_window": "256k",
+      "tags": [
+        "open-weight",
+        "coding",
+        "agentic",
+        "instruction-following"
+      ],
+      "pricing": {
+        "input_per_m": 0.6,
+        "output_per_m": 2.5
+      },
+      "architecture": {
+        "notes": "Thinking variant of Kimi K2; trillion-parameter MoE family; strong tool-use and RAG pipeline performance"
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 48,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://onyx.app/llm-leaderboard",
+          "notes": null
+        },
+        "swe_bench_verified": {
+          "value": 72.4,
+          "self_reported": false,
+          "benchmark_date": "2026-02-01",
+          "source": "https://www.alphacorp.ai/blog/top-5-llms-for-march-2026-benchmarks-pricing-picks",
+          "notes": "Top of SWE-bench Verified open-weight leaderboard per Onyx/Vellum"
+        },
+        "ifeval": {
+          "value": 94.0,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://www.alphacorp.ai/blog/top-5-llms-for-march-2026-benchmarks-pricing-picks",
+          "notes": "Leads IFEval \u2014 critical for RAG pipelines, structured output, multi-agent orchestration"
+        },
+        "hle_no_tools": {
+          "value": 44.9,
+          "self_reported": true,
+          "benchmark_date": "2026-03-01",
+          "source": "https://www.siliconflow.com/articles/benchmark",
+          "notes": "Self-reported via SiliconFlow aggregation"
+        }
+      },
+      "verification": {
+        "status": "partially_verified",
+        "notes": "SWE-Bench and IFEval from Vellum/Onyx leaderboards. HLE from SiliconFlow aggregation (self-reported)."
+      },
+      "provider_id": "moonshot",
+      "provider_name": "Moonshot AI",
+      "provider_color": "#0F3460"
+    },
+    {
+      "id": "gpt-5.1",
+      "name": "GPT-5.1",
+      "released": "2025-09-01",
+      "type": "proprietary",
+      "context_window": "200k",
+      "superseded_by": "gpt-5.2",
+      "tags": [
+        "reasoning",
+        "balanced"
+      ],
+      "pricing": {
+        "input_per_m": 1.25,
+        "output_per_m": 10.0
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 48,
+          "self_reported": false,
+          "benchmark_date": "2026-04-02",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "provider_id": "openai",
+      "provider_name": "OpenAI",
+      "provider_color": "#10A37F"
+    },
+    {
+      "id": "grok-4.20-beta",
+      "name": "Grok 4.20 Beta",
+      "released": "2026-02-17",
+      "type": "proprietary",
+      "context_window": "2M",
+      "tags": [
+        "fast",
+        "long-context",
+        "multi-agent",
+        "reasoning"
+      ],
+      "pricing": {
+        "composite_per_m": 3.0
+      },
+      "architecture": {
+        "notes": "Four parallel AI agents running simultaneously \u2014 new multi-agent architecture. 248 t/s \u2014 fastest frontier model."
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 48,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "arc_agi_2": {
+          "value": 16,
+          "self_reported": false,
+          "benchmark_date": "2026-02-19",
+          "source": "https://designforonline.com/the-best-ai-models-so-far-in-2026/",
+          "notes": "Notably weak on abstract reasoning vs peers"
+        },
+        "gpqa_diamond": {
+          "value": 88,
+          "self_reported": true,
+          "benchmark_date": "2026-02-17",
+          "source": "https://designforonline.com/the-best-ai-models-so-far-in-2026/",
+          "notes": "Approximate \u2014 self-reported by xAI"
+        }
+      },
+      "verification": {
+        "status": "partially_verified",
+        "notes": "Intelligence Index from Artificial Analysis. GPQA and ARC-AGI-2 from third-party aggregators."
+      },
+      "provider_id": "xai",
+      "provider_name": "xAI",
+      "provider_color": "#E8E8E8"
+    },
+    {
+      "id": "gemini-3-flash",
+      "name": "Gemini 3 Flash",
+      "released": "2025-12-17",
+      "type": "proprietary",
+      "context_window": "1M",
+      "max_output": "65k",
+      "tags": [
+        "fast",
+        "coding",
+        "efficient",
+        "agentic",
+        "multimodal"
+      ],
+      "pricing": {
+        "input_per_m": 0.1,
+        "output_per_m": 0.4,
+        "notes": "~20x cheaper than Gemini 3 Pro; 3x faster inference"
+      },
+      "architecture": {
+        "notes": "Optimised for iterative/agentic coding loops; 30% more token-efficient than 3 Pro; modulates reasoning depth per token"
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 46,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 90.4,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/",
+          "notes": "Rivals Gemini 3 Pro at Flash pricing"
+        },
+        "swe_bench_verified": {
+          "value": 78.0,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/",
+          "notes": "Outperforms Gemini 3 Pro on SWE-Bench despite being 20x cheaper"
+        },
+        "hle_no_tools": {
+          "value": 33.7,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/",
+          "notes": null
+        },
+        "mmmu_pro": {
+          "value": 81.2,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/",
+          "notes": null
+        },
+        "aime_2025_with_code": {
+          "value": 99.7,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://www.aifreeapi.com/en/posts/gemini-3-flash-vs-pro-capabilities",
+          "notes": null
+        },
+        "simple_qa": {
+          "value": 68.7,
+          "self_reported": false,
+          "benchmark_date": "2025-12-17",
+          "source": "https://businessanalytics.substack.com/p/google-achieves-78-coding-accuracy",
+          "notes": "Up from 28.1% on previous Flash model"
+        }
+      },
+      "verification": {
+        "status": "verified",
+        "notes": "SWE-Bench and GPQA scores from official Google blog"
+      },
+      "provider_id": "google",
+      "provider_name": "Google DeepMind",
+      "provider_color": "#4285F4"
+    },
+    {
+      "id": "minimax-m2.5",
+      "name": "MiniMax-M2.5",
+      "released": "2026-02-12",
+      "type": "proprietary",
+      "context_window": "205k",
+      "superseded_by": "minimax-m2.7",
+      "tags": [
+        "efficient",
+        "agentic"
+      ],
+      "pricing": {
+        "input_per_m": 0.3,
+        "output_per_m": 1.2
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 42,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 84.8,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "hle_no_tools": {
+          "value": 19.1,
+          "self_reported": false,
+          "benchmark_date": "2026-03-18",
+          "source": "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/",
+          "notes": null
+        },
+        "pinch_bench": {
+          "value": 82.5,
+          "self_reported": false,
+          "benchmark_date": "2026-03-19",
+          "source": "https://www.reddit.com/r/LocalLLaMA/comments/1rxwcda/benchmarked_minimax_m27_through_2_benchmarks/",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "partially_verified"
+      },
+      "provider_id": "minimax",
+      "provider_name": "MiniMax",
+      "provider_color": "#FF6B6B"
+    },
+    {
+      "id": "glm-4.7",
+      "name": "GLM-4.7",
+      "released": "2025-12-01",
+      "type": "open-source",
+      "context_window": "128k",
+      "superseded_by": "glm-5",
+      "tags": [
+        "open-weight",
+        "coding"
+      ],
+      "pricing": {
+        "input_per_m": 0.5,
+        "output_per_m": 1.5
+      },
+      "scores": {
+        "intelligence_index": {
+          "value": 42,
+          "self_reported": false,
+          "benchmark_date": "2026-02-11",
+          "source": "https://artificialanalysis.ai/leaderboards/models",
+          "notes": null
+        }
+      },
+      "verification": {
+        "status": "verified"
+      },
+      "notes": "Used as Claude Opus/Sonnet/Haiku mapping target in Z.ai/Antigravity MCP setup",
+      "provider_id": "zai",
+      "provider_name": "Z.ai (formerly Zhipu AI)",
+      "provider_color": "#6C5CE7"
+    }
+  ],
+  "snapshots": [
+    {
+      "snapshot_date": "2026-04-02",
+      "notes": "Initial snapshot. GLM-5.1 released March 27 but coding scores unverified.",
+      "leaderboard": [
+        {
+          "rank": 1,
+          "model": "Gemini 3.1 Pro",
+          "provider": "google",
+          "intelligence_index": 57
+        },
+        {
+          "rank": 1,
+          "model": "GPT-5.4",
+          "provider": "openai",
+          "intelligence_index": 57
+        },
+        {
+          "rank": 3,
+          "model": "GPT-5.3 Codex",
+          "provider": "openai",
+          "intelligence_index": 54
+        },
+        {
+          "rank": 4,
+          "model": "Claude Opus 4.6",
+          "provider": "anthropic",
+          "intelligence_index": 53
+        },
+        {
+          "rank": 5,
+          "model": "Claude Sonnet 4.6",
+          "provider": "anthropic",
+          "intelligence_index": 52
+        },
+        {
+          "rank": 6,
+          "model": "GPT-5.2",
+          "provider": "openai",
+          "intelligence_index": 51
+        },
+        {
+          "rank": 7,
+          "model": "GLM-5",
+          "provider": "zai",
+          "intelligence_index": 50
+        },
+        {
+          "rank": 7,
+          "model": "Claude Opus 4.5",
+          "provider": "anthropic",
+          "intelligence_index": 50
+        },
+        {
+          "rank": 7,
+          "model": "MiniMax-M2.7",
+          "provider": "minimax",
+          "intelligence_index": 50
+        },
+        {
+          "rank": 10,
+          "model": "MiMo-V2-Pro",
+          "provider": "xiaomi",
+          "intelligence_index": 49
+        },
+        {
+          "rank": 11,
+          "model": "Grok 4.20 Beta",
+          "provider": "xai",
+          "intelligence_index": 48
+        }
+      ],
+      "category_winners": {
+        "reasoning": "Gemini 3.1 Pro",
+        "science": "Gemini 3.1 Pro",
+        "coding_swe": "Claude Opus 4.6",
+        "coding_terminal": "GPT-5.3 Codex",
+        "coding_competitive": "Gemini 3.1 Pro",
+        "math": "GPT-5.4 Pro",
+        "knowledge_work": "Claude Sonnet 4.6",
+        "web_research": "Claude Opus 4.6",
+        "long_context": "Gemini 3.1 Pro",
+        "best_value": "GLM-5",
+        "fastest": "Grok 4.20 Beta"
+      }
+    }
+  ]
+}

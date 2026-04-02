@@ -1,0 +1,72 @@
+provider:
+  name: Moonshot AI
+  brand_color: "#0F3460"
+  website: https://www.moonshot.cn
+
+models:
+  - id: kimi-k2.5
+    name: Kimi K2.5
+    released: 2026-02-01
+    type: open-source
+    context_window: 256k
+    tags: [open-weight, coding, agentic, instruction-following]
+    pricing:
+      input_per_m: 0.60
+      output_per_m: 2.50
+    architecture:
+      notes: "Thinking variant of Kimi K2; trillion-parameter MoE family; strong tool-use and RAG pipeline performance"
+    scores:
+      intelligence_index:
+        value: 48
+        benchmark_date: 2026-03-18
+        source: "https://onyx.app/llm-leaderboard"
+      swe_bench_verified:
+        value: 72.4
+        benchmark_date: 2026-02-01
+        source: "https://www.alphacorp.ai/blog/top-5-llms-for-march-2026-benchmarks-pricing-picks"
+        notes: "Top of SWE-bench Verified open-weight leaderboard per Onyx/Vellum"
+      ifeval:
+        value: 94.0
+        benchmark_date: 2026-03-18
+        source: "https://www.alphacorp.ai/blog/top-5-llms-for-march-2026-benchmarks-pricing-picks"
+        notes: "Leads IFEval — critical for RAG pipelines, structured output, multi-agent orchestration"
+      hle_no_tools:
+        value: 44.9
+        self_reported: true
+        benchmark_date: 2026-03-01
+        source: "https://www.siliconflow.com/articles/benchmark"
+        notes: "Self-reported via SiliconFlow aggregation"
+    verification:
+      status: partially_verified
+      notes: "SWE-Bench and IFEval from Vellum/Onyx leaderboards. HLE from SiliconFlow aggregation (self-reported)."
+
+  - id: kimi-k2
+    name: Kimi K2
+    released: 2025-07-01
+    type: open-source
+    context_window: 128k
+    superseded_by: kimi-k2.5
+    tags: [open-weight, coding, math, agentic]
+    pricing:
+      input_per_m: 0.15
+      output_per_m: 0.60
+    architecture:
+      notes: "First major Kimi frontier release; trillion-parameter MoE; strong math reasoning"
+    scores:
+      swe_bench_verified:
+        value: 65.8
+        benchmark_date: 2025-07-11
+        source: "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free"
+        notes: "Independently verified on official SWE-Bench leaderboard"
+      livecode_bench:
+        value: 53.7
+        benchmark_date: 2025-07-11
+        source: "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free"
+      math_500:
+        value: 97.0
+        benchmark_date: 2025-07-11
+        source: "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free"
+        notes: "Kimi K2 Thinking variant leads LiveCodeBench among open-weight models per Vellum"
+    verification:
+      status: verified
+      notes: "SWE-Bench and LiveCodeBench verified via official leaderboards"

@@ -2,65 +2,104 @@ provider:
   name: Z.ai (formerly Zhipu AI)
   brand_color: "#6C5CE7"
   website: https://z.ai
-  notes: "World's first publicly traded foundation model company (HK IPO Jan 2026, $6.6B valuation)"
+  notes: "World's first publicly traded foundation model company (HK IPO Jan 2026, $6.6B valuation). On US Entity List since Jan 2025 — trains entirely on Huawei Ascend hardware."
 
 models:
   - id: glm-5.1
     name: GLM-5.1
     released: 2026-03-27
-    type: open-source (MIT, weights coming)
+    type: open-source
     context_window: 200k
     max_output: 131k
+    tags: [open-weight, coding, agentic, efficient]
     pricing:
-      coding_plan_monthly: "$3–$30"
-      notes: "API pricing TBD; inherits GLM-5 base API pricing"
+      coding_plan_monthly_usd: "$3–$30"
+      notes: "API pricing TBD; MIT license — self-hostable at zero per-token cost"
     architecture:
       total_params: 744B
       architecture: MoE
       experts_total: 256
       experts_active: 8
       active_params: "~40–44B"
-      training_hardware: "Huawei Ascend 910B (100,000 chips, zero NVIDIA)"
-      training_data: 28.5T tokens
-      attention: DeepSeek Sparse Attention (DSA)
+      training_hardware: "100,000 × Huawei Ascend 910B (zero NVIDIA)"
+      training_data_tokens: "28.5T (inherited from GLM-5 base)"
+      attention: "DeepSeek Sparse Attention (DSA)"
+      notes: "Post-training update on GLM-5 base — not a full retrain. Significant improvements in agentic instruction-following and long-running tasks."
     scores:
-      coding_eval_claude_code: 45.3
+      coding_eval_claude_code:
+        value: 45.3
+        self_reported: true
+        benchmark_date: 2026-03-27
+        source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
+        notes: "Self-reported by Z.ai using Claude Code harness (non-standard). 94.6% of Claude Opus 4.6 (47.9). 28% improvement over GLM-5 (35.4). Independent verification pending."
     verification:
       status: unverified
-      notes: "Coding score (45.3, 94.6% of Opus 4.6) is self-reported by Z.ai using Claude Code harness. Not yet independently verified as of April 2, 2026."
-      source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
+      notes: "Coding score (45.3 = 94.6% of Opus 4.6) is entirely self-reported. Claude Code harness is unconventional and not directly comparable to SWE-Bench or Terminal-Bench. No independent evaluation published as of April 2, 2026. Expected within weeks."
 
   - id: glm-5
     name: GLM-5
     released: 2026-02-10
-    type: open-source (MIT)
+    type: open-source
     context_window: 200k
     max_output: 131k
+    superseded_by: glm-5.1
+    tags: [open-weight, coding, agentic, efficient, flagship]
     pricing:
       input_per_m: 1.00
       output_per_m: 3.20
+      notes: "5x cheaper input and ~8x cheaper output vs Claude Opus 4.6"
     architecture:
       total_params: 744B
       architecture: MoE
       experts_total: 256
       experts_active: 8
       training_hardware: "Huawei Ascend 910B"
+      training_data_tokens: "28.5T"
     scores:
-      intelligence_index: 50
-      speed_tps: 68
-      swe_bench_verified: 77.8
-      terminal_bench_2: 56.2
-      browsecomp: 75.9
-      coding_eval_claude_code: 35.4
+      intelligence_index:
+        value: 50
+        benchmark_date: 2026-02-11
+        source: "https://artificialanalysis.ai/leaderboards/models"
+        notes: "First open-weight model to breach the 50 threshold on Artificial Analysis Intelligence Index"
+      swe_bench_verified:
+        value: 77.8
+        benchmark_date: 2026-02-11
+        source: "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ"
+        notes: "Independently validated — highest SWE-Bench score among all open-weight models"
+      terminal_bench_2:
+        value: 56.2
+        benchmark_date: 2026-02-11
+        source: "https://llm-stats.com/blog/research/glm-5-launch"
+      browsecomp:
+        value: 75.9
+        benchmark_date: 2026-02-11
+        source: "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ"
+        notes: "With context management; outperforms GPT-5.2 (65.8)"
+      coding_eval_claude_code:
+        value: 35.4
+        self_reported: true
+        benchmark_date: 2026-03-27
+        source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
+        notes: "Self-reported baseline used in GLM-5.1 comparison"
     verification:
-      swe_bench_verified: "Independently validated — highest open-weight score"
-      intelligence_index: "First open-weight model to breach 50 threshold"
+      status: partially_verified
+      notes: "SWE-Bench Verified (77.8%) and Intelligence Index (50) independently confirmed. Coding eval and BrowseComp scores are self-reported or from aggregators."
 
   - id: glm-4.7
     name: GLM-4.7
     released: 2025-12-01
-    type: open-source (MIT)
+    type: open-source
     context_window: 128k
+    superseded_by: glm-5
+    tags: [open-weight, coding]
+    pricing:
+      input_per_m: 0.50
+      output_per_m: 1.50
     scores:
-      intelligence_index: 42
-    notes: "Previous flagship; used as Opus/Sonnet mapping target in Z.ai/Antigravity"
+      intelligence_index:
+        value: 42
+        benchmark_date: 2026-02-11
+        source: "https://artificialanalysis.ai/leaderboards/models"
+    verification:
+      status: verified
+    notes: "Used as Claude Opus/Sonnet/Haiku mapping target in Z.ai/Antigravity MCP setup"

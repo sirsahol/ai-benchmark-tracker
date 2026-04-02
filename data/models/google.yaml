@@ -10,43 +10,179 @@ models:
     type: proprietary
     context_window: 1M
     max_output: 65k
+    tags: [flagship, reasoning, science, coding, agentic, long-context]
     pricing:
       input_per_m: 2.00
       output_per_m: 12.00
+      notes: "Same price as Gemini 3 Pro — major capability upgrade at no cost increase"
     architecture:
       thinking_levels: [minimal, low, medium, high]
-      notes: "Preview; 75% prompt caching discounts; video/audio/image input"
+      notes: "Preview as of April 2026; 75% prompt caching discounts; video/audio/image/speech input; output truncation fixed vs 3 Pro"
     scores:
-      intelligence_index: 57
-      speed_tps: 109
-      arc_agi_2: 77.1
-      gpqa_diamond: 94.3
-      swe_bench_verified: 80.6
-      terminal_bench_2: 68.5
-      hle_with_tools: 51.4
-      browsecomp: 85.9
-      livecode_bench_elo: 2887
-      mrcr_v2_128k: 84.9
-      mmmlu: 92.6
-      apex_agents: 33.5
-      mcp_atlas: 69.2
-      scicode: 59
+      intelligence_index:
+        value: 57
+        benchmark_date: 2026-02-19
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      arc_agi_2:
+        value: 77.1
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+        notes: "ARC Prize verified — highest recorded score on this benchmark"
+      gpqa_diamond:
+        value: 94.3
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+        notes: "Highest ever recorded on GPQA Diamond per PCMag"
+      swe_bench_verified:
+        value: 80.6
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      terminal_bench_2:
+        value: 68.5
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+        notes: "Terminus-2 harness"
+      hle_with_tools:
+        value: 51.4
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      browsecomp:
+        value: 85.9
+        benchmark_date: 2026-02-19
+        source: "https://almcorp.com/blog/gemini-3-1-pro-complete-guide/"
+      livecode_bench_elo:
+        value: 2887
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      mrcr_v2_128k:
+        value: 84.9
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      mmmlu:
+        value: 92.6
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      apex_agents:
+        value: 33.5
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+        notes: "Long-horizon professional tasks — 82% relative improvement vs 3 Pro"
+      mcp_atlas:
+        value: 69.2
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      scicode:
+        value: 59
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      swe_bench_pro:
+        value: 54.2
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      gdpval_aa_elo:
+        value: 1317
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+        notes: "Weaker than Claude on expert knowledge work despite leading raw benchmarks"
+    verification:
+      status: verified
+      notes: "All scores from official Google DeepMind model card"
 
   - id: gemini-3-pro
     name: Gemini 3 Pro
     released: 2025-11-01
     type: proprietary
     context_window: 1M
+    superseded_by: gemini-3.1-pro
+    tags: [flagship, science, long-context]
     pricing:
       input_per_m: 2.00
       output_per_m: 12.00
     scores:
-      intelligence_index: 48
-      speed_tps: 121
-      arc_agi_2: 31.1
-      gpqa_diamond: 92.6
-      swe_bench_verified: 76.2
-      terminal_bench_2: 56.9
-      hle_with_tools: 45.8
-      livecode_bench_elo: 2439
-      mrcr_v2_128k: 77.0
+      intelligence_index:
+        value: 48
+        benchmark_date: 2026-02-19
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      arc_agi_2:
+        value: 31.1
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      gpqa_diamond:
+        value: 92.6
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      swe_bench_verified:
+        value: 76.2
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      terminal_bench_2:
+        value: 56.9
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      hle_with_tools:
+        value: 45.8
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      livecode_bench_elo:
+        value: 2439
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      mrcr_v2_128k:
+        value: 77.0
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      browsecomp:
+        value: 59.2
+        benchmark_date: 2026-02-19
+        source: "https://almcorp.com/blog/gemini-3-1-pro-complete-guide/"
+    verification:
+      status: verified
+
+  - id: gemini-3-flash
+    name: Gemini 3 Flash
+    released: 2025-12-17
+    type: proprietary
+    context_window: 1M
+    max_output: 65k
+    tags: [fast, coding, efficient, agentic, multimodal]
+    pricing:
+      input_per_m: 0.10
+      output_per_m: 0.40
+      notes: "~20x cheaper than Gemini 3 Pro; 3x faster inference"
+    architecture:
+      notes: "Optimised for iterative/agentic coding loops; 30% more token-efficient than 3 Pro; modulates reasoning depth per token"
+    scores:
+      intelligence_index:
+        value: 46
+        benchmark_date: 2025-12-17
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      gpqa_diamond:
+        value: 90.4
+        benchmark_date: 2025-12-17
+        source: "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/"
+        notes: "Rivals Gemini 3 Pro at Flash pricing"
+      swe_bench_verified:
+        value: 78.0
+        benchmark_date: 2025-12-17
+        source: "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/"
+        notes: "Outperforms Gemini 3 Pro on SWE-Bench despite being 20x cheaper"
+      hle_no_tools:
+        value: 33.7
+        benchmark_date: 2025-12-17
+        source: "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/"
+      mmmu_pro:
+        value: 81.2
+        benchmark_date: 2025-12-17
+        source: "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/"
+      aime_2025_with_code:
+        value: 99.7
+        benchmark_date: 2025-12-17
+        source: "https://www.aifreeapi.com/en/posts/gemini-3-flash-vs-pro-capabilities"
+      simple_qa:
+        value: 68.7
+        benchmark_date: 2025-12-17
+        source: "https://businessanalytics.substack.com/p/google-achieves-78-coding-accuracy"
+        notes: "Up from 28.1% on previous Flash model"
+    verification:
+      status: verified
+      notes: "SWE-Bench and GPQA scores from official Google blog"

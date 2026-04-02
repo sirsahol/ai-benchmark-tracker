@@ -41,6 +41,7 @@
   --c-meta: #0668E1; --c-meta-accent: #0084FF;
   --c-minimax: #FF6B6B; --c-minimax-accent: #EE5A5A;
   --c-xiaomi: #FF6700; --c-xiaomi-accent: #FF8533;
+  --c-moonshot: #0F3460; --c-moonshot-accent: #1A4A8A;
 }
 
 /* ========== DARK THEME (primary) ========== */
@@ -85,6 +86,7 @@
   --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
   --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.06);
   --c-xai: #555;
+  --c-moonshot: #0F3460;
   color-scheme: light;
 }
 
@@ -146,21 +148,21 @@ table { border-collapse: collapse; width: 100%; }
 .nav-link:hover, .nav-link.active {
   color: var(--color-text); background: var(--color-surface);
 }
-.nav-actions { display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0; }
+.nav-actions { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
 .badge-updated {
   font-size: var(--text-xs); color: var(--color-text-muted);
   background: var(--color-surface); border: 1px solid var(--color-border);
   padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);
   font-variant-numeric: tabular-nums; display: none;
 }
-.theme-toggle {
+.icon-btn {
   width: 36px; height: 36px; border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center;
   color: var(--color-text-muted); background: var(--color-surface);
   border: 1px solid var(--color-border);
   transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
 }
-.theme-toggle:hover { color: var(--color-text); border-color: var(--color-text-muted); }
+.icon-btn:hover { color: var(--color-text); border-color: var(--color-text-muted); }
 
 @media (min-width: 768px) {
   .badge-updated { display: block; }
@@ -225,6 +227,29 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 }
 .kpi-label { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-1); }
 
+/* ========== TAG FILTER BAR ========== */
+.tag-filter-bar {
+  display: flex; flex-wrap: wrap; gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.tag-pill {
+  font-size: var(--text-xs); font-weight: 500;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.tag-pill:hover { border-color: var(--color-accent); color: var(--color-text); }
+.tag-pill.active {
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
 /* ========== LEADERBOARD TABLE ========== */
 .table-controls {
   display: flex; flex-wrap: wrap; gap: var(--space-3);
@@ -267,6 +292,8 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 .leaderboard tbody tr { transition: background var(--transition-fast); }
 .leaderboard tbody tr:hover { background: var(--color-surface-2); }
 .leaderboard tbody tr:last-child td { border-bottom: none; }
+.leaderboard tbody tr.row-superseded { opacity: 0.55; }
+.leaderboard tbody tr.row-superseded:hover { opacity: 0.8; }
 
 .model-cell { display: flex; align-items: center; gap: var(--space-3); }
 .model-cell .provider-logo { width: 20px; height: 20px; flex-shrink: 0; }
@@ -282,6 +309,17 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 .badge-gold { background: rgba(240,180,41,0.15); color: var(--color-gold); }
 .badge-amber { background: rgba(212,160,23,0.15); color: var(--color-amber); }
 .badge-unverified { background: rgba(212,160,23,0.15); color: var(--color-amber); }
+.badge-superseded {
+  background: var(--color-surface-2); color: var(--color-text-faint);
+  border: 1px solid var(--color-border-muted);
+  font-size: 9px; padding: 1px 6px; letter-spacing: 0.03em;
+}
+.badge-sr {
+  background: #F59E0B22; color: #F59E0B; border: 1px solid #F59E0B44;
+  border-radius: 3px; font-size: 10px; padding: 1px 4px; font-weight: 600;
+  vertical-align: middle; margin-left: 4px; display: inline-block;
+  cursor: help; text-transform: none; letter-spacing: 0;
+}
 .winner-icon { font-size: 14px; }
 
 /* ========== RADAR CHART ========== */
@@ -334,6 +372,12 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 .benchmark-chart-group .bench-desc {
   font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4);
 }
+.bench-callout {
+  font-size: var(--text-xs); color: var(--color-accent); font-weight: 500;
+  margin-bottom: var(--space-3); padding: var(--space-2) var(--space-3);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  border-radius: var(--radius-sm); border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
 
 .bar-chart { display: flex; flex-direction: column; gap: var(--space-2); }
 .bar-row { display: flex; align-items: center; gap: var(--space-3); }
@@ -355,12 +399,12 @@ section + section { border-top: 1px solid var(--color-border-muted); }
   position: relative;
 }
 .bar-fill.winner::after {
-  content: '👑'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  content: '\1F451'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
   font-size: 14px;
 }
 .bar-value {
   font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums;
-  width: 60px; text-align: right; flex-shrink: 0;
+  width: 70px; text-align: right; flex-shrink: 0;
 }
 
 /* ========== SCATTER PLOT ========== */
@@ -451,9 +495,25 @@ section + section { border-top: 1px solid var(--color-border-muted); }
   padding-top: var(--space-4); border-top: 1px solid var(--color-border);
 }
 .model-card.expanded .model-card-expand { display: block; }
-.benchmark-mini { display: flex; justify-content: space-between; padding: var(--space-1) 0; font-size: var(--text-xs); }
-.benchmark-mini .bm-name { color: var(--color-text-muted); }
+.benchmark-mini { display: flex; justify-content: space-between; align-items: center; padding: var(--space-1) 0; font-size: var(--text-xs); }
+.benchmark-mini .bm-name { color: var(--color-text-muted); flex: 1; }
 .benchmark-mini .bm-score { font-weight: 600; font-variant-numeric: tabular-nums; }
+.benchmark-mini .bm-info {
+  width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--color-text-faint); cursor: help; margin-left: 4px;
+  border-radius: 50%; border: 1px solid var(--color-border-muted); flex-shrink: 0;
+  position: relative;
+}
+.bm-info-tooltip {
+  display: none; position: absolute; bottom: calc(100% + 8px); right: -10px;
+  background: var(--color-surface-raised); border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); padding: var(--space-2) var(--space-3);
+  font-size: 10px; color: var(--color-text-muted); white-space: normal;
+  width: 220px; z-index: 10; box-shadow: var(--shadow-card);
+  line-height: 1.5; text-align: left;
+}
+.bm-info-tooltip a { color: var(--color-accent); word-break: break-all; }
+.benchmark-mini:hover .bm-info-tooltip { display: block; }
 
 /* ========== FOOTER ========== */
 .footer {
@@ -471,8 +531,10 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 .row-openai { background: color-mix(in srgb, var(--c-openai) 4%, transparent); }
 .row-zai { background: color-mix(in srgb, var(--c-zai) 4%, transparent); }
 .row-xai { background: color-mix(in srgb, var(--c-xai) 3%, transparent); }
+.row-meta { background: color-mix(in srgb, var(--c-meta) 4%, transparent); }
 .row-minimax { background: color-mix(in srgb, var(--c-minimax) 4%, transparent); }
 .row-xiaomi { background: color-mix(in srgb, var(--c-xiaomi) 4%, transparent); }
+.row-moonshot { background: color-mix(in srgb, var(--c-moonshot) 4%, transparent); }
 
 /* ========== TWO-COL LAYOUT ========== */
 .two-col {
@@ -519,7 +581,10 @@ section + section { border-top: 1px solid var(--color-border-muted); }
     </div>
     <div class="nav-actions">
       <span class="badge-updated">Updated Apr 2, 2026</span>
-      <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
+      <a href="https://github.com/sirsahol/ai-benchmark-tracker" target="_blank" rel="noopener" class="icon-btn" title="View on GitHub" aria-label="View on GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" fill="currentColor"/></svg>
+      </a>
+      <button class="icon-btn" data-theme-toggle aria-label="Switch to light mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
@@ -546,7 +611,7 @@ section + section { border-top: 1px solid var(--color-border-muted); }
     </svg>
   </div>
   <h1>Frontier AI Benchmark Tracker</h1>
-  <p>Live model intelligence comparison — April 2026</p>
+  <p>Live model intelligence comparison &mdash; April 2026</p>
 </header>
 
 <!-- =================== KPIs =================== -->
@@ -558,31 +623,28 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 <section id="leaderboard" class="container">
   <div class="section-header">
     <h2 class="section-title">Intelligence Leaderboard</h2>
-    <p class="section-subtitle">Artificial Analysis Intelligence Index — April 2026</p>
+    <p class="section-subtitle">Artificial Analysis Intelligence Index &mdash; April 2026</p>
   </div>
+  <div class="tag-filter-bar" id="tagFilterBar"></div>
   <div class="table-controls" id="tableControls">
     <select id="providerFilter">
       <option value="all">All Providers</option>
-      <option value="anthropic">Anthropic</option>
-      <option value="google">Google</option>
-      <option value="openai">OpenAI</option>
-      <option value="zai">Z.ai</option>
-      <option value="xai">xAI</option>
-      <option value="minimax">MiniMax</option>
-      <option value="xiaomi">Xiaomi</option>
     </select>
+    <label>
+      <input type="checkbox" id="showSuperseded"> Show superseded models
+    </label>
   </div>
   <div class="leaderboard-wrap">
     <table class="leaderboard" id="leaderboardTable">
       <thead>
         <tr>
-          <th data-col="rank" class="sorted"># <span class="sort-arrow">▲</span></th>
-          <th data-col="model">Model <span class="sort-arrow">▲</span></th>
-          <th data-col="score">Intelligence <span class="sort-arrow">▲</span></th>
-          <th data-col="price">$/M Tokens <span class="sort-arrow">▲</span></th>
-          <th data-col="speed">Speed (t/s) <span class="sort-arrow">▲</span></th>
-          <th data-col="context">Context <span class="sort-arrow">▲</span></th>
-          <th data-col="released">Released <span class="sort-arrow">▲</span></th>
+          <th data-col="rank" class="sorted"># <span class="sort-arrow">&#9650;</span></th>
+          <th data-col="model">Model <span class="sort-arrow">&#9650;</span></th>
+          <th data-col="score">Intelligence <span class="sort-arrow">&#9650;</span></th>
+          <th data-col="price">$/M Tokens <span class="sort-arrow">&#9650;</span></th>
+          <th data-col="speed">Speed (t/s) <span class="sort-arrow">&#9650;</span></th>
+          <th data-col="context">Context <span class="sort-arrow">&#9650;</span></th>
+          <th data-col="released">Released <span class="sort-arrow">&#9650;</span></th>
         </tr>
       </thead>
       <tbody id="leaderboardBody"></tbody>
@@ -594,7 +656,7 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 <section id="radar" class="container radar-section">
   <div class="section-header">
     <h2 class="section-title">Model Comparison Radar</h2>
-    <p class="section-subtitle">Select 2–4 models to compare across benchmarks</p>
+    <p class="section-subtitle">Select 2&ndash;4 models to compare across benchmarks</p>
   </div>
   <div class="controls" id="radarControls"></div>
   <div class="chart-container">
@@ -615,8 +677,8 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 <!-- =================== SCATTER =================== -->
 <section id="scatter" class="container">
   <div class="section-header">
-    <h2 class="section-title">Price–Performance</h2>
-    <p class="section-subtitle">Intelligence score vs. cost — bubble size = speed</p>
+    <h2 class="section-title">Price&ndash;Performance</h2>
+    <p class="section-subtitle">Intelligence score vs. cost &mdash; bubble size = speed</p>
   </div>
   <div class="card">
     <div class="scatter-container">
@@ -629,16 +691,13 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 <section id="timeline" class="container">
   <div class="section-header">
     <h2 class="section-title">Release Timeline</h2>
-    <p class="section-subtitle">Model releases — October 2025 to March 2026</p>
+    <p class="section-subtitle">Model releases &mdash; April 2025 to March 2026</p>
   </div>
   <div class="card">
     <div class="timeline-track" id="timelineTrack">
       <div class="timeline-line"></div>
       <div class="timeline-items" id="timelineItems"></div>
     </div>
-    <p style="text-align:center;font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-4);">
-      Model progression timeline — score tracking over time coming in v2.
-    </p>
   </div>
 </section>
 
@@ -646,7 +705,7 @@ section + section { border-top: 1px solid var(--color-border-muted); }
 <section id="glm-spotlight" class="container">
   <div class="section-header">
     <h2 class="section-title">GLM-5.1 Spotlight</h2>
-    <p class="section-subtitle">Z.ai's latest — performance claims under review</p>
+    <p class="section-subtitle">Z.ai's latest &mdash; performance claims under review</p>
   </div>
   <div class="spotlight">
     <div class="spotlight-header">
@@ -656,7 +715,7 @@ section + section { border-top: 1px solid var(--color-border-muted); }
       </svg>
       <div>
         <h2 style="color:var(--c-zai)">GLM-5.1</h2>
-        <span class="badge badge-unverified">⚠ Unverified Claims</span>
+        <span class="badge badge-unverified">&#9888; Unverified Claims</span>
       </div>
     </div>
     <div class="spotlight-stat">
@@ -664,30 +723,32 @@ section + section { border-top: 1px solid var(--color-border-muted); }
       <span class="stat-label">of Opus 4.6 coding performance (self-reported)</span>
     </div>
     <div class="spotlight-stat">
-      <span class="stat-value">45.3</span>
-      <span class="stat-label">Coding Eval (Claude Code Harness) — self-reported</span>
+      <span class="stat-value">45.3 <span class="badge-sr" title="Self-reported by provider &mdash; not independently verified">SR</span></span>
+      <span class="stat-label">Coding Eval (Claude Code Harness) &mdash; self-reported</span>
     </div>
     <div class="spotlight-stat">
       <span class="stat-value">744B</span>
       <span class="stat-label">Total parameters</span>
     </div>
     <div class="spotlight-stat">
-      <span class="stat-value">256/8</span>
-      <span class="stat-label">Experts total / active (MoE)</span>
+      <span class="stat-value">MoE 256/8</span>
+      <span class="stat-label">Experts total / active (MoE architecture)</span>
     </div>
     <div class="spotlight-stat">
-      <span class="stat-value">Huawei Ascend</span>
-      <span class="stat-label">Training hardware</span>
+      <span class="stat-value">Huawei Ascend 910B</span>
+      <span class="stat-label">Training hardware (100,000 chips &mdash; zero NVIDIA)</span>
     </div>
     <div class="spotlight-stat">
-      <span class="stat-value">$3–30/mo</span>
-      <span class="stat-label">Pricing vs Opus $100–200/mo</span>
+      <span class="stat-value">$3&ndash;$30/mo</span>
+      <span class="stat-label">Pricing vs Opus $100&ndash;200/mo</span>
     </div>
     <div class="spotlight-stat" style="grid-column: 1/-1;">
       <span class="stat-value">200k</span>
-      <span class="stat-label">Context window</span>
+      <span class="stat-label">Context window (131k max output)</span>
     </div>
-    <div style="grid-column:1/-1;font-size:var(--text-xs);color:var(--color-text-muted);border-top:1px solid var(--color-border);padding-top:var(--space-3);">
+    <div style="grid-column:1/-1;font-size:var(--text-xs);color:var(--color-text-muted);border-top:1px solid var(--color-border);padding-top:var(--space-3);line-height:1.7;">
+      <strong>&#9888; Uses Claude Code harness</strong> &mdash; not comparable to SWE-Bench Verified or Terminal-Bench 2.0.<br>
+      Architecture: 744B params, MoE 256/8, Huawei Ascend 910B.<br>
       Released March 27, 2026. Independent benchmarks pending. All scores above are self-reported by Z.ai.
     </div>
   </div>
@@ -709,125 +770,167 @@ section + section { border-top: 1px solid var(--color-border-muted); }
     <a href="https://artificialanalysis.ai" target="_blank" rel="noopener">Artificial Analysis</a>,
     <a href="https://deepmind.google" target="_blank" rel="noopener">Google DeepMind</a>,
     <a href="https://anthropic.com" target="_blank" rel="noopener">Anthropic</a>,
-    <a href="https://lmcouncil.org" target="_blank" rel="noopener">LM Council</a>, and
+    <a href="https://lmcouncil.org" target="_blank" rel="noopener">LM Council</a>,
+    <a href="https://www.moonshot.cn" target="_blank" rel="noopener">Moonshot AI</a>, and
     <a href="https://z.ai" target="_blank" rel="noopener">Z.ai / Serenities AI</a>.
   </p>
-  <p>Self-reported scores are clearly marked. All other scores from official model cards and third-party evaluators.</p>
-  <div class="footer-built">Built by sirsahol — GitHub repo link coming soon</div>
+  <p>Self-reported scores are clearly marked with <span class="badge-sr" style="cursor:default">SR</span> badges. All other scores from official model cards and third-party evaluators.</p>
+  <div class="footer-built">Built by <a href="https://github.com/sirsahol/ai-benchmark-tracker" target="_blank" rel="noopener">sirsahol</a> &mdash; v2</div>
 </footer>
 
 <script>
-// =================== DATA ===================
-const PROVIDERS = {
-  anthropic: { name: 'Anthropic', color: '#D4A27F', accent: '#CC785C' },
-  google:    { name: 'Google', color: '#4285F4', accent: '#EA4335' },
-  openai:    { name: 'OpenAI', color: '#10A37F', accent: '#000000' },
-  zai:       { name: 'Z.ai', color: '#6C5CE7', accent: '#A29BFE' },
-  xai:       { name: 'xAI', color: '#E8E8E8', accent: '#1DA1F2' },
-  meta:      { name: 'Meta', color: '#0668E1', accent: '#0084FF' },
-  minimax:   { name: 'MiniMax', color: '#FF6B6B', accent: '#EE5A5A' },
-  xiaomi:    { name: 'Xiaomi', color: '#FF6700', accent: '#FF8533' }
-};
+// =================== EMBEDDED DATA ===================
+const DASHBOARD = {"meta":{"built_at":"2026-04-02T22:08:19.041228Z","schema_version":"3","model_count":21,"benchmark_count":12},"benchmarks":{"arc_agi_2":{"name":"ARC-AGI-2","category":"reasoning","description":"Novel abstract reasoning puzzles \u2014 tests genuine pattern inference, not recall","unit":"percent","higher_is_better":true,"source":"ARC Prize","url":"https://arcprize.org"},"gpqa_diamond":{"name":"GPQA Diamond","category":"science","description":"198 PhD-level science questions (biology, chemistry, physics)","unit":"percent","higher_is_better":true,"source":"Multiple (Google DeepMind, LM Council)"},"swe_bench_verified":{"name":"SWE-Bench Verified","category":"coding","description":"500 human-curated GitHub issues \u2014 model must fix real code and pass unit tests","unit":"percent","higher_is_better":true,"source":"SWE-bench project","url":"https://www.swebench.com"},"terminal_bench_2":{"name":"Terminal-Bench 2.0","category":"coding","description":"Agentic terminal coding \u2014 file editing, commands, debugging via terminal","unit":"percent","higher_is_better":true,"source":"Anthropic, Google DeepMind","notes":"Harness varies by provider (Terminus-2 vs Codex CLI)"},"hle_with_tools":{"name":"Humanity's Last Exam (with tools)","category":"reasoning","description":"2,500 expert academic questions from ~1,000 contributors","unit":"percent","higher_is_better":true,"source":"Center for AI Safety","url":"https://lastexam.ai"},"frontier_math":{"name":"FrontierMath","category":"math","description":"Research-level mathematics (undergrad through research-level), manually graded","unit":"percent","higher_is_better":true,"source":"Epoch AI"},"gdpval_aa_elo":{"name":"GDPval-AA Elo","category":"knowledge_work","description":"44 knowledge work occupations from top 9 US GDP industries, human-rated","unit":"elo","higher_is_better":true,"source":"Artificial Analysis"},"browsecomp":{"name":"BrowseComp","category":"knowledge_work","description":"Locating hard-to-find information online (autonomous web research)","unit":"percent","higher_is_better":true,"source":"OpenAI"},"livecode_bench_elo":{"name":"LiveCodeBench Pro","category":"coding","description":"Competitive programming from Codeforces, ICPC, IOI","unit":"elo","higher_is_better":true,"source":"Google DeepMind"},"mrcr_v2_128k":{"name":"MRCR v2 (8-needle 128k)","category":"long_context","description":"Needle-in-a-haystack retrieval across 128k token context","unit":"percent","higher_is_better":true,"source":"Multiple"},"coding_eval_claude_code":{"name":"Coding Eval (Claude Code Harness)","category":"coding","description":"Coding evaluation using Claude Code as test framework","unit":"points","higher_is_better":true,"source":"Z.ai","notes":"Not a standard benchmark \u2014 Z.ai's internal evaluation. GLM scores are self-reported."},"intelligence_index":{"name":"Artificial Analysis Intelligence Index","category":"composite","description":"Synthesis metric incorporating 10 evaluations (agentic, coding, scientific reasoning)","unit":"score","higher_is_better":true,"source":"Artificial Analysis","url":"https://artificialanalysis.ai"}},"providers":{"anthropic":{"name":"Anthropic","brand_color":"#D4A27F","website":"https://www.anthropic.com"},"google":{"name":"Google DeepMind","brand_color":"#4285F4","website":"https://deepmind.google"},"meta":{"name":"Meta","brand_color":"#0668E1","website":"https://llama.meta.com"},"minimax":{"name":"MiniMax","brand_color":"#FF6B6B","website":"https://minimax.io"},"moonshot":{"name":"Moonshot AI","brand_color":"#0F3460","website":"https://www.moonshot.cn"},"openai":{"name":"OpenAI","brand_color":"#10A37F","website":"https://openai.com"},"xai":{"name":"xAI","brand_color":"#E8E8E8","website":"https://x.ai"},"zai":{"name":"Z.ai (formerly Zhipu AI)","brand_color":"#6C5CE7","website":"https://z.ai","notes":"World's first publicly traded foundation model company (HK IPO Jan 2026, $6.6B valuation). On US Entity List since Jan 2025 \u2014 trains entirely on Huawei Ascend hardware."}},"models":[{"id":"llama-4-scout","name":"Llama 4 Scout","released":"2025-04-01","type":"open-source","context_window":"10M","tags":["open-weight","fast","long-context","tool-use"],"pricing":{"input_per_m":0.08,"output_per_m":0.3},"architecture":{"notes":"10M context window \u2014 largest of any tracked model. MoE architecture."},"scores":{"speed_tps":{"value":2600,"self_reported":false,"benchmark_date":"2025-04-01","source":"https://www.siliconflow.com/articles/benchmark","notes":"Fastest model tracked \u2014 2600 t/s"},"mmlu":{"value":79.6,"self_reported":false,"benchmark_date":"2025-04-01","source":"https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout","notes":null},"mmlu_pro":{"value":74.3,"self_reported":false,"benchmark_date":"2025-04-01","source":"https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout","notes":null}},"verification":{"status":"verified"},"provider_id":"meta","provider_name":"Meta","provider_color":"#0668E1"},{"id":"llama-4-maverick","name":"Llama 4 Maverick","released":"2025-04-01","type":"open-source","context_window":"10M","tags":["open-weight","long-context"],"pricing":{"input_per_m":0.2,"output_per_m":0.6},"scores":{"speed_tps":{"value":1260,"self_reported":false,"benchmark_date":"2025-04-01","source":"https://www.siliconflow.com/articles/benchmark","notes":null}},"verification":{"status":"verified"},"provider_id":"meta","provider_name":"Meta","provider_color":"#0668E1"},{"id":"kimi-k2","name":"Kimi K2","released":"2025-07-01","type":"open-source","context_window":"128k","superseded_by":"kimi-k2.5","tags":["open-weight","coding","math","agentic"],"pricing":{"input_per_m":0.15,"output_per_m":0.6},"architecture":{"notes":"First major Kimi frontier release; trillion-parameter MoE; strong math reasoning"},"scores":{"swe_bench_verified":{"value":65.8,"self_reported":false,"benchmark_date":"2025-07-11","source":"https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free","notes":"Independently verified on official SWE-Bench leaderboard"},"livecode_bench":{"value":53.7,"self_reported":false,"benchmark_date":"2025-07-11","source":"https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free","notes":null},"math_500":{"value":97.0,"self_reported":false,"benchmark_date":"2025-07-11","source":"https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free","notes":"Kimi K2 Thinking variant leads LiveCodeBench among open-weight models per Vellum"}},"verification":{"status":"verified","notes":"SWE-Bench and LiveCodeBench verified via official leaderboards"},"provider_id":"moonshot","provider_name":"Moonshot AI","provider_color":"#0F3460"},{"id":"grok-4","name":"Grok 4","released":"2025-08-01","type":"proprietary","context_window":"2M","superseded_by":"grok-4.20-beta","tags":["reasoning","math","long-context"],"pricing":{"composite_per_m":2.0},"scores":{"gpqa_diamond":{"value":87.5,"self_reported":false,"benchmark_date":"2025-08-01","source":"https://www.siliconflow.com/articles/benchmark","notes":null},"aime_2025":{"value":92.0,"self_reported":false,"benchmark_date":"2025-08-01","source":"https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout","notes":null},"simple_qa":{"value":95.0,"self_reported":false,"benchmark_date":"2025-08-01","source":"https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout","notes":null}},"verification":{"status":"partially_verified"},"provider_id":"xai","provider_name":"xAI","provider_color":"#E8E8E8"},{"id":"glm-5.1","name":"GLM-5.1","released":"2026-03-27","type":"open-source","context_window":"200k","max_output":"131k","tags":["open-weight","coding","agentic","efficient"],"pricing":{"coding_plan_monthly_usd":"$3\u2013$30","notes":"API pricing TBD; MIT license \u2014 self-hostable at zero per-token cost"},"architecture":{"total_params":"744B","architecture":"MoE","experts_total":256,"experts_active":8,"active_params":"~40\u201344B","training_hardware":"100,000 \u00d7 Huawei Ascend 910B (zero NVIDIA)","training_data_tokens":"28.5T (inherited from GLM-5 base)","attention":"DeepSeek Sparse Attention (DSA)","notes":"Post-training update on GLM-5 base \u2014 not a full retrain. Significant improvements in agentic instruction-following and long-running tasks."},"scores":{"coding_eval_claude_code":{"value":45.3,"self_reported":true,"benchmark_date":"2026-03-27","source":"https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026","notes":"Self-reported by Z.ai using Claude Code harness (non-standard). 94.6% of Claude Opus 4.6 (47.9). 28% improvement over GLM-5 (35.4). Independent verification pending."}},"verification":{"status":"unverified","notes":"Coding score (45.3 = 94.6% of Opus 4.6) is entirely self-reported. Claude Code harness is unconventional and not directly comparable to SWE-Bench or Terminal-Bench. No independent evaluation published as of April 2, 2026. Expected within weeks."},"provider_id":"zai","provider_name":"Z.ai (formerly Zhipu AI)","provider_color":"#6C5CE7"},{"id":"gemini-3.1-pro","name":"Gemini 3.1 Pro","released":"2026-02-19","type":"proprietary","context_window":"1M","max_output":"65k","tags":["flagship","reasoning","science","coding","agentic","long-context"],"pricing":{"input_per_m":2.0,"output_per_m":12.0,"notes":"Same price as Gemini 3 Pro \u2014 major capability upgrade at no cost increase"},"architecture":{"thinking_levels":["minimal","low","medium","high"],"notes":"Preview as of April 2026; 75% prompt caching discounts; video/audio/image/speech input; output truncation fixed vs 3 Pro"},"scores":{"intelligence_index":{"value":57,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"arc_agi_2":{"value":77.1,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"ARC Prize verified \u2014 highest recorded score on this benchmark"},"gpqa_diamond":{"value":94.3,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Highest ever recorded on GPQA Diamond per PCMag"},"swe_bench_verified":{"value":80.6,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"terminal_bench_2":{"value":68.5,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Terminus-2 harness"},"hle_with_tools":{"value":51.4,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"browsecomp":{"value":85.9,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://almcorp.com/blog/gemini-3-1-pro-complete-guide/","notes":null},"livecode_bench_elo":{"value":2887,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"mrcr_v2_128k":{"value":84.9,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"mmmlu":{"value":92.6,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"apex_agents":{"value":33.5,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Long-horizon professional tasks \u2014 82% relative improvement vs 3 Pro"},"mcp_atlas":{"value":69.2,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"scicode":{"value":59,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"swe_bench_pro":{"value":54.2,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"gdpval_aa_elo":{"value":1317,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Weaker than Claude on expert knowledge work despite leading raw benchmarks"}},"verification":{"status":"verified","notes":"All scores from official Google DeepMind model card"},"provider_id":"google","provider_name":"Google DeepMind","provider_color":"#4285F4"},{"id":"gpt-5.4","name":"GPT-5.4","released":"2026-03-15","type":"proprietary","context_window":"1.05M","tags":["flagship","math","coding","reasoning"],"pricing":{"composite_per_m":5.63},"scores":{"intelligence_index":{"value":57,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"swe_bench_verified":{"value":76.9,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://lmcouncil.ai/benchmarks","notes":null},"frontier_math":{"value":47.6,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://lmcouncil.ai/benchmarks","notes":null},"gdpval":{"value":83.0,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://lmcouncil.ai/benchmarks","notes":null}},"verification":{"status":"verified"},"provider_id":"openai","provider_name":"OpenAI","provider_color":"#10A37F"},{"id":"gpt-5.3-codex","name":"GPT-5.3 Codex","released":"2026-02-05","type":"proprietary","context_window":"400k","tags":["coding","terminal","agentic"],"pricing":{"composite_per_m":4.81},"scores":{"intelligence_index":{"value":54,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"terminal_bench_2":{"value":77.3,"self_reported":true,"benchmark_date":"2026-02-05","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Self-reported by OpenAI using Codex CLI harness \u2014 not comparable to Terminus-2 harness used by others"},"swe_bench_pro":{"value":56.8,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"weird_ml_v2":{"value":79.3,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://lmcouncil.ai/benchmarks","notes":null}},"verification":{"status":"partially_verified","notes":"Terminal-Bench 2.0 score uses Codex CLI harness (self-reported); not directly comparable to Terminus-2 results"},"provider_id":"openai","provider_name":"OpenAI","provider_color":"#10A37F"},{"id":"claude-opus-4.6","name":"Claude Opus 4.6","released":"2026-02-05","type":"proprietary","context_window":"1M (beta)","max_output":"128k","tags":["flagship","long-context","agentic","coding","knowledge-work"],"pricing":{"input_per_m":5.0,"output_per_m":25.0,"notes":"Premium pricing ($10/$37.50) applies for prompts exceeding 200k tokens"},"architecture":{"notes":"1M context in beta; adaptive thinking; effort controls; compaction support"},"scores":{"intelligence_index":{"value":53,"self_reported":false,"benchmark_date":"2026-02-09","source":"https://artificialanalysis.ai/models/claude-opus-4-6-adaptive","notes":null},"arc_agi_2":{"value":68.8,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Measured with max effort and 120k thinking budget"},"gpqa_diamond":{"value":90.5,"self_reported":false,"benchmark_date":"2026-02-05","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":"32k thinking budget"},"swe_bench_verified":{"value":80.8,"self_reported":false,"benchmark_date":"2026-02-05","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":"Averaged over 25 trials; 81.42% with prompt modification"},"terminal_bench_2":{"value":65.4,"self_reported":false,"benchmark_date":"2026-02-05","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":"Terminus-2 harness"},"hle_with_tools":{"value":53.1,"self_reported":false,"benchmark_date":"2026-02-05","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":null},"frontier_math":{"value":40.7,"self_reported":false,"benchmark_date":"2026-02-09","source":"https://lmcouncil.ai/benchmarks","notes":"Max effort mode"},"gdpval_aa_elo":{"value":1606,"self_reported":false,"benchmark_date":"2026-02-09","source":"https://www.linkedin.com/pulse/claude-opus-46-takes-first-place-full-artificial-analysis-jw6dc","notes":null},"browsecomp":{"value":86.8,"self_reported":false,"benchmark_date":"2026-02-05","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":"Multi-agent harness with web search + compaction"},"mrcr_v2_128k":{"value":84.0,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"biglaw_bench":{"value":90.2,"self_reported":false,"benchmark_date":"2026-02-05","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":null},"coding_eval_claude_code":{"value":47.9,"self_reported":true,"benchmark_date":"2026-03-27","source":"https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026","notes":"Used as baseline by Z.ai for GLM-5.1 comparison; score is from Anthropic's own harness"}},"verification":{"status":"verified","notes":"All major scores verified by Artificial Analysis and Google DeepMind model card"},"provider_id":"anthropic","provider_name":"Anthropic","provider_color":"#D4A27F"},{"id":"claude-sonnet-4.6","name":"Claude Sonnet 4.6","released":"2026-02-17","type":"proprietary","context_window":"1M (beta)","max_output":"64k","tags":["balanced","long-context","coding","knowledge-work","fast"],"pricing":{"input_per_m":3.0,"output_per_m":15.0},"scores":{"intelligence_index":{"value":52,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"arc_agi_2":{"value":60.4,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"gpqa_diamond":{"value":89.9,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"swe_bench_verified":{"value":79.6,"self_reported":false,"benchmark_date":"2026-02-17","source":"https://www.datastudios.org/post/claude-sonnet-4-6-vs-opus-4-6-2026-comparison-capability-split-output-ceilings-long-context-beha","notes":null},"terminal_bench_2":{"value":59.1,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"hle_with_tools":{"value":49.0,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"gdpval_aa_elo":{"value":1633,"self_reported":false,"benchmark_date":"2026-02-17","source":"https://designforonline.com/the-best-ai-models-so-far-in-2026/","notes":"Leads entire GDPval-AA field \u2014 above Opus 4.6"},"mrcr_v2_128k":{"value":84.9,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null}},"verification":{"status":"verified"},"provider_id":"anthropic","provider_name":"Anthropic","provider_color":"#D4A27F"},{"id":"gpt-5.2","name":"GPT-5.2","released":"2025-12-01","type":"proprietary","context_window":"400k","superseded_by":"gpt-5.4","tags":["reasoning","coding","science"],"pricing":{"composite_per_m":4.81},"scores":{"intelligence_index":{"value":51,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"arc_agi_2":{"value":52.9,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"gpqa_diamond":{"value":91.4,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"swe_bench_verified":{"value":80.0,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"terminal_bench_2":{"value":54.0,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":"Terminus-2 harness"},"hle_with_tools":{"value":45.5,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"frontier_math":{"value":40.7,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://lmcouncil.ai/benchmarks","notes":null},"gdpval_aa_elo":{"value":1462,"self_reported":false,"benchmark_date":"2026-02-09","source":"https://www.anthropic.com/news/claude-opus-4-6","notes":null},"browsecomp":{"value":65.8,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ","notes":null},"livecode_bench_elo":{"value":2393,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"mrcr_v2_128k":{"value":83.8,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null}},"verification":{"status":"verified"},"provider_id":"openai","provider_name":"OpenAI","provider_color":"#10A37F"},{"id":"claude-opus-4.5","name":"Claude Opus 4.5","released":"2025-10-22","type":"proprietary","context_window":"200k","max_output":"64k","superseded_by":"claude-opus-4.6","tags":["flagship","coding","agentic"],"pricing":{"input_per_m":5.0,"output_per_m":25.0},"scores":{"intelligence_index":{"value":50,"self_reported":false,"benchmark_date":"2026-02-09","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"swe_bench_verified":{"value":76.7,"self_reported":false,"benchmark_date":"2026-02-09","source":"https://lmcouncil.ai/benchmarks","notes":null},"browsecomp":{"value":67.8,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ","notes":null}},"verification":{"status":"verified"},"provider_id":"anthropic","provider_name":"Anthropic","provider_color":"#D4A27F"},{"id":"minimax-m2.7","name":"MiniMax-M2.7","released":"2026-03-18","type":"proprietary","context_window":"205k","tags":["agentic","coding","efficient","self-improving"],"pricing":{"input_per_m":0.3,"output_per_m":1.2},"architecture":{"notes":"30% capability improvement via 100+ autonomous self-training rounds. Up to 50x cheaper than Claude Opus 4.6."},"scores":{"intelligence_index":{"value":50,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"gpqa_diamond":{"value":87.4,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"hle_no_tools":{"value":28.1,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"swe_bench_pro":{"value":56.22,"self_reported":false,"benchmark_date":"2026-03-21","source":"https://www.geeky-gadgets.com/minimax-m27-benchmark-results/","notes":"World of AI independent testing \u2014 outperforms Gemini 3.1 Pro on SWE-Bench Pro"},"terminal_bench_2":{"value":57.0,"self_reported":false,"benchmark_date":"2026-03-21","source":"https://www.geeky-gadgets.com/minimax-m27-benchmark-results/","notes":"Independent test by World of AI"},"scicode":{"value":47.0,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"ifbench":{"value":75.7,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"tau_bench_v2":{"value":84.8,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"pinch_bench":{"value":86.2,"self_reported":false,"benchmark_date":"2026-03-19","source":"https://www.reddit.com/r/LocalLLaMA/comments/1rxwcda/benchmarked_minimax_m27_through_2_benchmarks/","notes":"5th overall, within 1.2 points of Claude Opus 4.6 (87.4)"}},"verification":{"status":"partially_verified","notes":"SWE-Bench Pro and Terminal-Bench from World of AI independent testing. GPQA/HLE from LLMBase aggregation."},"provider_id":"minimax","provider_name":"MiniMax","provider_color":"#FF6B6B"},{"id":"glm-5","name":"GLM-5","released":"2026-02-10","type":"open-source","context_window":"200k","max_output":"131k","superseded_by":"glm-5.1","tags":["open-weight","coding","agentic","efficient","flagship"],"pricing":{"input_per_m":1.0,"output_per_m":3.2,"notes":"5x cheaper input and ~8x cheaper output vs Claude Opus 4.6"},"architecture":{"total_params":"744B","architecture":"MoE","experts_total":256,"experts_active":8,"training_hardware":"Huawei Ascend 910B","training_data_tokens":"28.5T"},"scores":{"intelligence_index":{"value":50,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://artificialanalysis.ai/leaderboards/models","notes":"First open-weight model to breach the 50 threshold on Artificial Analysis Intelligence Index"},"swe_bench_verified":{"value":77.8,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ","notes":"Independently validated \u2014 highest SWE-Bench score among all open-weight models"},"terminal_bench_2":{"value":56.2,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://llm-stats.com/blog/research/glm-5-launch","notes":null},"browsecomp":{"value":75.9,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ","notes":"With context management; outperforms GPT-5.2 (65.8)"},"coding_eval_claude_code":{"value":35.4,"self_reported":true,"benchmark_date":"2026-03-27","source":"https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026","notes":"Self-reported baseline used in GLM-5.1 comparison"}},"verification":{"status":"partially_verified","notes":"SWE-Bench Verified (77.8%) and Intelligence Index (50) independently confirmed. Coding eval and BrowseComp scores are self-reported or from aggregators."},"provider_id":"zai","provider_name":"Z.ai (formerly Zhipu AI)","provider_color":"#6C5CE7"},{"id":"gemini-3-pro","name":"Gemini 3 Pro","released":"2025-11-01","type":"proprietary","context_window":"1M","superseded_by":"gemini-3.1-pro","tags":["flagship","science","long-context"],"pricing":{"input_per_m":2.0,"output_per_m":12.0},"scores":{"intelligence_index":{"value":48,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"arc_agi_2":{"value":31.1,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"gpqa_diamond":{"value":92.6,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"swe_bench_verified":{"value":76.2,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"terminal_bench_2":{"value":56.9,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"hle_with_tools":{"value":45.8,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"livecode_bench_elo":{"value":2439,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"mrcr_v2_128k":{"value":77.0,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://deepmind.google/models/model-cards/gemini-3-1-pro/","notes":null},"browsecomp":{"value":59.2,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://almcorp.com/blog/gemini-3-1-pro-complete-guide/","notes":null}},"verification":{"status":"verified"},"provider_id":"google","provider_name":"Google DeepMind","provider_color":"#4285F4"},{"id":"kimi-k2.5","name":"Kimi K2.5","released":"2026-02-01","type":"open-source","context_window":"256k","tags":["open-weight","coding","agentic","instruction-following"],"pricing":{"input_per_m":0.6,"output_per_m":2.5},"architecture":{"notes":"Thinking variant of Kimi K2; trillion-parameter MoE family; strong tool-use and RAG pipeline performance"},"scores":{"intelligence_index":{"value":48,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://onyx.app/llm-leaderboard","notes":null},"swe_bench_verified":{"value":72.4,"self_reported":false,"benchmark_date":"2026-02-01","source":"https://www.alphacorp.ai/blog/top-5-llms-for-march-2026-benchmarks-pricing-picks","notes":"Top of SWE-bench Verified open-weight leaderboard per Onyx/Vellum"},"ifeval":{"value":94.0,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://www.alphacorp.ai/blog/top-5-llms-for-march-2026-benchmarks-pricing-picks","notes":"Leads IFEval \u2014 critical for RAG pipelines, structured output, multi-agent orchestration"},"hle_no_tools":{"value":44.9,"self_reported":true,"benchmark_date":"2026-03-01","source":"https://www.siliconflow.com/articles/benchmark","notes":"Self-reported via SiliconFlow aggregation"}},"verification":{"status":"partially_verified","notes":"SWE-Bench and IFEval from Vellum/Onyx leaderboards. HLE from SiliconFlow aggregation (self-reported)."},"provider_id":"moonshot","provider_name":"Moonshot AI","provider_color":"#0F3460"},{"id":"gpt-5.1","name":"GPT-5.1","released":"2025-09-01","type":"proprietary","context_window":"200k","superseded_by":"gpt-5.2","tags":["reasoning","balanced"],"pricing":{"input_per_m":1.25,"output_per_m":10.0},"scores":{"intelligence_index":{"value":48,"self_reported":false,"benchmark_date":"2026-04-02","source":"https://artificialanalysis.ai/leaderboards/models","notes":null}},"verification":{"status":"verified"},"provider_id":"openai","provider_name":"OpenAI","provider_color":"#10A37F"},{"id":"grok-4.20-beta","name":"Grok 4.20 Beta","released":"2026-02-17","type":"proprietary","context_window":"2M","tags":["fast","long-context","multi-agent","reasoning"],"pricing":{"composite_per_m":3.0},"architecture":{"notes":"Four parallel AI agents running simultaneously \u2014 new multi-agent architecture. 248 t/s \u2014 fastest frontier model."},"scores":{"intelligence_index":{"value":48,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"arc_agi_2":{"value":16,"self_reported":false,"benchmark_date":"2026-02-19","source":"https://designforonline.com/the-best-ai-models-so-far-in-2026/","notes":"Notably weak on abstract reasoning vs peers"},"gpqa_diamond":{"value":88,"self_reported":true,"benchmark_date":"2026-02-17","source":"https://designforonline.com/the-best-ai-models-so-far-in-2026/","notes":"Approximate \u2014 self-reported by xAI"}},"verification":{"status":"partially_verified","notes":"Intelligence Index from Artificial Analysis. GPQA and ARC-AGI-2 from third-party aggregators."},"provider_id":"xai","provider_name":"xAI","provider_color":"#E8E8E8"},{"id":"gemini-3-flash","name":"Gemini 3 Flash","released":"2025-12-17","type":"proprietary","context_window":"1M","max_output":"65k","tags":["fast","coding","efficient","agentic","multimodal"],"pricing":{"input_per_m":0.1,"output_per_m":0.4,"notes":"~20x cheaper than Gemini 3 Pro; 3x faster inference"},"architecture":{"notes":"Optimised for iterative/agentic coding loops; 30% more token-efficient than 3 Pro; modulates reasoning depth per token"},"scores":{"intelligence_index":{"value":46,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://artificialanalysis.ai/leaderboards/models","notes":null},"gpqa_diamond":{"value":90.4,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/","notes":"Rivals Gemini 3 Pro at Flash pricing"},"swe_bench_verified":{"value":78.0,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/","notes":"Outperforms Gemini 3 Pro on SWE-Bench despite being 20x cheaper"},"hle_no_tools":{"value":33.7,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/","notes":null},"mmmu_pro":{"value":81.2,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/","notes":null},"aime_2025_with_code":{"value":99.7,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://www.aifreeapi.com/en/posts/gemini-3-flash-vs-pro-capabilities","notes":null},"simple_qa":{"value":68.7,"self_reported":false,"benchmark_date":"2025-12-17","source":"https://businessanalytics.substack.com/p/google-achieves-78-coding-accuracy","notes":"Up from 28.1% on previous Flash model"}},"verification":{"status":"verified","notes":"SWE-Bench and GPQA scores from official Google blog"},"provider_id":"google","provider_name":"Google DeepMind","provider_color":"#4285F4"},{"id":"minimax-m2.5","name":"MiniMax-M2.5","released":"2026-02-12","type":"proprietary","context_window":"205k","superseded_by":"minimax-m2.7","tags":["efficient","agentic"],"pricing":{"input_per_m":0.3,"output_per_m":1.2},"scores":{"intelligence_index":{"value":42,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"gpqa_diamond":{"value":84.8,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"hle_no_tools":{"value":19.1,"self_reported":false,"benchmark_date":"2026-03-18","source":"https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/","notes":null},"pinch_bench":{"value":82.5,"self_reported":false,"benchmark_date":"2026-03-19","source":"https://www.reddit.com/r/LocalLLaMA/comments/1rxwcda/benchmarked_minimax_m27_through_2_benchmarks/","notes":null}},"verification":{"status":"partially_verified"},"provider_id":"minimax","provider_name":"MiniMax","provider_color":"#FF6B6B"},{"id":"glm-4.7","name":"GLM-4.7","released":"2025-12-01","type":"open-source","context_window":"128k","superseded_by":"glm-5","tags":["open-weight","coding"],"pricing":{"input_per_m":0.5,"output_per_m":1.5},"scores":{"intelligence_index":{"value":42,"self_reported":false,"benchmark_date":"2026-02-11","source":"https://artificialanalysis.ai/leaderboards/models","notes":null}},"verification":{"status":"verified"},"notes":"Used as Claude Opus/Sonnet/Haiku mapping target in Z.ai/Antigravity MCP setup","provider_id":"zai","provider_name":"Z.ai (formerly Zhipu AI)","provider_color":"#6C5CE7"}],"snapshots":[{"snapshot_date":"2026-04-02","notes":"Initial snapshot. GLM-5.1 released March 27 but coding scores unverified.","leaderboard":[{"rank":1,"model":"Gemini 3.1 Pro","provider":"google","intelligence_index":57},{"rank":1,"model":"GPT-5.4","provider":"openai","intelligence_index":57},{"rank":3,"model":"GPT-5.3 Codex","provider":"openai","intelligence_index":54},{"rank":4,"model":"Claude Opus 4.6","provider":"anthropic","intelligence_index":53},{"rank":5,"model":"Claude Sonnet 4.6","provider":"anthropic","intelligence_index":52},{"rank":6,"model":"GPT-5.2","provider":"openai","intelligence_index":51},{"rank":7,"model":"GLM-5","provider":"zai","intelligence_index":50},{"rank":7,"model":"Claude Opus 4.5","provider":"anthropic","intelligence_index":50},{"rank":7,"model":"MiniMax-M2.7","provider":"minimax","intelligence_index":50},{"rank":10,"model":"MiMo-V2-Pro","provider":"xiaomi","intelligence_index":49},{"rank":11,"model":"Grok 4.20 Beta","provider":"xai","intelligence_index":48}],"category_winners":{"reasoning":"Gemini 3.1 Pro","science":"Gemini 3.1 Pro","coding_swe":"Claude Opus 4.6","coding_terminal":"GPT-5.3 Codex","coding_competitive":"Gemini 3.1 Pro","math":"GPT-5.4 Pro","knowledge_work":"Claude Sonnet 4.6","web_research":"Claude Opus 4.6","long_context":"Gemini 3.1 Pro","best_value":"GLM-5","fastest":"Grok 4.20 Beta"}}]};
 
-const MODELS = [
-  { model: "Gemini 3.1 Pro Preview", provider: "google", score: 57, price: 4.50, speed: 109, context: "1M", released: "2026-02-19" },
-  { model: "GPT-5.4", provider: "openai", score: 57, price: 5.63, speed: 80, context: "1.05M", released: "2026-03-15" },
-  { model: "GPT-5.3 Codex", provider: "openai", score: 54, price: 4.81, speed: 73, context: "400k", released: "2026-02-05" },
-  { model: "Claude Opus 4.6", provider: "anthropic", score: 53, price: 10.00, speed: 43, context: "1M", released: "2026-02-05" },
-  { model: "Claude Sonnet 4.6", provider: "anthropic", score: 52, price: 6.00, speed: 68, context: "1M", released: "2026-02-17" },
-  { model: "GPT-5.2", provider: "openai", score: 51, price: 4.81, speed: 70, context: "400k", released: "2025-12-01" },
-  { model: "GLM-5", provider: "zai", score: 50, price: 1.55, speed: 68, context: "200k", released: "2026-02-10" },
-  { model: "Claude Opus 4.5", provider: "anthropic", score: 50, price: 10.00, speed: 50, context: "200k", released: "2025-10-22" },
-  { model: "MiniMax-M2.7", provider: "minimax", score: 50, price: 0.53, speed: 45, context: "205k", released: "2026-01-15" },
-  { model: "MiMo-V2-Pro", provider: "xiaomi", score: 49, price: 1.50, speed: null, context: "1M", released: "2026-02-01" },
-  { model: "Grok 4.20 Beta", provider: "xai", score: 48, price: 3.00, speed: 248, context: "2M", released: "2026-02-17" },
-  { model: "Gemini 3 Pro", provider: "google", score: 48, price: 4.50, speed: 121, context: "1M", released: "2025-11-01" },
-  { model: "GLM-5.1", provider: "zai", score: null, price: null, speed: null, context: "200k", released: "2026-03-27", note: "Self-reported: 94.6% of Opus 4.6 on coding" }
+// =================== DERIVED DATA ===================
+const DB_PROVIDERS = DASHBOARD.providers;
+const DB_BENCHMARKS = DASHBOARD.benchmarks;
+const DB_MODELS = DASHBOARD.models;
+
+// Build provider lookup with colors
+const PROVIDERS = {};
+Object.entries(DB_PROVIDERS).forEach(([id, p]) => {
+  PROVIDERS[id] = { name: p.name, color: p.brand_color, website: p.website };
+});
+
+// Compute composite price for each model
+function getCompositePrice(m) {
+  const p = m.pricing;
+  if (!p) return null;
+  if (p.composite_per_m) return p.composite_per_m;
+  if (p.input_per_m != null && p.output_per_m != null) return (p.input_per_m + p.output_per_m) / 2;
+  return null;
+}
+
+// Get speed for model
+function getSpeed(m) {
+  if (m.scores && m.scores.speed_tps) return m.scores.speed_tps.value;
+  // Fallback known speeds from v1
+  const speedMap = {
+    'gemini-3.1-pro': 109, 'gpt-5.4': 80, 'gpt-5.3-codex': 73,
+    'claude-opus-4.6': 43, 'claude-sonnet-4.6': 68, 'gpt-5.2': 70,
+    'glm-5': 68, 'claude-opus-4.5': 50, 'minimax-m2.7': 45,
+    'grok-4.20-beta': 248, 'gemini-3-pro': 121, 'gemini-3-flash': 350,
+    'mimo-v2-pro': null
+  };
+  return speedMap[m.id] ?? null;
+}
+
+// Build flat MODELS array for leaderboard
+const MODELS = DB_MODELS.map(m => {
+  const ii = m.scores?.intelligence_index?.value ?? null;
+  const price = getCompositePrice(m);
+  const speed = getSpeed(m);
+  return {
+    id: m.id,
+    model: m.name,
+    provider: m.provider_id,
+    score: ii,
+    price: price,
+    speed: speed,
+    context: m.context_window,
+    released: m.released,
+    tags: m.tags || [],
+    superseded_by: m.superseded_by || null,
+    verification: m.verification || { status: 'verified' },
+    scores: m.scores || {},
+    architecture: m.architecture || null,
+    pricing: m.pricing || null,
+    type: m.type || ''
+  };
+});
+
+// Build benchmark score map for bar charts & radar
+// Map from benchmark_key -> { model_name: { value, self_reported, ... } }
+const BENCH_SCORES = {};
+const TRACKED_BENCHMARKS = [
+  'arc_agi_2', 'gpqa_diamond', 'swe_bench_verified', 'terminal_bench_2',
+  'hle_with_tools', 'frontier_math', 'gdpval_aa_elo', 'browsecomp',
+  'livecode_bench_elo', 'mrcr_v2_128k', 'coding_eval_claude_code', 'ifeval'
 ];
+TRACKED_BENCHMARKS.forEach(bk => { BENCH_SCORES[bk] = {}; });
 
-const BENCHMARKS = {
-  arc_agi_2: {
-    name: "ARC-AGI-2", category: "reasoning",
-    description: "Novel abstract reasoning puzzles (ARC Prize Verified)",
-    scores: { "Gemini 3.1 Pro": 77.1, "Claude Opus 4.6": 68.8, "Claude Sonnet 4.6": 60.4, "GPT-5.2": 52.9, "Grok 4.20": 16, "Qwen 3.5": 12 }
-  },
-  gpqa_diamond: {
-    name: "GPQA Diamond", category: "science",
-    description: "PhD-level science questions (biology, chemistry, physics)",
-    scores: { "Gemini 3.1 Pro": 94.3, "Gemini 3 Pro": 92.6, "GPT-5.2": 91.4, "Claude Opus 4.6": 90.5, "Qwen 3.5": 88.4, "Grok 4": 88 }
-  },
-  swe_bench: {
-    name: "SWE-Bench Verified", category: "coding",
-    description: "Real-world GitHub issue resolution",
-    scores: { "Claude Opus 4.6": 80.8, "Gemini 3.1 Pro": 80.6, "GPT-5.2": 80.0, "GLM-5": 77.8, "Claude Opus 4.5": 76.7, "Gemini 3.1 Pro Preview": 75.6, "GPT-5.4": 76.9 }
-  },
-  terminal_bench: {
-    name: "Terminal-Bench 2.0", category: "coding",
-    description: "Agentic terminal coding & DevOps tasks",
-    scores: { "GPT-5.3 Codex": 77.3, "Gemini 3.1 Pro": 68.5, "Claude Opus 4.6": 65.4, "Claude Sonnet 4.6": 59.1, "GLM-5": 56.2, "GPT-5.2": 54.0 }
-  },
-  hle: {
-    name: "Humanity's Last Exam", category: "reasoning",
-    description: "2,500 expert academic questions (with tools)",
-    scores: { "Claude Opus 4.6": 53.1, "Gemini 3.1 Pro": 51.4, "Claude Sonnet 4.6": 49.0, "Gemini 3 Pro": 45.8, "GPT-5.2": 45.5 }
-  },
-  frontier_math: {
-    name: "FrontierMath", category: "math",
-    description: "Research-level mathematics problems",
-    scores: { "GPT-5.4 Pro": 50.0, "GPT-5.4": 47.6, "Claude Opus 4.6": 40.7, "GPT-5.2": 40.7 }
-  },
-  gdpval_aa: {
-    name: "GDPval-AA Elo", category: "knowledge_work",
-    description: "Expert knowledge work tasks, human-rated",
-    unit: "elo",
-    scores: { "Claude Sonnet 4.6": 1633, "Claude Opus 4.6": 1606, "GPT-5.2": 1462, "Gemini 3.1 Pro": 1317 }
-  },
-  browsecomp: {
-    name: "BrowseComp", category: "knowledge_work",
-    description: "Autonomous web research capability",
-    scores: { "Claude Opus 4.6": 86.8, "Gemini 3.1 Pro": 85.9, "GLM-5": 75.9, "Claude Opus 4.5": 67.8, "GPT-5.2": 65.8 }
-  },
-  livecode_bench: {
-    name: "LiveCodeBench Pro", category: "coding",
-    description: "Competitive coding (Codeforces, ICPC, IOI)",
-    unit: "elo",
-    scores: { "Gemini 3.1 Pro": 2887, "Gemini 3 Pro": 2439, "GPT-5.2": 2393 }
-  },
-  mrcr_v2: {
-    name: "MRCR v2 (8-needle 128k)", category: "long_context",
-    description: "Needle-in-a-haystack long context retrieval",
-    scores: { "Gemini 3.1 Pro": 84.9, "Claude Sonnet 4.6": 84.9, "Claude Opus 4.6": 84.0, "GPT-5.2": 83.8, "Gemini 3 Pro": 77.0 }
-  },
-  coding_eval_claude_code: {
-    name: "Coding Eval (Claude Code Harness)", category: "coding",
-    description: "Coding evaluation using Claude Code — self-reported by Z.ai",
-    scores: { "Claude Opus 4.6": 47.9, "GLM-5.1": 45.3, "GLM-5": 35.4 },
-    note: "GLM-5.1 score is self-reported, not independently verified"
-  }
+DB_MODELS.forEach(m => {
+  if (!m.scores) return;
+  Object.entries(m.scores).forEach(([scoreKey, scoreObj]) => {
+    if (scoreKey === 'intelligence_index' || scoreKey === 'speed_tps') return;
+    if (!BENCH_SCORES[scoreKey]) BENCH_SCORES[scoreKey] = {};
+    BENCH_SCORES[scoreKey][m.name] = scoreObj;
+  });
+});
+
+// Fallback display names for benchmark keys not in DB_BENCHMARKS
+const EXTRA_BENCH_NAMES = {
+  ifeval: 'IFEval',
+  hle_no_tools: "Humanity's Last Exam (no tools)",
+  math_500: 'MATH-500',
+  livecode_bench: 'LiveCodeBench',
+  aime_2025: 'AIME 2025',
+  simple_qa: 'SimpleQA',
+  mmlu: 'MMLU',
+  mmlu_pro: 'MMLU-Pro',
+  mmmlu: 'mMMLU',
+  mmmu_pro: 'MMMU Pro',
+  aime_2025_with_code: 'AIME 2025 (with code)',
+  biglaw_bench: 'BigLaw Bench',
+  apex_agents: 'Apex Agents',
+  mcp_atlas: 'MCP Atlas',
+  scicode: 'SciCode',
+  swe_bench_pro: 'SWE-Bench Pro',
+  weird_ml_v2: 'Weird ML v2',
+  ifbench: 'IFBench',
+  tau_bench_v2: 'TAU-Bench v2',
+  pinch_bench: 'Pinch Bench',
+  gdpval: 'GDPval'
 };
+
+function getBenchName(key) {
+  return DB_BENCHMARKS[key]?.name || EXTRA_BENCH_NAMES[key] || key;
+}
 
 const CATEGORIES = {
-  'reasoning_science': { label: 'Reasoning & Science', benchmarks: ['arc_agi_2', 'gpqa_diamond', 'hle'] },
-  'coding': { label: 'Coding & Engineering', benchmarks: ['swe_bench', 'terminal_bench', 'livecode_bench', 'coding_eval_claude_code'] },
-  'math': { label: 'Mathematics', benchmarks: ['frontier_math'] },
-  'knowledge_work': { label: 'Knowledge Work', benchmarks: ['gdpval_aa', 'browsecomp'] },
-  'long_context': { label: 'Long Context', benchmarks: ['mrcr_v2'] }
+  'reasoning_science': {
+    label: 'Reasoning & Science',
+    benchmarks: ['arc_agi_2', 'gpqa_diamond', 'hle_with_tools']
+  },
+  'coding': {
+    label: 'Coding & Engineering',
+    benchmarks: ['swe_bench_verified', 'terminal_bench_2', 'livecode_bench_elo', 'coding_eval_claude_code']
+  },
+  'math': {
+    label: 'Mathematics',
+    benchmarks: ['frontier_math']
+  },
+  'knowledge_work': {
+    label: 'Knowledge Work',
+    benchmarks: ['gdpval_aa_elo', 'browsecomp']
+  },
+  'long_context': {
+    label: 'Long Context',
+    benchmarks: ['mrcr_v2_128k']
+  },
+  'instruction_following': {
+    label: 'Instruction Following',
+    benchmarks: ['ifeval']
+  }
 };
 
 // =================== PROVIDER SVG LOGOS ===================
 function providerLogo(provider, size = 20) {
   const s = size;
+  const c = getProviderColor(provider);
   const logos = {
-    anthropic: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="${PROVIDERS.anthropic.color}" stroke-width="2"/><line x1="5" y1="12" x2="19" y2="12" stroke="${PROVIDERS.anthropic.color}" stroke-width="2"/></svg>`,
-    google: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5H22L16 14L18.5 22L12 17L5.5 22L8 14L2 9.5H9.5Z" fill="${PROVIDERS.google.color}" opacity="0.9"/></svg>`,
-    openai: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M12 2L17.5 5.5V12.5L12 16L6.5 12.5V5.5Z" stroke="${PROVIDERS.openai.color}" stroke-width="1.8"/><path d="M12 8L15 10V14L12 16L9 14V10Z" stroke="${PROVIDERS.openai.color}" stroke-width="1.5"/></svg>`,
-    zai: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="${PROVIDERS.zai.color}" stroke-width="1.8"/><path d="M7 8H17L7 16H17" stroke="${PROVIDERS.zai.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    xai: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="${PROVIDERS.xai.color}" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-    meta: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M4 12C4 7 8 4 12 8C16 12 16 12 16 12C16 12 16 12 20 8" stroke="${PROVIDERS.meta.color}" stroke-width="2" stroke-linecap="round"/><path d="M4 16C4 12 8 8 12 12C16 16 16 16 16 16C16 16 16 16 20 12" stroke="${PROVIDERS.meta.color}" stroke-width="2" stroke-linecap="round"/></svg>`,
-    minimax: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M4 18V8L8 14L12 6L16 14L20 8V18" stroke="${PROVIDERS.minimax.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    xiaomi: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="${PROVIDERS.xiaomi.color}" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="${PROVIDERS.xiaomi.color}"/></svg>`
+    anthropic: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="${c}" stroke-width="2"/><line x1="5" y1="12" x2="19" y2="12" stroke="${c}" stroke-width="2"/></svg>`,
+    google: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5H22L16 14L18.5 22L12 17L5.5 22L8 14L2 9.5H9.5Z" fill="${c}" opacity="0.9"/></svg>`,
+    openai: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M12 2L17.5 5.5V12.5L12 16L6.5 12.5V5.5Z" stroke="${c}" stroke-width="1.8"/><path d="M12 8L15 10V14L12 16L9 14V10Z" stroke="${c}" stroke-width="1.5"/></svg>`,
+    zai: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="${c}" stroke-width="1.8"/><path d="M7 8H17L7 16H17" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    xai: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="${c}" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+    meta: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M4 12C4 7 8 4 12 8C16 12 16 12 16 12C16 12 16 12 20 8" stroke="${c}" stroke-width="2" stroke-linecap="round"/><path d="M4 16C4 12 8 8 12 12C16 16 16 16 16 16C16 16 16 16 20 12" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>`,
+    minimax: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M4 18V8L8 14L12 6L16 14L20 8V18" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    xiaomi: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="${c}" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="${c}"/></svg>`,
+    moonshot: `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="${c}" stroke-width="2" fill="none"/></svg>`
   };
-  return logos[provider] || '';
+  return logos[provider] || `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="${c}" stroke-width="2"/></svg>`;
 }
 
 function getProviderColor(provider) {
@@ -835,29 +938,26 @@ function getProviderColor(provider) {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     return isDark ? '#C8C8C8' : '#666666';
   }
+  if (provider === 'moonshot') {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return isDark ? '#4A7BC4' : '#0F3460';
+  }
   return PROVIDERS[provider]?.color || '#888';
 }
 
-function getProviderForModel(modelName) {
-  const m = MODELS.find(m => m.model === modelName);
-  if (m) return m.provider;
-  if (modelName.includes('Claude') || modelName.includes('Opus') || modelName.includes('Sonnet')) return 'anthropic';
-  if (modelName.includes('Gemini')) return 'google';
-  if (modelName.includes('GPT')) return 'openai';
-  if (modelName.includes('GLM')) return 'zai';
-  if (modelName.includes('Grok')) return 'xai';
-  if (modelName.includes('Llama')) return 'meta';
-  if (modelName.includes('MiniMax')) return 'minimax';
-  if (modelName.includes('MiMo')) return 'xiaomi';
-  if (modelName.includes('Qwen')) return 'openai'; // fallback
-  return 'openai';
+function getProviderRowClass(provider) {
+  return 'row-' + provider;
+}
+
+function srBadge(title) {
+  return `<span class="badge-sr" title="${title || 'Self-reported by provider \u2014 not independently verified'}">SR</span>`;
 }
 
 // =================== THEME TOGGLE ===================
 (function() {
   const toggle = document.querySelector('[data-theme-toggle]');
   const root = document.documentElement;
-  let theme = 'dark'; // default dark
+  let theme = 'dark';
   root.setAttribute('data-theme', theme);
 
   toggle.addEventListener('click', () => {
@@ -867,9 +967,11 @@ function getProviderForModel(modelName) {
     toggle.innerHTML = theme === 'dark'
       ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
       : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-    // Re-render charts and benchmarks with new colors
     renderAllCharts();
     rebuildBenchmarkBars();
+    buildRadarControls();
+    buildTimeline();
+    buildModelCards();
   });
 })();
 
@@ -896,19 +998,68 @@ function getProviderForModel(modelName) {
   sections.forEach(s => observer.observe(s));
 })();
 
+// =================== POPULATE PROVIDER FILTER ===================
+(function() {
+  const sel = document.getElementById('providerFilter');
+  const providerIds = [...new Set(MODELS.map(m => m.provider))];
+  providerIds.forEach(pid => {
+    const opt = document.createElement('option');
+    opt.value = pid;
+    opt.textContent = PROVIDERS[pid]?.name || pid;
+    sel.appendChild(opt);
+  });
+})();
+
+// =================== TAG FILTER ===================
+let activeTags = new Set();
+
+function buildTagFilter() {
+  const allTags = new Set();
+  MODELS.forEach(m => (m.tags || []).forEach(t => allTags.add(t)));
+  const bar = document.getElementById('tagFilterBar');
+  const sortedTags = [...allTags].sort();
+
+  bar.innerHTML = `<button class="tag-pill active" data-tag="all">All</button>` +
+    sortedTags.map(t => `<button class="tag-pill" data-tag="${t}">${t}</button>`).join('');
+
+  bar.querySelectorAll('.tag-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const tag = pill.dataset.tag;
+      if (tag === 'all') {
+        activeTags.clear();
+        bar.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      } else {
+        bar.querySelector('[data-tag="all"]').classList.remove('active');
+        if (activeTags.has(tag)) {
+          activeTags.delete(tag);
+          pill.classList.remove('active');
+        } else {
+          activeTags.add(tag);
+          pill.classList.add('active');
+        }
+        if (activeTags.size === 0) {
+          bar.querySelector('[data-tag="all"]').classList.add('active');
+        }
+      }
+      renderLeaderboard();
+    });
+  });
+}
+buildTagFilter();
+
 // =================== KPI CARDS ===================
 (function() {
   const validModels = MODELS.filter(m => m.score !== null);
-  const topModel = validModels[0];
+  const topModel = [...validModels].sort((a,b) => b.score - a.score)[0];
   const cheapest = MODELS.filter(m => m.price).reduce((a, b) => a.price < b.price ? a : b);
   const fastest = MODELS.filter(m => m.speed).reduce((a, b) => a.speed > b.speed ? a : b);
-  const avgScore = Math.round(validModels.reduce((s, m) => s + m.score, 0) / validModels.length * 10) / 10;
 
   const kpis = [
-    { value: `${topModel.score}`, label: `Top Score — ${topModel.model}`, color: 'var(--color-gold)' },
-    { value: `$${cheapest.price}`, label: `Best Price — ${cheapest.model}`, color: 'var(--color-success)' },
-    { value: `${fastest.speed} t/s`, label: `Fastest — ${fastest.model}`, color: 'var(--color-accent)' },
-    { value: `${validModels.length}`, label: 'Models Tracked', color: 'var(--color-text)' }
+    { value: `${topModel.score}`, label: `Top Score \u2014 ${topModel.model}`, color: 'var(--color-gold)' },
+    { value: `$${cheapest.price}`, label: `Best Price \u2014 ${cheapest.model}`, color: 'var(--color-success)' },
+    { value: `${fastest.speed} t/s`, label: `Fastest \u2014 ${fastest.model}`, color: 'var(--color-accent)' },
+    { value: `${MODELS.length}`, label: 'Models Tracked', color: 'var(--color-text)' }
   ];
 
   document.getElementById('kpiGrid').innerHTML = kpis.map(k =>
@@ -921,56 +1072,86 @@ function getProviderForModel(modelName) {
 
 // =================== LEADERBOARD ===================
 let sortCol = 'score';
-let sortDir = -1; // -1 = descending
+let sortDir = -1;
 
 function renderLeaderboard() {
   const filterProvider = document.getElementById('providerFilter').value;
+  const showSuperseded = document.getElementById('showSuperseded').checked;
   let data = [...MODELS];
+
+  // Filter by provider
   if (filterProvider !== 'all') data = data.filter(m => m.provider === filterProvider);
 
-  // Sort
-  data.sort((a, b) => {
+  // Filter by tags
+  if (activeTags.size > 0) {
+    data = data.filter(m => {
+      return [...activeTags].some(t => m.tags.includes(t));
+    });
+  }
+
+  // Separate active vs superseded
+  const active = data.filter(m => !m.superseded_by);
+  const superseded = data.filter(m => m.superseded_by);
+
+  // Sort function
+  const sortFn = (a, b) => {
     let av = a[sortCol], bv = b[sortCol];
-    if (sortCol === 'model') { av = av.toLowerCase(); bv = bv.toLowerCase(); return sortDir * av.localeCompare(bv); }
+    if (sortCol === 'model') { av = (av||'').toLowerCase(); bv = (bv||'').toLowerCase(); return sortDir * av.localeCompare(bv); }
     if (sortCol === 'context') {
-      const parse = v => { const n = parseFloat(v); return v.includes('M') ? n * 1000 : n; };
+      const parse = v => { if (!v) return 0; const n = parseFloat(v); return v.includes('M') ? n * 1000 : n; };
       av = parse(av); bv = parse(bv);
     }
     if (sortCol === 'released') { av = new Date(av); bv = new Date(bv); }
     if (av === null || av === undefined) return 1;
     if (bv === null || bv === undefined) return -1;
     return sortDir * (av - bv);
-  });
+  };
 
-  // Find winners
-  const validForScore = data.filter(m => m.score !== null);
-  const maxScore = Math.max(...validForScore.map(m => m.score));
-  const minPrice = Math.min(...data.filter(m => m.price).map(m => m.price));
-  const maxSpeed = Math.max(...data.filter(m => m.speed).map(m => m.speed));
+  active.sort(sortFn);
+  superseded.sort(sortFn);
+
+  // Combine: active first, then superseded
+  const combined = showSuperseded ? [...active, ...superseded] : active;
+
+  // Find stat highlights
+  const validForScore = combined.filter(m => m.score !== null);
+  const maxScore = validForScore.length > 0 ? Math.max(...validForScore.map(m => m.score)) : 0;
+  const priced = combined.filter(m => m.price);
+  const minPrice = priced.length > 0 ? Math.min(...priced.map(m => m.price)) : 0;
+  const speeded = combined.filter(m => m.speed);
+  const maxSpeed = speeded.length > 0 ? Math.max(...speeded.map(m => m.speed)) : 0;
 
   const tbody = document.getElementById('leaderboardBody');
-  tbody.innerHTML = data.map((m, i) => {
-    const rank = sortCol === 'score' && sortDir === -1 ? i + 1 : '—';
-    const isUnverified = m.model === 'GLM-5.1';
-    const badges = [];
-    if (m.score === maxScore && m.score !== null) badges.push('<span class="badge badge-gold">🥇 #1</span>');
-    if (isUnverified) badges.push('<span class="badge badge-unverified">⚠ Unverified</span>');
+  let rank = 0;
+  tbody.innerHTML = combined.map((m, i) => {
+    const isSuperseded = !!m.superseded_by;
+    if (!isSuperseded && sortCol === 'score' && sortDir === -1) rank++;
+    const displayRank = (!isSuperseded && sortCol === 'score' && sortDir === -1) ? rank : '\u2014';
 
-    return `<tr class="row-${m.provider}">
-      <td style="color:var(--color-text-muted);font-size:var(--text-xs)">${rank}</td>
+    const isUnverified = m.verification.status === 'unverified';
+    const badges = [];
+    if (m.score === maxScore && m.score !== null) badges.push('<span class="badge badge-gold">\ud83e\udd47 #1</span>');
+    if (isSuperseded) badges.push('<span class="badge badge-superseded">Superseded</span>');
+
+    const scoreDisplay = m.score !== null
+      ? `${m.score}${isUnverified ? ' ' + srBadge('Self-reported by provider \u2014 not independently verified') : ''}`
+      : '\u2014';
+
+    return `<tr class="${getProviderRowClass(m.provider)}${isSuperseded ? ' row-superseded' : ''}">
+      <td style="color:var(--color-text-muted);font-size:var(--text-xs)">${displayRank}</td>
       <td>
         <div class="model-cell">
           <span class="provider-logo">${providerLogo(m.provider)}</span>
           <div>
             <div class="model-name">${m.model} ${badges.join(' ')}</div>
-            <div class="model-provider">${PROVIDERS[m.provider].name}</div>
+            <div class="model-provider">${PROVIDERS[m.provider]?.name || m.provider}</div>
           </div>
         </div>
       </td>
-      <td style="font-weight:600;${m.score === maxScore && m.score !== null ? 'color:var(--color-gold)' : ''}">${m.score ?? '—'}</td>
-      <td style="${m.price === minPrice ? 'color:var(--color-success);font-weight:600' : ''}">${m.price ? '$' + m.price.toFixed(2) : '—'}</td>
-      <td style="${m.speed === maxSpeed ? 'color:var(--color-accent);font-weight:600' : ''}">${m.speed ?? '—'}</td>
-      <td>${m.context}</td>
+      <td style="font-weight:600;${m.score === maxScore && m.score !== null ? 'color:var(--color-gold)' : ''}">${scoreDisplay}</td>
+      <td style="${m.price === minPrice && m.price ? 'color:var(--color-success);font-weight:600' : ''}">${m.price ? '$' + m.price.toFixed(2) : '\u2014'}</td>
+      <td style="${m.speed === maxSpeed && m.speed ? 'color:var(--color-accent);font-weight:600' : ''}">${m.speed ?? '\u2014'}</td>
+      <td>${m.context || '\u2014'}</td>
       <td style="font-size:var(--text-xs);color:var(--color-text-muted)">${new Date(m.released).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
     </tr>`;
   }).join('');
@@ -979,7 +1160,7 @@ function renderLeaderboard() {
   document.querySelectorAll('.leaderboard th').forEach(th => {
     th.classList.toggle('sorted', th.dataset.col === sortCol);
     const arrow = th.querySelector('.sort-arrow');
-    if (arrow) arrow.textContent = th.dataset.col === sortCol ? (sortDir === 1 ? '▲' : '▼') : '▲';
+    if (arrow) arrow.textContent = th.dataset.col === sortCol ? (sortDir === 1 ? '\u25b2' : '\u25bc') : '\u25b2';
   });
 }
 
@@ -994,30 +1175,32 @@ document.querySelectorAll('.leaderboard th[data-col]').forEach(th => {
 });
 
 document.getElementById('providerFilter').addEventListener('change', renderLeaderboard);
+document.getElementById('showSuperseded').addEventListener('change', renderLeaderboard);
 renderLeaderboard();
 
 // =================== RADAR CHART ===================
 const radarModels = [
-  'Claude Opus 4.6', 'Gemini 3.1 Pro', 'GPT-5.2', 'Claude Sonnet 4.6', 'GLM-5', 'Grok 4.20'
+  'Claude Opus 4.6', 'Gemini 3.1 Pro', 'GPT-5.2', 'Claude Sonnet 4.6',
+  'GLM-5', 'Grok 4.20 Beta', 'GPT-5.4', 'GPT-5.3 Codex', 'MiniMax-M2.7',
+  'Gemini 3 Flash', 'Kimi K2.5', 'Gemini 3 Pro'
 ];
 const radarAxes = [
   { key: 'arc_agi_2', label: 'Reasoning\n(ARC-AGI-2)' },
   { key: 'gpqa_diamond', label: 'Science\n(GPQA)' },
-  { key: 'swe_bench', label: 'Coding\n(SWE-Bench)' },
-  { key: 'terminal_bench', label: 'Agentic\n(Terminal-Bench)' },
-  { key: 'gdpval_aa', label: 'Knowledge Work\n(GDPval-AA)' },
-  { key: 'mrcr_v2', label: 'Long Context\n(MRCR v2)' }
+  { key: 'swe_bench_verified', label: 'Coding\n(SWE-Bench)' },
+  { key: 'terminal_bench_2', label: 'Agentic\n(Terminal-Bench)' },
+  { key: 'gdpval_aa_elo', label: 'Knowledge Work\n(GDPval-AA)' },
+  { key: 'mrcr_v2_128k', label: 'Long Context\n(MRCR v2)' }
 ];
 
-// Normalize scores to 0-100
 function normalizeScore(benchKey, modelName) {
-  const bench = BENCHMARKS[benchKey];
-  if (!bench || !bench.scores[modelName]) return null;
-  const values = Object.values(bench.scores);
+  const bench = BENCH_SCORES[benchKey];
+  if (!bench || !bench[modelName]) return null;
+  const values = Object.values(bench).map(s => s.value);
   const maxV = Math.max(...values);
   const minV = Math.min(...values);
   if (maxV === minV) return 50;
-  return ((bench.scores[modelName] - minV) / (maxV - minV)) * 100;
+  return ((bench[modelName].value - minV) / (maxV - minV)) * 100;
 }
 
 let selectedRadar = new Set(['Claude Opus 4.6', 'Gemini 3.1 Pro', 'GPT-5.2']);
@@ -1026,9 +1209,10 @@ let radarChart = null;
 function buildRadarControls() {
   const container = document.getElementById('radarControls');
   container.innerHTML = radarModels.map(name => {
-    const provider = getProviderForModel(name);
+    const m = MODELS.find(mo => mo.model === name);
+    const provider = m ? m.provider : 'openai';
     const checked = selectedRadar.has(name) ? 'checked' : '';
-    return `<label class="model-check" style="--check-color:${getProviderColor(provider)}">
+    return `<label class="model-check">
       <input type="checkbox" value="${name}" ${checked}>
       ${providerLogo(provider, 16)} ${name}
     </label>`;
@@ -1037,14 +1221,10 @@ function buildRadarControls() {
   container.querySelectorAll('input').forEach(input => {
     input.addEventListener('change', () => {
       if (input.checked) {
-        if (selectedRadar.size >= 4) {
-          input.checked = false; return;
-        }
+        if (selectedRadar.size >= 4) { input.checked = false; return; }
         selectedRadar.add(input.value);
       } else {
-        if (selectedRadar.size <= 2) {
-          input.checked = true; return;
-        }
+        if (selectedRadar.size <= 2) { input.checked = true; return; }
         selectedRadar.delete(input.value);
       }
       renderRadar();
@@ -1061,7 +1241,8 @@ function renderRadar() {
   const labelColor = isDark ? '#8B949E' : '#656D76';
 
   const datasets = Array.from(selectedRadar).map(name => {
-    const provider = getProviderForModel(name);
+    const m = MODELS.find(mo => mo.model === name);
+    const provider = m ? m.provider : 'openai';
     const color = getProviderColor(provider);
     return {
       label: name,
@@ -1119,9 +1300,11 @@ function renderRadar() {
           bodyFont: { family: "'Inter', sans-serif" },
           callbacks: {
             label: ctx => {
-              const bench = BENCHMARKS[radarAxes[ctx.dataIndex].key];
-              const raw = bench?.scores[ctx.dataset.label];
-              return `${ctx.dataset.label}: ${raw ?? 'N/A'}${bench?.unit === 'elo' ? ' Elo' : ''}`;
+              const benchKey = radarAxes[ctx.dataIndex].key;
+              const bench = BENCH_SCORES[benchKey];
+              const raw = bench?.[ctx.dataset.label]?.value;
+              const unit = DB_BENCHMARKS[benchKey]?.unit;
+              return `${ctx.dataset.label}: ${raw ?? 'N/A'}${unit === 'elo' ? ' Elo' : ''}`;
             }
           }
         }
@@ -1166,27 +1349,48 @@ function rebuildBenchmarkBars() {
     panel.innerHTML = '';
 
     cat.benchmarks.forEach(bKey => {
-      const bench = BENCHMARKS[bKey];
-      if (!bench) return;
-      const entries = Object.entries(bench.scores).sort((a, b) => b[1] - a[1]);
+      const benchMeta = DB_BENCHMARKS[bKey];
+      const benchScores = BENCH_SCORES[bKey];
+      if (!benchScores || Object.keys(benchScores).length === 0) return;
+
+      const entries = Object.entries(benchScores)
+        .map(([name, obj]) => [name, obj.value, obj.self_reported])
+        .sort((a, b) => b[1] - a[1]);
       const maxVal = entries[0][1];
 
+      // Callouts
+      let callout = '';
+      if (bKey === 'swe_bench_verified') {
+        const flash = benchScores['Gemini 3 Flash'];
+        const pro = benchScores['Gemini 3 Pro'];
+        if (flash && pro && flash.value > pro.value) {
+          callout = `<div class="bench-callout">\u26a1 Gemini 3 Flash (${flash.value}%) outperforms Gemini 3 Pro (${pro.value}%) on SWE-Bench &mdash; at 20x lower price</div>`;
+        }
+      }
+      if (bKey === 'livecode_bench_elo') {
+        callout += `<div class="bench-callout">\ud83c\udfc6 Kimi K2.5 leads LiveCodeBench among open-weight models (per Vellum)</div>`;
+      }
+
+      const hasNote = benchMeta?.notes;
       const html = `<div class="benchmark-chart-group">
-        <h3>${bench.name}${bench.note ? ' <span class="badge badge-unverified" style="font-size:9px;vertical-align:middle">⚠ Note</span>' : ''}</h3>
-        <p class="bench-desc">${bench.description}${bench.note ? ' — ' + bench.note : ''}</p>
+        <h3>${getBenchName(bKey)}${hasNote ? ' <span class="badge badge-unverified" style="font-size:9px;vertical-align:middle">\u26a0 Note</span>' : ''}</h3>
+        <p class="bench-desc">${benchMeta?.description || ''}${hasNote ? ' \u2014 ' + hasNote : ''}</p>
+        ${callout}
         <div class="bar-chart">
-          ${entries.map(([name, score]) => {
-            const provider = getProviderForModel(name);
+          ${entries.map(([name, score, selfReported]) => {
+            const m = MODELS.find(mo => mo.model === name);
+            const provider = m ? m.provider : guessProvider(name);
             const color = getProviderColor(provider);
             const pct = (score / maxVal * 100).toFixed(1);
             const isWinner = score === maxVal;
-            const unit = bench.unit === 'elo' ? ' Elo' : '';
+            const unit = benchMeta?.unit === 'elo' ? ' Elo' : '';
+            const sr = selfReported ? ' ' + srBadge('Self-reported by provider') : '';
             return `<div class="bar-row">
               <span class="bar-label" title="${name}">${name}</span>
               <div class="bar-track">
-                <div class="bar-fill ${isWinner ? 'winner' : ''}" style="width:${pct}%;background:${color}">${score >= 20 || bench.unit === 'elo' ? '' : ''}</div>
+                <div class="bar-fill ${isWinner ? 'winner' : ''}" style="width:${pct}%;background:${color}"></div>
               </div>
-              <span class="bar-value" style="color:${isWinner ? 'var(--color-gold)' : ''}">${score}${unit}</span>
+              <span class="bar-value" style="color:${isWinner ? 'var(--color-gold)' : ''}">${score}${unit}${sr}</span>
             </div>`;
           }).join('')}
         </div>
@@ -1194,6 +1398,20 @@ function rebuildBenchmarkBars() {
       panel.innerHTML += html;
     });
   });
+}
+
+function guessProvider(name) {
+  if (name.includes('Claude') || name.includes('Opus') || name.includes('Sonnet')) return 'anthropic';
+  if (name.includes('Gemini')) return 'google';
+  if (name.includes('GPT')) return 'openai';
+  if (name.includes('GLM')) return 'zai';
+  if (name.includes('Grok')) return 'xai';
+  if (name.includes('Llama')) return 'meta';
+  if (name.includes('MiniMax')) return 'minimax';
+  if (name.includes('MiMo')) return 'xiaomi';
+  if (name.includes('Kimi')) return 'moonshot';
+  if (name.includes('Qwen')) return 'openai';
+  return 'openai';
 }
 
 buildBenchmarkTabs();
@@ -1218,7 +1436,6 @@ function renderScatter() {
     speed: m.speed
   }));
 
-  // Group by provider
   const byProvider = {};
   dataPoints.forEach(d => {
     if (!byProvider[d.provider]) byProvider[d.provider] = [];
@@ -1226,7 +1443,7 @@ function renderScatter() {
   });
 
   const datasets = Object.entries(byProvider).map(([prov, points]) => ({
-    label: PROVIDERS[prov].name,
+    label: PROVIDERS[prov]?.name || prov,
     data: points.map(p => ({ x: p.x, y: p.y, r: p.r })),
     backgroundColor: getProviderColor(prov) + '80',
     borderColor: getProviderColor(prov),
@@ -1235,7 +1452,7 @@ function renderScatter() {
     _meta: points
   }));
 
-  // Value frontier - find best price at each score tier
+  // Value frontier
   const sorted = [...dataPoints].sort((a, b) => a.x - b.x);
   let frontier = [];
   let bestPrice = Infinity;
@@ -1260,6 +1477,12 @@ function renderScatter() {
     });
   }
 
+  // Determine axis ranges
+  const scores = dataPoints.map(d => d.x);
+  const prices = dataPoints.map(d => d.y);
+  const minScore = Math.max(Math.min(...scores) - 2, 0);
+  const maxScoreVal = Math.max(...scores) + 2;
+
   scatterChart = new Chart(ctx, {
     type: 'bubble',
     data: { datasets },
@@ -1271,7 +1494,7 @@ function renderScatter() {
           title: { display: true, text: 'Intelligence Index', color: labelColor, font: { size: 12, family: "'Inter', sans-serif" } },
           grid: { color: gridColor },
           ticks: { color: labelColor, font: { size: 11 } },
-          min: 46, max: 59
+          min: minScore, max: maxScoreVal
         },
         y: {
           title: { display: true, text: 'Price ($/M tokens)', color: labelColor, font: { size: 12, family: "'Inter', sans-serif" } },
@@ -1338,49 +1561,66 @@ buildTimeline();
 function buildModelCards() {
   const grid = document.getElementById('modelCardsGrid');
 
-  // Group by model (unique entries)
   grid.innerHTML = MODELS.map(m => {
     const color = getProviderColor(m.provider);
-    // Find all benchmark scores for this model
+    const isUnverified = m.verification.status === 'unverified';
+
+    // Gather all benchmark scores for this model
     const benchScores = [];
-    Object.entries(BENCHMARKS).forEach(([key, bench]) => {
-      // Check various name forms
-      const nameForms = [m.model, m.model.replace(' Preview', '')];
-      for (const name of nameForms) {
-        if (bench.scores[name] !== undefined) {
-          benchScores.push({ name: bench.name, score: bench.scores[name], unit: bench.unit || '' });
-          break;
-        }
-      }
+    Object.entries(m.scores).forEach(([key, obj]) => {
+      if (key === 'intelligence_index' || key === 'speed_tps') return;
+      const meta = DB_BENCHMARKS[key];
+      benchScores.push({
+        key: key,
+        name: getBenchName(key),
+        value: obj.value,
+        unit: meta?.unit || '',
+        self_reported: obj.self_reported,
+        source: obj.source,
+        benchmark_date: obj.benchmark_date,
+        notes: obj.notes
+      });
     });
 
-    const bestBench = benchScores.length > 0
-      ? benchScores.reduce((a, b) => {
-          // For elo scores, just pick the one; for percentages, find highest relative position
-          return a.score > b.score ? a : b;
-        })
-      : null;
+    const scoreInfoHtml = benchScores.map(b => {
+      const sr = b.self_reported ? ' ' + srBadge('Self-reported by provider') : '';
+      const unitLabel = b.unit === 'elo' ? ' Elo' : '';
+      const tooltipContent = [
+        b.source ? `<a href="${b.source}" target="_blank" rel="noopener">${b.source.replace(/https?:\/\//, '').substring(0, 40)}...</a>` : '',
+        b.benchmark_date ? `Date: ${b.benchmark_date}` : '',
+        b.notes ? b.notes : ''
+      ].filter(Boolean).join('<br>');
+
+      return `<div class="benchmark-mini">
+        <span class="bm-name">${b.name}</span>
+        <span class="bm-score">${b.value}${unitLabel}${sr}</span>
+        ${tooltipContent ? `<span class="bm-info" title="Source info">i<span class="bm-info-tooltip">${tooltipContent}</span></span>` : ''}
+      </div>`;
+    }).join('');
+
+    const supersededBadge = m.superseded_by ? ' <span class="badge badge-superseded">Superseded</span>' : '';
+    const unverifiedBadge = isUnverified ? ' <span class="badge badge-unverified" style="font-size:9px">\u26a0</span>' : '';
 
     return `<div class="model-card" data-model="${m.model}" onclick="this.classList.toggle('expanded')" style="--card-color:${color}">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${color};opacity:0.7;border-radius:var(--radius-lg) var(--radius-lg) 0 0;"></div>
       <div class="model-card-head">
         <span class="provider-logo">${providerLogo(m.provider, 28)}</span>
         <div>
-          <h3>${m.model}${m.note ? ' <span class="badge badge-unverified" style="font-size:9px">⚠</span>' : ''}</h3>
-          <span class="provider-name">${PROVIDERS[m.provider].name}</span>
+          <h3>${m.model}${supersededBadge}${unverifiedBadge}</h3>
+          <span class="provider-name">${PROVIDERS[m.provider]?.name || m.provider}</span>
         </div>
       </div>
       <div class="model-card-stats">
         <div class="model-card-stat">
-          <div class="mc-value" style="color:${color}">${m.score ?? '—'}</div>
+          <div class="mc-value" style="color:${color}">${m.score ?? '\u2014'}</div>
           <div class="mc-label">Intelligence</div>
         </div>
         <div class="model-card-stat">
-          <div class="mc-value">${m.price ? '$' + m.price.toFixed(2) : '—'}</div>
+          <div class="mc-value">${m.price ? '$' + m.price.toFixed(2) : '\u2014'}</div>
           <div class="mc-label">$/M Tokens</div>
         </div>
         <div class="model-card-stat">
-          <div class="mc-value">${m.speed ?? '—'}</div>
+          <div class="mc-value">${m.speed ?? '\u2014'}</div>
           <div class="mc-label">Speed (t/s)</div>
         </div>
         <div class="model-card-stat">
@@ -1391,12 +1631,7 @@ function buildModelCards() {
       ${benchScores.length > 0 ? `
       <div class="model-card-expand">
         <div style="font-size:var(--text-xs);font-weight:600;margin-bottom:var(--space-2);color:var(--color-text-muted)">Benchmark Scores</div>
-        ${benchScores.map(b => `
-          <div class="benchmark-mini">
-            <span class="bm-name">${b.name}</span>
-            <span class="bm-score">${b.score}${b.unit === 'elo' ? ' Elo' : ''}</span>
-          </div>
-        `).join('')}
+        ${scoreInfoHtml}
       </div>` : ''}
     </div>`;
   }).join('');
@@ -1409,7 +1644,6 @@ function renderAllCharts() {
   renderScatter();
 }
 
-// Initial render
 renderAllCharts();
 
 // Animate bar fills on scroll

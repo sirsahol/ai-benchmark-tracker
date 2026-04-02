@@ -6,11 +6,85 @@ provider:
 models:
   - id: minimax-m2.7
     name: MiniMax-M2.7
-    released: 2026-01-15
+    released: 2026-03-18
     type: proprietary
     context_window: 205k
+    tags: [agentic, coding, efficient, self-improving]
     pricing:
-      composite_per_m: 0.53
+      input_per_m: 0.30
+      output_per_m: 1.20
+    architecture:
+      notes: "30% capability improvement via 100+ autonomous self-training rounds. Up to 50x cheaper than Claude Opus 4.6."
     scores:
-      intelligence_index: 50
-      speed_tps: 45
+      intelligence_index:
+        value: 50
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      gpqa_diamond:
+        value: 87.4
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      hle_no_tools:
+        value: 28.1
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      swe_bench_pro:
+        value: 56.22
+        benchmark_date: 2026-03-21
+        source: "https://www.geeky-gadgets.com/minimax-m27-benchmark-results/"
+        notes: "World of AI independent testing — outperforms Gemini 3.1 Pro on SWE-Bench Pro"
+      terminal_bench_2:
+        value: 57.0
+        benchmark_date: 2026-03-21
+        source: "https://www.geeky-gadgets.com/minimax-m27-benchmark-results/"
+        notes: "Independent test by World of AI"
+      scicode:
+        value: 47.0
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      ifbench:
+        value: 75.7
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      tau_bench_v2:
+        value: 84.8
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      pinch_bench:
+        value: 86.2
+        benchmark_date: 2026-03-19
+        source: "https://www.reddit.com/r/LocalLLaMA/comments/1rxwcda/benchmarked_minimax_m27_through_2_benchmarks/"
+        notes: "5th overall, within 1.2 points of Claude Opus 4.6 (87.4)"
+    verification:
+      status: partially_verified
+      notes: "SWE-Bench Pro and Terminal-Bench from World of AI independent testing. GPQA/HLE from LLMBase aggregation."
+
+  - id: minimax-m2.5
+    name: MiniMax-M2.5
+    released: 2026-02-12
+    type: proprietary
+    context_window: 205k
+    superseded_by: minimax-m2.7
+    tags: [efficient, agentic]
+    pricing:
+      input_per_m: 0.30
+      output_per_m: 1.20
+    scores:
+      intelligence_index:
+        value: 42
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      gpqa_diamond:
+        value: 84.8
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      hle_no_tools:
+        value: 19.1
+        benchmark_date: 2026-03-18
+        source: "https://llmbase.ai/compare/minimax-m2-5,minimax-m2-7/"
+      pinch_bench:
+        value: 82.5
+        benchmark_date: 2026-03-19
+        source: "https://www.reddit.com/r/LocalLLaMA/comments/1rxwcda/benchmarked_minimax_m27_through_2_benchmarks/"
+    verification:
+      status: partially_verified

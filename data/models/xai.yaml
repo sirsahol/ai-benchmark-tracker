@@ -9,22 +9,52 @@ models:
     released: 2026-02-17
     type: proprietary
     context_window: 2M
+    tags: [fast, long-context, multi-agent, reasoning]
     pricing:
       composite_per_m: 3.00
     architecture:
-      notes: "Four AI agents running in parallel; new architecture"
+      notes: "Four parallel AI agents running simultaneously — new multi-agent architecture. 248 t/s — fastest frontier model."
     scores:
-      intelligence_index: 48
-      speed_tps: 248
-      arc_agi_2: 16
-      gpqa_diamond: 88
+      intelligence_index:
+        value: 48
+        benchmark_date: 2026-02-19
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      arc_agi_2:
+        value: 16
+        benchmark_date: 2026-02-19
+        source: "https://designforonline.com/the-best-ai-models-so-far-in-2026/"
+        notes: "Notably weak on abstract reasoning vs peers"
+      gpqa_diamond:
+        value: 88
+        self_reported: true
+        benchmark_date: 2026-02-17
+        source: "https://designforonline.com/the-best-ai-models-so-far-in-2026/"
+        notes: "Approximate — self-reported by xAI"
+    verification:
+      status: partially_verified
+      notes: "Intelligence Index from Artificial Analysis. GPQA and ARC-AGI-2 from third-party aggregators."
 
   - id: grok-4
     name: Grok 4
     released: 2025-08-01
     type: proprietary
     context_window: 2M
+    superseded_by: grok-4.20-beta
+    tags: [reasoning, math, long-context]
+    pricing:
+      composite_per_m: 2.00
     scores:
-      gpqa_diamond: 87.5
-      aime_2025: 92.0
-      simple_qa: 95.0
+      gpqa_diamond:
+        value: 87.5
+        benchmark_date: 2025-08-01
+        source: "https://www.siliconflow.com/articles/benchmark"
+      aime_2025:
+        value: 92.0
+        benchmark_date: 2025-08-01
+        source: "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout"
+      simple_qa:
+        value: 95.0
+        benchmark_date: 2025-08-01
+        source: "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout"
+    verification:
+      status: partially_verified

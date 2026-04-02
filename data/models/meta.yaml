@@ -7,21 +7,44 @@ models:
   - id: llama-4-scout
     name: Llama 4 Scout
     released: 2025-04-01
-    type: open-source (Llama 4 Community License)
+    type: open-source
     context_window: 10M
+    tags: [open-weight, fast, long-context, tool-use]
     pricing:
       input_per_m: 0.08
       output_per_m: 0.30
+    architecture:
+      notes: "10M context window — largest of any tracked model. MoE architecture."
     scores:
-      speed_tps: 2600
-      mmlu: 79.6
-      mmlu_pro: 74.3
+      speed_tps:
+        value: 2600
+        benchmark_date: 2025-04-01
+        source: "https://www.siliconflow.com/articles/benchmark"
+        notes: "Fastest model tracked — 2600 t/s"
+      mmlu:
+        value: 79.6
+        benchmark_date: 2025-04-01
+        source: "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout"
+      mmlu_pro:
+        value: 74.3
+        benchmark_date: 2025-04-01
+        source: "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout"
+    verification:
+      status: verified
 
   - id: llama-4-maverick
     name: Llama 4 Maverick
     released: 2025-04-01
-    type: open-source (Llama 4 Community License)
+    type: open-source
     context_window: 10M
+    tags: [open-weight, long-context]
     pricing:
       input_per_m: 0.20
       output_per_m: 0.60
+    scores:
+      speed_tps:
+        value: 1260
+        benchmark_date: 2025-04-01
+        source: "https://www.siliconflow.com/articles/benchmark"
+    verification:
+      status: verified

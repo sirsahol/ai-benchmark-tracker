@@ -10,25 +10,73 @@ models:
     type: proprietary
     context_window: 1M (beta)
     max_output: 128k
+    tags: [flagship, long-context, agentic, coding, knowledge-work]
     pricing:
       input_per_m: 5.00
       output_per_m: 25.00
+      notes: "Premium pricing ($10/$37.50) applies for prompts exceeding 200k tokens"
     architecture:
-      notes: "1M context in beta; premium pricing for >200k input ($10/$37.50)"
+      notes: "1M context in beta; adaptive thinking; effort controls; compaction support"
     scores:
-      intelligence_index: 53
-      speed_tps: 43
-      arc_agi_2: 68.8
-      gpqa_diamond: 90.5
-      swe_bench_verified: 80.8
-      terminal_bench_2: 65.4
-      hle_with_tools: 53.1
-      frontier_math: 40.7
-      gdpval_aa_elo: 1606
-      browsecomp: 86.8
-      mrcr_v2_128k: 84.0
-      coding_eval_claude_code: 47.9
-      biglaw_bench: 90.2
+      intelligence_index:
+        value: 53
+        benchmark_date: 2026-02-09
+        source: "https://artificialanalysis.ai/models/claude-opus-4-6-adaptive"
+      arc_agi_2:
+        value: 68.8
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+        notes: "Measured with max effort and 120k thinking budget"
+      gpqa_diamond:
+        value: 90.5
+        benchmark_date: 2026-02-05
+        source: "https://www.anthropic.com/news/claude-opus-4-6"
+        notes: "32k thinking budget"
+      swe_bench_verified:
+        value: 80.8
+        benchmark_date: 2026-02-05
+        source: "https://www.anthropic.com/news/claude-opus-4-6"
+        notes: "Averaged over 25 trials; 81.42% with prompt modification"
+      terminal_bench_2:
+        value: 65.4
+        benchmark_date: 2026-02-05
+        source: "https://www.anthropic.com/news/claude-opus-4-6"
+        notes: "Terminus-2 harness"
+      hle_with_tools:
+        value: 53.1
+        benchmark_date: 2026-02-05
+        source: "https://www.anthropic.com/news/claude-opus-4-6"
+      frontier_math:
+        value: 40.7
+        benchmark_date: 2026-02-09
+        source: "https://lmcouncil.ai/benchmarks"
+        notes: "Max effort mode"
+      gdpval_aa_elo:
+        value: 1606
+        benchmark_date: 2026-02-09
+        source: "https://www.linkedin.com/pulse/claude-opus-46-takes-first-place-full-artificial-analysis-jw6dc"
+      browsecomp:
+        value: 86.8
+        benchmark_date: 2026-02-05
+        source: "https://www.anthropic.com/news/claude-opus-4-6"
+        notes: "Multi-agent harness with web search + compaction"
+      mrcr_v2_128k:
+        value: 84.0
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      biglaw_bench:
+        value: 90.2
+        benchmark_date: 2026-02-05
+        source: "https://www.anthropic.com/news/claude-opus-4-6"
+      coding_eval_claude_code:
+        value: 47.9
+        self_reported: true
+        benchmark_date: 2026-03-27
+        source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
+        notes: "Used as baseline by Z.ai for GLM-5.1 comparison; score is from Anthropic's own harness"
+    verification:
+      status: verified
+      notes: "All major scores verified by Artificial Analysis and Google DeepMind model card"
 
   - id: claude-sonnet-4.6
     name: Claude Sonnet 4.6
@@ -36,19 +84,46 @@ models:
     type: proprietary
     context_window: 1M (beta)
     max_output: 64k
+    tags: [balanced, long-context, coding, knowledge-work, fast]
     pricing:
       input_per_m: 3.00
       output_per_m: 15.00
     scores:
-      intelligence_index: 52
-      speed_tps: 68
-      arc_agi_2: 60.4
-      gpqa_diamond: 89.9
-      swe_bench_verified: 79.6
-      terminal_bench_2: 59.1
-      hle_with_tools: 49.0
-      gdpval_aa_elo: 1633
-      mrcr_v2_128k: 84.9
+      intelligence_index:
+        value: 52
+        benchmark_date: 2026-02-19
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      arc_agi_2:
+        value: 60.4
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      gpqa_diamond:
+        value: 89.9
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      swe_bench_verified:
+        value: 79.6
+        benchmark_date: 2026-02-17
+        source: "https://www.datastudios.org/post/claude-sonnet-4-6-vs-opus-4-6-2026-comparison-capability-split-output-ceilings-long-context-beha"
+      terminal_bench_2:
+        value: 59.1
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      hle_with_tools:
+        value: 49.0
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      gdpval_aa_elo:
+        value: 1633
+        benchmark_date: 2026-02-17
+        source: "https://designforonline.com/the-best-ai-models-so-far-in-2026/"
+        notes: "Leads entire GDPval-AA field — above Opus 4.6"
+      mrcr_v2_128k:
+        value: 84.9
+        benchmark_date: 2026-02-19
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+    verification:
+      status: verified
 
   - id: claude-opus-4.5
     name: Claude Opus 4.5
@@ -56,11 +131,23 @@ models:
     type: proprietary
     context_window: 200k
     max_output: 64k
+    superseded_by: claude-opus-4.6
+    tags: [flagship, coding, agentic]
     pricing:
       input_per_m: 5.00
       output_per_m: 25.00
     scores:
-      intelligence_index: 50
-      speed_tps: 50
-      swe_bench_verified: 76.7
-      browsecomp: 67.8
+      intelligence_index:
+        value: 50
+        benchmark_date: 2026-02-09
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      swe_bench_verified:
+        value: 76.7
+        benchmark_date: 2026-02-09
+        source: "https://lmcouncil.ai/benchmarks"
+      browsecomp:
+        value: 67.8
+        benchmark_date: 2026-02-11
+        source: "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ"
+    verification:
+      status: verified
