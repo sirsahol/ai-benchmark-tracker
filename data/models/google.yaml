@@ -14,6 +14,7 @@ models:
     pricing:
       input_per_m: 2.00
       output_per_m: 12.00
+      cache_per_m: 0.50
       notes: "Same price as Gemini 3 Pro — major capability upgrade at no cost increase"
     architecture:
       thinking_levels: [minimal, low, medium, high]
@@ -98,6 +99,7 @@ models:
     pricing:
       input_per_m: 2.00
       output_per_m: 12.00
+      cache_per_m: 0.50
     scores:
       intelligence_index:
         value: 48
@@ -148,6 +150,7 @@ models:
     pricing:
       input_per_m: 0.10
       output_per_m: 0.40
+      cache_per_m: 0.025
       notes: "~20x cheaper than Gemini 3 Pro; 3x faster inference"
     architecture:
       notes: "Optimised for iterative/agentic coding loops; 30% more token-efficient than 3 Pro; modulates reasoning depth per token"
@@ -186,3 +189,57 @@ models:
     verification:
       status: verified
       notes: "SWE-Bench and GPQA scores from official Google blog"
+
+  - id: gemini-3-5-flash
+    name: Gemini 3.5 Flash
+    released: 2026-05-01
+    type: proprietary
+    context_window: 1M
+    max_output: 64k
+    tags: [fast, multimodal, long-context]
+    pricing:
+      input_per_m: 0.15
+      output_per_m: 0.60
+      cache_per_m: 0.025
+    scores:
+      gpqa_diamond:
+        value: 92.2
+        benchmark_date: 2026-05-01
+        source: "https://blog.google/technology/ai/"
+    verification:
+      status: partially_verified
+      notes: "GPQA Diamond score from Google. Other benchmarks pending."
+
+  - id: gemini-3-1-flash-lite
+    name: Gemini 3.1 Flash-Lite
+    released: 2026-05-15
+    type: proprietary
+    context_window: 512k
+    max_output: 32k
+    tags: [efficient, budget, multimodal]
+    pricing:
+      input_per_m: 0.05
+      output_per_m: 0.20
+      cache_per_m: 0.01
+    scores: {}
+    verification:
+      status: unverified
+      notes: "Lightweight Flash variant. No benchmark scores available yet."
+
+  - id: gemma-4
+    name: Gemma 4
+    released: 2026-05-10
+    type: open-source
+    context_window: 128k
+    tags: [open-weight, small, efficient]
+    pricing:
+      input_per_m: 0.00
+      output_per_m: 0.00
+      notes: "Open-weight model — self-hostable at zero per-token cost"
+    architecture:
+      total_params: "~27B"
+      architecture: Dense
+    scores: {}
+    verification:
+      status: unverified
+      notes: "Open-weight release. No benchmark scores available yet."

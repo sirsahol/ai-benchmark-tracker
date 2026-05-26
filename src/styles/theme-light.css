@@ -1,0 +1,23 @@
+/* ========== LIGHT THEME ========== */
+[data-theme="light"] {
+  --color-bg: #F6F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F6F8FA;
+  --color-surface-raised: #FFFFFF;
+  --color-border: #D0D7DE;
+  --color-border-muted: #E1E7ED;
+  --color-text: #1F2328;
+  --color-text-muted: #656D76;
+  --color-text-faint: #B0B8C1;
+  --color-accent: #0E7A86;
+  --color-accent-hover: #0A5F68;
+  --color-gold: #C4940F;
+  --color-amber: #B48A0E;
+  --color-success: #1A7F37;
+  --color-error: #CF222E;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.06);
+  --c-xai: #555;
+  --c-moonshot: #0F3460;
+  color-scheme: light;
+}

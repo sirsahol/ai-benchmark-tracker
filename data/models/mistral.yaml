@@ -1,0 +1,24 @@
+provider:
+  name: Mistral AI
+  brand_color: "#FF7000"
+  website: https://mistral.ai
+
+models:
+  - id: mistral-large-3
+    name: Mistral Large 3
+    released: 2026-05-01
+    type: proprietary
+    context_window: 128k
+    max_output: 128k
+    tags: [flagship, multilingual, coding, reasoning]
+    pricing:
+      input_per_m: 2.00
+      output_per_m: 6.00
+      notes: "No confirmed benchmark scores available yet"
+    architecture:
+      total_params: "~178B"
+      architecture: Dense
+    scores: {}
+    verification:
+      status: unverified
+      notes: "Released May 2026. No independent benchmark evaluations published yet."

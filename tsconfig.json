@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "$lib/*": ["./src/lib/*"],
+      "$stores/*": ["./src/stores/*"]
+    }
+  },
+  "include": ["src/**/*", "data/dashboard.json"]
+}

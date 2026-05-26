@@ -31,7 +31,7 @@ models:
     pricing:
       input_per_m: number       # USD per 1M input tokens
       output_per_m: number      # USD per 1M output tokens
-      composite_per_m: number   # blended composite (when input/output not split)
+      cache_per_m: number       # USD per 1M cached input tokens
       notes: string             # optional — pricing caveats
     architecture:
       total_params: string      # optional — e.g. "744B"
@@ -51,6 +51,8 @@ models:
     sources:
       - string                  # optional list of URLs for this model's data
 ```
+
+**Note on pricing:** The `composite_per_m` field is no longer stored in YAML. It is derived in code as a weighted blend of `input_per_m` and `output_per_m`. Only `input_per_m`, `output_per_m`, and `cache_per_m` are stored.
 
 ---
 
@@ -110,31 +112,32 @@ benchmarks:
 
 `reasoning` · `science` · `coding` · `math` · `knowledge_work` · `long_context` · `agentic` · `composite`
 
----
+### Current benchmarks (16)
 
-## Snapshot File (`data/snapshots/YYYY-MM-DD.yaml`)
+| Key | Name | Category | Unit |
+|-----|------|----------|------|
+| `arc_agi_2` | ARC-AGI-2 | reasoning | percent |
+| `hle_with_tools` | Humanity's Last Exam (with tools) | reasoning | percent |
+| `gpqa_diamond` | GPQA Diamond | science | percent |
+| `swe_bench_verified` | SWE-Bench Verified | coding | percent |
+| `swe_bench_pro` | SWE-Bench Pro | coding | percent |
+| `terminal_bench_2` | Terminal-Bench 2.0 | coding | percent |
+| `livecode_bench_elo` | LiveCodeBench Pro | coding | elo |
+| `frontier_math` | FrontierMath | math | percent |
+| `gdpval_aa_elo` | GDPval-AA Elo | knowledge_work | elo |
+| `browsecomp` | BrowseComp | knowledge_work | percent |
+| `biglaw_bench` | BigLaw Bench | knowledge_work | percent |
+| `mrcr_v2_128k` | MRCR v2 (8-needle 128k) | long_context | percent |
+| `webarena` | WebArena | agentic | percent |
+| `intelligence_index` | Artificial Analysis Intelligence Index | composite | score |
+| `chatbot_arena_elo` | Chatbot Arena Elo | composite | elo |
+| `aitnt_arena_elo` | AiTNt Arena Elo | composite | elo |
 
-```yaml
-snapshot_date: YYYY-MM-DD       # REQUIRED
-notes: string                   # optional — what changed since last snapshot
+### Dropped benchmarks
 
-leaderboard:                    # REQUIRED — ordered list
-  - rank: number                # REQUIRED — positive integer (ties share same rank)
-    model: string               # REQUIRED — model display name
-    provider: string            # REQUIRED — provider slug matching models/ filename
-    intelligence_index: number  # optional — composite score at snapshot time
-
-category_winners:               # optional — model that leads each category
-  reasoning: string
-  science: string
-  coding_swe: string
-  coding_terminal: string
-  math: string
-  knowledge_work: string
-  long_context: string
-  best_value: string
-  fastest: string
-```
+| Key | Reason |
+|-----|--------|
+| `coding_eval_claude_code` | Replaced by more general coding benchmarks |
 
 ---
 

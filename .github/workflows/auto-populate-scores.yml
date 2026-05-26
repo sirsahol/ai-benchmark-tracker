@@ -1,0 +1,43 @@
+name: Auto-Populate Scores
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  fetch-scores:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - run: python .github/scripts/auto_populate_scores.py
+      - id: check_changes
+        run: |
+          if git diff --quiet data/models/; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+      - if: steps.check_changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[auto] Update benchmark scores from public APIs"
+          title: "[auto] Weekly score update"
+          body: |
+            Automated score update from free public APIs:
+            - HuggingFace Open LLM Leaderboard
+            - Artificial Analysis
+
+            Please review before merging.
+          branch: auto-populate/scores
+          base: master
+          labels: automated,data-update

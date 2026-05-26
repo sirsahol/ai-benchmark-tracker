@@ -14,6 +14,14 @@ Do **not** add benchmarks that are:
 
 ---
 
+## Orphan Formalization Rule
+
+Scores for a benchmark key that doesn't yet exist in `benchmarks.yaml` are called **orphans**. An orphan should be formalized (added to `benchmarks.yaml` with a proper definition) once it appears in **3 or more models**. Below that threshold, it's acceptable to leave the key undefined — the dashboard will simply ignore unknown scores.
+
+This rule prevents premature formalization of niche or transient benchmarks while keeping the schema clean.
+
+---
+
 ## Step-by-Step
 
 ### 1 — Add to `data/benchmarks/benchmarks.yaml`
@@ -41,10 +49,10 @@ benchmarks:
 | `science` | Graduate-level scientific knowledge (e.g. GPQA Diamond) |
 | `coding` | Software engineering, code generation (e.g. SWE-Bench, HumanEval) |
 | `math` | Mathematical problem-solving (e.g. FrontierMath, AIME, MATH-500) |
-| `knowledge_work` | Professional tasks, legal, financial, office work (e.g. GDPval-AA) |
+| `knowledge_work` | Professional tasks, legal, financial, office work (e.g. GDPval-AA, BigLaw Bench) |
 | `long_context` | Retrieval and reasoning over long contexts (e.g. MRCR v2) |
-| `agentic` | Autonomous multi-step task completion (e.g. APEX-Agents, τ-bench) |
-| `composite` | Aggregated index scores (e.g. Artificial Analysis Intelligence Index) |
+| `agentic` | Autonomous multi-step task completion, web agents (e.g. WebArena, APEX-Agents, tau-bench) |
+| `composite` | Aggregated index scores or arena-style Elo ratings (e.g. Artificial Analysis Intelligence Index, Chatbot Arena Elo, AiTNt Arena Elo) |
 
 ---
 
@@ -67,11 +75,11 @@ your_benchmark_key:
 
 ---
 
-### 3 — Add to dashboard (if it should appear in charts)
+### 3 — Update dashboard config (if it should appear in charts)
 
-The dashboard reads benchmark categories from the data. To add the benchmark to the **radar chart axes**, edit `index.html` and find the `RADAR_AXES` array:
+The dashboard reads benchmark categories from the data. To add the benchmark to the **radar chart axes**, edit `src/lib/constants.ts` and find the `RADAR_AXES` array:
 
-```javascript
+```typescript
 const RADAR_AXES = [
   { key: 'arc_agi_2',         label: 'Reasoning',     max: 100 },
   { key: 'gpqa_diamond',      label: 'Science',        max: 100 },
@@ -80,11 +88,21 @@ const RADAR_AXES = [
 ];
 ```
 
-To add it to the **Benchmark Deep Dive** tabs, find the `BENCHMARK_TABS` config and add it to the appropriate category array.
+To add it to the **Benchmark Deep Dive** tabs, find the tab configuration in the relevant Svelte component or store and add it to the appropriate category array.
 
 ---
 
-### 4 — Update CHANGELOG.md
+### 4 — Rebuild and test
+
+```bash
+python .github/scripts/validate_yaml.py    # Validate
+python .github/scripts/build_json.py        # Rebuild dashboard.json
+pnpm dev                                    # Test locally at localhost:5173
+```
+
+---
+
+### 5 — Update CHANGELOG.md
 
 ```markdown
 ## [YYYY-MM-DD] — Add <Benchmark Name>
@@ -105,6 +123,7 @@ To add it to the **Benchmark Deep Dive** tabs, find the `BENCHMARK_TABS` config 
 | Benchmark name + variant | `gpqa_diamond`, `mrcr_v2_128k` |
 | Organisation abbreviation | `hle_with_tools`, `hle_no_tools` |
 | Composite / index | `intelligence_index`, `coding_index` |
+| Arena-style Elo | `chatbot_arena_elo`, `aitnt_arena_elo` |
 
 Use **snake_case** only. No hyphens, spaces, or capitals in keys.
 
@@ -128,3 +147,25 @@ terminal_bench_2:
   self_reported: true
   notes: "Codex CLI harness — not comparable to Terminus-2 results"
 ```
+
+---
+
+## Dropped Benchmarks
+
+The following benchmark has been removed and should not be re-added:
+
+| Key | Reason |
+|-----|--------|
+| `coding_eval_claude_code` | Replaced by more general coding benchmarks (SWE-Bench Verified, Terminal-Bench 2.0) |
+
+---
+
+## New Benchmarks Added in v3
+
+| Key | Name | Category | Notes |
+|-----|------|----------|-------|
+| `swe_bench_pro` | SWE-Bench Pro | coding | Extended SWE-Bench with complex multi-file tasks |
+| `chatbot_arena_elo` | Chatbot Arena Elo | composite | Crowdsourced pairwise comparisons (LMSYS) |
+| `webarena` | WebArena | agentic | End-to-end web agent tasks |
+| `aitnt_arena_elo` | AiTNt Arena Elo | composite | Formalized orphan (Asian-language arena) |
+| `biglaw_bench` | BigLaw Bench | knowledge_work | Formalized orphan (legal reasoning) |

@@ -11,7 +11,9 @@ models:
     context_window: 2M
     tags: [fast, long-context, multi-agent, reasoning]
     pricing:
-      composite_per_m: 3.00
+      input_per_m: 3.00
+      output_per_m: 15.00
+      cache_per_m: 1.50
     architecture:
       notes: "Four parallel AI agents running simultaneously — new multi-agent architecture. 248 t/s — fastest frontier model."
     scores:
@@ -42,7 +44,9 @@ models:
     superseded_by: grok-4.20-beta
     tags: [reasoning, math, long-context]
     pricing:
-      composite_per_m: 2.00
+      input_per_m: 2.00
+      output_per_m: 10.00
+      cache_per_m: 1.00
     scores:
       gpqa_diamond:
         value: 87.5

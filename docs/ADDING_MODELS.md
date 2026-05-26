@@ -24,6 +24,9 @@
 | Meta (Llama) | `data/models/meta.yaml` |
 | MiniMax | `data/models/minimax.yaml` |
 | Moonshot (Kimi) | `data/models/moonshot.yaml` |
+| DeepSeek | `data/models/deepseek.yaml` |
+| Mistral | `data/models/mistral.yaml` |
+| Xiaomi | `data/models/xiaomi.yaml` |
 
 If the provider doesn't exist yet, see [Adding a Provider](#adding-a-new-provider).
 
@@ -43,6 +46,7 @@ Copy this template and fill in what you know. Leave unknown fields as `null` —
     pricing:
       input_per_m: 5.00              # USD per 1M input tokens (null if unknown)
       output_per_m: 25.00            # USD per 1M output tokens
+      cache_per_m: 1.25              # USD per 1M cached input tokens (null if N/A)
     architecture:
       total_params: 744B             # optional
       architecture: MoE              # optional: MoE | Dense
@@ -52,11 +56,12 @@ Copy this template and fill in what you know. Leave unknown fields as `null` —
       notes: ""                      # any notable architecture facts
     scores:
       # Use the benchmark keys from data/benchmarks/benchmarks.yaml
-      # All values must be numbers or null — never strings
+      # Values can be bare numbers or rich objects — see Score Format below
       intelligence_index: null
       arc_agi_2: null
       gpqa_diamond: null
       swe_bench_verified: null
+      swe_bench_pro: null
       terminal_bench_2: null
       hle_with_tools: null
       frontier_math: null
@@ -64,6 +69,10 @@ Copy this template and fill in what you know. Leave unknown fields as `null` —
       browsecomp: null
       livecode_bench_elo: null
       mrcr_v2_128k: null
+      chatbot_arena_elo: null
+      webarena: null
+      aitnt_arena_elo: null
+      biglaw_bench: null
     verification:
       status: unverified             # verified | unverified | partially_verified
       notes: "Source and date of any independent verification"
@@ -76,7 +85,35 @@ Copy this template and fill in what you know. Leave unknown fields as `null` —
 
 ---
 
-### 3. Set verification status correctly
+### 3. Score Format
+
+Scores support two formats. **Both are valid** and the build script handles both.
+
+**Bare number** (concise, for verified scores with no caveats):
+
+```yaml
+scores:
+  gpqa_diamond: 94.3
+  swe_bench_verified: 80.6
+```
+
+**Rich object** (for self-reported scores or scores with provenance):
+
+```yaml
+scores:
+  gpqa_diamond:
+    value: 94.3                     # REQUIRED — the numeric score (or null)
+    self_reported: false            # optional, default false
+    benchmark_date: 2026-02-19      # optional — when the score was recorded
+    source: "https://..."           # optional — URL to the source
+    notes: "Thinking High mode"     # optional — harness/methodology caveats
+```
+
+**Rule:** Any `self_reported: true` score **must** include a `source` URL.
+
+---
+
+### 4. Set verification status correctly
 
 | Status | When to use |
 |--------|-------------|
@@ -88,24 +125,23 @@ Always add a `notes` field explaining which scores are verified and by whom.
 
 ---
 
-### 4. Update the benchmark definitions (if needed)
+### 5. Update the benchmark definitions (if needed)
 
 If you're adding scores for a benchmark not yet in `data/benchmarks/benchmarks.yaml`, add it there first. See [ADDING_BENCHMARKS.md](./ADDING_BENCHMARKS.md).
 
 ---
 
-### 5. Add a snapshot
-
-After a significant model addition or update, create a dated snapshot:
+### 6. Rebuild and test
 
 ```bash
-cp data/snapshots/2026-04-02.yaml data/snapshots/$(date +%Y-%m-%d).yaml
-# Edit the new file — update the leaderboard and category_winners
+python .github/scripts/validate_yaml.py    # Validate
+python .github/scripts/build_json.py        # Rebuild dashboard.json
+pnpm dev                                    # Test locally at localhost:5173
 ```
 
 ---
 
-### 6. Update CHANGELOG.md
+### 7. Update CHANGELOG.md
 
 ```markdown
 ## [YYYY-MM-DD] — Add <Model Name>
@@ -135,7 +171,24 @@ provider:
 models: []
 ```
 
-3. Add the provider's brand color to `index.html` in the `PROVIDER_COLORS` object.
+3. The `brand_color` and `website` fields are **required** for new providers — the dashboard uses them for chart coloring and provider links.
+
+---
+
+## Pricing Notes
+
+- Pricing uses three fields: `input_per_m`, `output_per_m`, and `cache_per_m`
+- `composite_per_m` is **no longer stored** in YAML — it is derived in code as a weighted blend of input and output pricing
+- If cache pricing is not available, set `cache_per_m: null` or omit it
+- All values are in USD per 1M tokens
+
+---
+
+## Dropped Benchmarks
+
+The following benchmarks have been removed and should not be used in new model entries:
+
+- `coding_eval_claude_code` — dropped (replaced by more general coding benchmarks)
 
 ---
 
@@ -148,3 +201,5 @@ models: []
 | `type: open source` | Must be `open-source` (hyphenated) or `proprietary` |
 | Omitting `verification.status` for new models | Always include it — default to `unverified` if unsure |
 | Benchmark key typo | Check against `data/benchmarks/benchmarks.yaml` for exact keys |
+| Including `composite_per_m` in pricing | Remove it — it's derived in code, not stored in YAML |
+| Adding `coding_eval_claude_code` scores | This benchmark has been dropped — use `swe_bench_verified` or `terminal_bench_2` instead |

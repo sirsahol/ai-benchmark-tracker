@@ -1,0 +1,59 @@
+provider:
+  name: Xiaomi
+  brand_color: "#FF6900"
+  website: https://github.com/XiaomiMiMo/MiMo
+
+models:
+  - id: mimo-v2-pro
+    name: MiMo-V2-Pro
+    released: 2026-04-15
+    type: open-source
+    context_window: 1M
+    tags: [open-weight, moe, long-context]
+    pricing:
+      input_per_m: 0.20
+      output_per_m: 0.60
+      notes: "Open-weight, self-hostable. API pricing for MiMo platform TBD."
+    architecture:
+      total_params: "~1T+"
+      architecture: MoE
+      notes: "1M context window. Ranks 7th-8th globally on Artificial Analysis."
+    scores:
+      intelligence_index:
+        value: 49
+        benchmark_date: 2026-04-20
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      gdpval_aa_elo:
+        value: 1426
+        benchmark_date: 2026-04-20
+        source: "https://artificialanalysis.ai/leaderboards/models"
+      aitnt_arena_elo:
+        value: 1449
+        benchmark_date: 2026-04-20
+        source: "https://artificialanalysis.ai/leaderboards/models"
+    verification:
+      status: partially_verified
+      notes: "Intelligence Index and Elo scores from Artificial Analysis aggregator."
+
+  - id: mimo-v2-5-pro
+    name: MiMo-V2.5-Pro
+    released: 2026-05-10
+    type: open-source
+    context_window: 1M
+    tags: [open-weight, moe, long-context]
+    pricing:
+      input_per_m: 0.25
+      output_per_m: 0.75
+      notes: "Open-weight, self-hostable. API pricing TBD."
+    architecture:
+      total_params: "~1T+"
+      architecture: MoE
+      notes: "Ranked 3rd among open-source models on Artificial Analysis."
+    scores:
+      intelligence_index:
+        value: 54
+        benchmark_date: 2026-05-15
+        source: "https://artificialanalysis.ai/leaderboards/models"
+    verification:
+      status: partially_verified
+      notes: "Intelligence Index confirmed. Limited other scores available."

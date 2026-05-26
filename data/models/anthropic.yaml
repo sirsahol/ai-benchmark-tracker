@@ -14,6 +14,7 @@ models:
     pricing:
       input_per_m: 5.00
       output_per_m: 25.00
+      cache_per_m: 0.50
       notes: "Premium pricing ($10/$37.50) applies for prompts exceeding 200k tokens"
     architecture:
       notes: "1M context in beta; adaptive thinking; effort controls; compaction support"
@@ -68,15 +69,30 @@ models:
         value: 90.2
         benchmark_date: 2026-02-05
         source: "https://www.anthropic.com/news/claude-opus-4-6"
-      coding_eval_claude_code:
-        value: 47.9
-        self_reported: true
-        benchmark_date: 2026-03-27
-        source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
-        notes: "Used as baseline by Z.ai for GLM-5.1 comparison; score is from Anthropic's own harness"
     verification:
       status: verified
       notes: "All major scores verified by Artificial Analysis and Google DeepMind model card"
+
+  - id: claude-opus-4-7
+    name: Claude Opus 4.7
+    released: 2026-04-16
+    type: proprietary
+    context_window: 200k
+    max_output: 32k
+    tags: [flagship, reasoning, coding, agentic]
+    pricing:
+      input_per_m: 15.00
+      output_per_m: 75.00
+      cache_per_m: 1.50
+      notes: "Most expensive model. Prompt caching available."
+    scores:
+      swe_bench_verified:
+        value: 87.6
+        benchmark_date: 2026-04-16
+        source: "https://www.anthropic.com"
+    verification:
+      status: partially_verified
+      notes: "SWE-bench Verified score from Anthropic. Other benchmarks pending."
 
   - id: claude-sonnet-4.6
     name: Claude Sonnet 4.6
@@ -88,6 +104,7 @@ models:
     pricing:
       input_per_m: 3.00
       output_per_m: 15.00
+      cache_per_m: 0.75
     scores:
       intelligence_index:
         value: 52
@@ -136,6 +153,7 @@ models:
     pricing:
       input_per_m: 5.00
       output_per_m: 25.00
+      cache_per_m: 0.50
     scores:
       intelligence_index:
         value: 50

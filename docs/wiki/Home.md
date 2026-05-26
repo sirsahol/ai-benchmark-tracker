@@ -9,7 +9,6 @@ Maintained by [@sirsahol](https://github.com/sirsahol).
 
 | | |
 |---|---|
-| **Live Dashboard** | [perplexity.ai/computer/a/frontier-ai-benchmark-tracker-HND2tHqjQrGSQ9_6w4CDsw](https://www.perplexity.ai/computer/a/frontier-ai-benchmark-tracker-HND2tHqjQrGSQ9_6w4CDsw) |
 | **GitHub Pages** | [sirsahol.github.io/ai-benchmark-tracker](https://sirsahol.github.io/ai-benchmark-tracker) |
 | **GitHub Repo** | [github.com/sirsahol/ai-benchmark-tracker](https://github.com/sirsahol/ai-benchmark-tracker) |
 
@@ -19,7 +18,7 @@ Maintained by [@sirsahol](https://github.com/sirsahol).
 
 | Page | What it covers |
 |------|----------------|
-| [Schema Reference](./Schema-Reference.md) | Complete YAML field definitions for models, benchmarks, snapshots |
+| [Schema Reference](./Schema-Reference.md) | Complete YAML field definitions for models, benchmarks |
 | [Adding Models](./Adding-Models.md) | Step-by-step guide to adding a new model or provider |
 | [Adding Benchmarks](./Adding-Benchmarks.md) | How to add a new benchmark definition and scores |
 | [Verification Guide](./Verification-Guide.md) | When to mark a score as verified, unverified, or partially_verified |
@@ -29,40 +28,64 @@ Maintained by [@sirsahol](https://github.com/sirsahol).
 
 ---
 
+## Architecture
+
+Built with **Vite 6** + **Svelte 5** + **TypeScript** + **Chart.js**. Previously a monolithic 106K `index.html` (now retired to `legacy/`), the dashboard is now a proper component-based SPA.
+
+**Data pipeline:** YAML files in `data/models/` are compiled by `build_json.py` into `data/dashboard.json`, which the Svelte app imports at build time.
+
+**Auto-populate:** A weekly GitHub Actions cron fetches scores from free public APIs and opens a pull request for human review.
+
+---
+
 ## Repo Structure
 
 ```
 ai-benchmark-tracker/
-├── index.html                        # Interactive dashboard (self-contained)
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
+├── index.html                        # Vite entry point (thin shell)
+├── package.json                      # pnpm, Vite 6, Svelte 5, Chart.js
+├── vite.config.ts                    # Build config, path aliases
+├── svelte.config.js                  # Svelte compiler options
+├── tsconfig.json                     # TypeScript config
+├── src/
+│   ├── main.ts                       # App bootstrap, CSS imports
+│   ├── App.svelte                    # Root Svelte component
+│   ├── lib/
+│   │   └── constants.ts              # Shared constants
+│   ├── stores/
+│   │   ├── data.ts                   # Dashboard data store
+│   │   ├── filters.ts                # Filter state
+│   │   ├── radarSelection.ts         # Radar chart selection
+│   │   ├── sort.ts                   # Sort state
+│   │   └── theme.ts                  # Dark/light theme
+│   └── styles/
+│       ├── design-tokens.css         # CSS custom properties
+│       ├── theme-dark.css            # Dark mode overrides
+│       ├── theme-light.css           # Light mode overrides
+│       ├── base.css                  # Reset and global styles
+│       └── components.css            # Component-specific styles
 ├── data/
 │   ├── dashboard.json                # Auto-generated — do not edit manually
-│   ├── models/                       # One YAML per provider
-│   │   ├── anthropic.yaml
-│   │   ├── google.yaml
-│   │   ├── openai.yaml
-│   │   ├── zai.yaml
-│   │   ├── xai.yaml
-│   │   ├── meta.yaml
-│   │   ├── minimax.yaml
-│   │   └── moonshot.yaml
+│   ├── models/                       # One YAML per provider (11 files)
 │   ├── benchmarks/
-│   │   └── benchmarks.yaml           # Benchmark definitions
-│   ├── snapshots/
-│   │   └── YYYY-MM-DD.yaml           # Leaderboard snapshots
+│   │   └── benchmarks.yaml           # Benchmark definitions (16 benchmarks)
 │   └── versions/
 │       └── YYYY-MM-DD.json           # Auto-generated versioned JSON
+├── legacy/
+│   └── index.html                    # Retired monolithic dashboard (106K)
 ├── docs/
+│   ├── ADDING_MODELS.md
 │   └── wiki/                         # This wiki
 └── .github/
     ├── workflows/
-    │   ├── validate-yaml.yml         # Validates YAML on every push
-    │   └── build-json.yml            # Compiles YAML → JSON on push to main
+    │   ├── validate-yaml.yml          # Validates YAML on every push/PR
+    │   ├── build-json.yml             # Compiles YAML -> JSON on push to main
+    │   ├── deploy-pages.yml           # OIDC deploy to GitHub Pages
+    │   └── auto-populate-scores.yml   # Weekly cron fetches scores, opens PR
     └── scripts/
         ├── validate_yaml.py
-        └── build_json.py
+        ├── build_json.py
+        └── auto_populate_scores.py
 ```
 
 ---
@@ -74,10 +97,13 @@ ai-benchmark-tracker/
 3. **Self-reported scores are flagged** — any score with `self_reported: true` gets an SR badge in the dashboard and cannot be treated as independently verified.
 4. **Superseded models are preserved** — old model versions stay in the YAML with `superseded_by:` set. The dashboard can hide or grey them out; the data is never lost.
 5. **Tags enable filtering** — models have `tags` like `[fast, coding, open-weight]` for capability-based filtering in the dashboard.
+6. **No snapshots** — historical data is preserved via git history and the `data/versions/` directory. Point-in-time snapshots have been dropped.
 
 ---
 
-## Current Models Tracked (April 2026)
+## Current Models Tracked (May 2026)
+
+32 models across 11 providers:
 
 | Provider | Models |
 |----------|--------|
@@ -89,3 +115,6 @@ ai-benchmark-tracker/
 | Meta | Llama 4 Scout, Llama 4 Maverick |
 | MiniMax | MiniMax-M2.7, MiniMax-M2.5 |
 | Moonshot AI | Kimi K2.5, Kimi K2 |
+| DeepSeek | DeepSeek-R2 |
+| Mistral | Mistral Large 3 |
+| Xiaomi | MiMo |

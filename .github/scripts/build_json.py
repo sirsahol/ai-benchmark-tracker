@@ -112,13 +112,6 @@ def build_payload() -> dict:
     for m in models:
         del m["_intelligence"]
 
-    # ── Snapshots ────────────────────────────────────────────────────────────
-    snapshots = []
-    snap_dir  = DATA_DIR / "snapshots"
-    if snap_dir.exists():
-        for sf in sorted(snap_dir.glob("*.yaml")):
-            snapshots.append(load_yaml(sf))
-
     return {
         "meta": {
             "built_at":        build_ts,
@@ -129,7 +122,6 @@ def build_payload() -> dict:
         "benchmarks": benchmarks,
         "providers":  providers,
         "models":     models,
-        "snapshots":  snapshots,
     }
 
 

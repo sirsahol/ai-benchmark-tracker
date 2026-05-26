@@ -1,6 +1,6 @@
 # Benchmark Definitions
 # Each benchmark is identified by its key (e.g., arc_agi_2)
-# Categories: reasoning, science, coding, math, knowledge_work, long_context, agentic
+# Categories: reasoning, science, coding, math, knowledge_work, long_context, agentic, composite
 
 benchmarks:
   arc_agi_2:
@@ -24,6 +24,15 @@ benchmarks:
     name: SWE-Bench Verified
     category: coding
     description: 500 human-curated GitHub issues — model must fix real code and pass unit tests
+    unit: percent
+    higher_is_better: true
+    source: SWE-bench project
+    url: https://www.swebench.com
+
+  swe_bench_pro:
+    name: SWE-Bench Pro
+    category: coding
+    description: Extended SWE-Bench with more complex multi-file tasks and professional-level code changes
     unit: percent
     higher_is_better: true
     source: SWE-bench project
@@ -87,15 +96,6 @@ benchmarks:
     higher_is_better: true
     source: Multiple
 
-  coding_eval_claude_code:
-    name: "Coding Eval (Claude Code Harness)"
-    category: coding
-    description: "Coding evaluation using Claude Code as test framework"
-    unit: points
-    higher_is_better: true
-    source: Z.ai
-    notes: "Not a standard benchmark — Z.ai's internal evaluation. GLM scores are self-reported."
-
   intelligence_index:
     name: Artificial Analysis Intelligence Index
     category: composite
@@ -104,3 +104,36 @@ benchmarks:
     higher_is_better: true
     source: Artificial Analysis
     url: https://artificialanalysis.ai
+
+  chatbot_arena_elo:
+    name: Chatbot Arena Elo
+    category: composite
+    description: Crowdsourced pairwise model comparisons rated by human preference
+    unit: elo
+    higher_is_better: true
+    source: LMSYS
+    url: https://chatbotarena.ai
+
+  webarena:
+    name: WebArena
+    category: agentic
+    description: End-to-end web agent tasks — navigation, form filling, shopping on real websites
+    unit: percent
+    higher_is_better: true
+    source: CMU
+
+  aitnt_arena_elo:
+    name: AiTNt Arena Elo
+    category: composite
+    description: Arena-style Elo rating from AiTNt platform for Asian-language model comparisons
+    unit: elo
+    higher_is_better: true
+    source: AiTNt
+
+  biglaw_bench:
+    name: BigLaw Bench
+    category: knowledge_work
+    description: Legal reasoning and knowledge tasks based on US bar exam and legal document analysis
+    unit: percent
+    higher_is_better: true
+    source: Multiple

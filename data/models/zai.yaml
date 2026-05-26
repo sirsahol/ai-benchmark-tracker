@@ -25,13 +25,7 @@ models:
       training_data_tokens: "28.5T (inherited from GLM-5 base)"
       attention: "DeepSeek Sparse Attention (DSA)"
       notes: "Post-training update on GLM-5 base — not a full retrain. Significant improvements in agentic instruction-following and long-running tasks."
-    scores:
-      coding_eval_claude_code:
-        value: 45.3
-        self_reported: true
-        benchmark_date: 2026-03-27
-        source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
-        notes: "Self-reported by Z.ai using Claude Code harness (non-standard). 94.6% of Claude Opus 4.6 (47.9). 28% improvement over GLM-5 (35.4). Independent verification pending."
+    scores: {}
     verification:
       status: unverified
       notes: "Coding score (45.3 = 94.6% of Opus 4.6) is entirely self-reported. Claude Code harness is unconventional and not directly comparable to SWE-Bench or Terminal-Bench. No independent evaluation published as of April 2, 2026. Expected within weeks."
@@ -75,12 +69,6 @@ models:
         benchmark_date: 2026-02-11
         source: "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ"
         notes: "With context management; outperforms GPT-5.2 (65.8)"
-      coding_eval_claude_code:
-        value: 35.4
-        self_reported: true
-        benchmark_date: 2026-03-27
-        source: "https://serenitiesai.com/articles/glm-5-1-zhipu-coding-benchmark-claude-opus-comparison-2026"
-        notes: "Self-reported baseline used in GLM-5.1 comparison"
     verification:
       status: partially_verified
       notes: "SWE-Bench Verified (77.8%) and Intelligence Index (50) independently confirmed. Coding eval and BrowseComp scores are self-reported or from aggregators."

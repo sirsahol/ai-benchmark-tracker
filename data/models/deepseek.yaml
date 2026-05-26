@@ -1,0 +1,51 @@
+provider:
+  name: DeepSeek
+  brand_color: "#4D6BFE"
+  website: https://deepseek.ai
+
+models:
+  - id: deepseek-v4-pro
+    name: DeepSeek V4 Pro
+    released: 2026-04-24
+    type: open-source
+    context_window: 1M
+    tags: [open-weight, moe, coding, reasoning, long-context]
+    pricing:
+      input_per_m: 0.50
+      output_per_m: 2.00
+      cache_per_m: 0.10
+      notes: "1.6T total / 49B active params. Rivaling closed-source on coding benchmarks."
+    architecture:
+      total_params: "1.6T"
+      architecture: MoE
+      active_params: "49B"
+      notes: "1M context window."
+    scores:
+      intelligence_index:
+        value: 52
+        benchmark_date: 2026-04-28
+        source: "https://artificialanalysis.ai/leaderboards/models"
+    verification:
+      status: partially_verified
+      notes: "Intelligence Index confirmed. Coding benchmarks reported strong but not independently verified."
+
+  - id: deepseek-v4-flash
+    name: DeepSeek V4 Flash
+    released: 2026-04-24
+    type: open-source
+    context_window: 1M
+    tags: [open-weight, moe, efficient, long-context]
+    pricing:
+      input_per_m: 0.05
+      output_per_m: 0.30
+      cache_per_m: 0.01
+      notes: "284B total / 13B active params. Budget-tier model."
+    architecture:
+      total_params: "284B"
+      architecture: MoE
+      active_params: "13B"
+      notes: "1M context window. Lightweight variant."
+    scores: {}
+    verification:
+      status: unverified
+      notes: "No Intelligence Index score found yet. Recently released."

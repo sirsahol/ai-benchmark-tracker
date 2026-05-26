@@ -11,7 +11,9 @@ models:
     context_window: 1.05M
     tags: [flagship, math, coding, reasoning]
     pricing:
-      composite_per_m: 5.63
+      input_per_m: 10.00
+      output_per_m: 30.00
+      cache_per_m: 2.50
     scores:
       intelligence_index:
         value: 57
@@ -39,7 +41,9 @@ models:
     context_window: 400k
     tags: [coding, terminal, agentic]
     pricing:
-      composite_per_m: 4.81
+      input_per_m: 5.00
+      output_per_m: 15.00
+      cache_per_m: 1.00
     scores:
       intelligence_index:
         value: 54
@@ -71,7 +75,9 @@ models:
     superseded_by: gpt-5.4
     tags: [reasoning, coding, science]
     pricing:
-      composite_per_m: 4.81
+      input_per_m: 2.50
+      output_per_m: 10.00
+      cache_per_m: 1.50
     scores:
       intelligence_index:
         value: 51
@@ -138,3 +144,43 @@ models:
         source: "https://artificialanalysis.ai/leaderboards/models"
     verification:
       status: verified
+
+  - id: gpt-5-5
+    name: GPT-5.5
+    released: 2026-04-23
+    type: proprietary
+    context_window: 256k
+    max_output: 64k
+    tags: [flagship, reasoning, multimodal, agentic]
+    pricing:
+      input_per_m: 10.00
+      output_per_m: 30.00
+      cache_per_m: 2.50
+    scores:
+      arc_agi_2:
+        value: 85.0
+        benchmark_date: 2026-04-23
+        source: "https://openai.com"
+      frontier_math:
+        value: 52.4
+        benchmark_date: 2026-04-23
+        source: "https://openai.com"
+    verification:
+      status: partially_verified
+      notes: "Scores from OpenAI announcement. Independent verification pending."
+
+  - id: gpt-5-5-instant
+    name: GPT-5.5 Instant
+    released: 2026-05-05
+    type: proprietary
+    context_window: 128k
+    max_output: 32k
+    tags: [fast, efficient, reasoning]
+    pricing:
+      input_per_m: 1.50
+      output_per_m: 6.00
+      cache_per_m: 0.75
+    scores: {}
+    verification:
+      status: unverified
+      notes: "Speed-optimized variant. No benchmark scores published yet."
