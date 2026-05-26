@@ -1,6 +1,7 @@
 <script lang="ts">
   import ThemeToggle from './icons/ThemeToggle.svelte';
   import { theme } from '$stores/theme';
+  import { data } from '$stores/data';
 
   let sections = [
     { id: 'leaderboard', label: 'Leaderboard' },
@@ -39,7 +40,14 @@
   });
 
   let updatedLabel = $derived.by(() => {
-    const d = new Date('2026-04-02');
+    const builtAt = $data.meta?.built_at;
+    if (builtAt) {
+      const d = new Date(builtAt);
+      if (!isNaN(d.getTime())) {
+        return `Updated ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+      }
+    }
+    const d = new Date();
     return `Updated ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
   });
 </script>

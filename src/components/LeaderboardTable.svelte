@@ -35,9 +35,16 @@
   }
 
   function parseContext(v: string | undefined): number {
-    if (!v) return 0;
+    if (!v) return -1;
     const n = parseFloat(v);
-    return v.includes('M') ? n * 1000 : n;
+    return v.includes('M') || v.includes('m') ? n * 1000 : n;
+  }
+
+  function formatDate(dateStr: string | undefined): string {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
   let enriched = $derived.by(() => {
@@ -167,7 +174,7 @@
           </td>
           <td>{m.context_window || '—'}</td>
           <td style="font-size:var(--text-xs);color:var(--color-text-muted)">
-            {new Date(m.released).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            {formatDate(m.released)}
           </td>
         </tr>
       {/each}

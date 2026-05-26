@@ -2,10 +2,14 @@
   import { data } from '$stores/data';
   import { activeTags } from '$stores/filters';
 
-  let allTags = $derived.by(() => {
-    const tags = new Set<string>();
-    ($data.models || []).forEach((m: any) => (m.tags || []).forEach((t: string) => tags.add(t)));
-    return [...tags].sort();
+  let tagEntries = $derived.by(() => {
+    const count: Record<string, number> = {};
+    ($data.models || []).forEach((m: any) => (m.tags || []).forEach((t: string) => { count[t] = (count[t] || 0) + 1; }));
+    const MIN_TAG_MODELS = 3;
+    return Object.entries(count)
+      .filter(([, c]) => c >= MIN_TAG_MODELS)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([tag, count]) => ({ tag, count }));
   });
 
   function handleClick(tag: string) {
@@ -31,11 +35,12 @@
     class:active={isAllActive}
     onclick={() => handleClick('all')}
   >All</button>
-  {#each allTags as tag}
+  {#each tagEntries as { tag, count }}
     <button
       class="tag-pill"
       class:active={$activeTags.has(tag)}
       onclick={() => handleClick(tag)}
+      title="{count} models"
     >{tag}</button>
   {/each}
 </div>

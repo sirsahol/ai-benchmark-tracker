@@ -3,7 +3,14 @@
   import { filteredModels } from '$stores/filters';
   import ModelCard from './ModelCard.svelte';
 
-  let models = $derived($filteredModels);
+  let models = $derived.by(() => {
+    return [...$filteredModels].sort((a: any, b: any) => {
+      const aS = !!a.superseded_by;
+      const bS = !!b.superseded_by;
+      if (aS !== bS) return aS ? 1 : -1;
+      return new Date(b.released).getTime() - new Date(a.released).getTime();
+    });
+  });
 </script>
 
 <section id="model-profiles" class="container">

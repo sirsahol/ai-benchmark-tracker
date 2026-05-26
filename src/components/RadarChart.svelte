@@ -32,9 +32,10 @@
     let modelScore: number | null = null;
 
     models.forEach((m: any) => {
-      if (m.scores?.[benchKey]?.value != null) {
-        values.push(m.scores[benchKey].value);
-        if (m.name === modelName) modelScore = m.scores[benchKey].value;
+      const v = m.scores?.[benchKey]?.value;
+      if (v != null && !isNaN(v)) {
+        values.push(v);
+        if (m.name === modelName) modelScore = v;
       }
     });
 
@@ -59,7 +60,8 @@
       const color = getProviderColor(provider);
       return {
         label: name,
-        data: axes.map((a: any) => normalizeScore(a.key, name) ?? 0),
+        data: axes.map((a: any) => { const v = normalizeScore(a.key, name); return v !== null ? v : null; }),
+        spanGaps: false,
         borderColor: color,
         backgroundColor: color + '20',
         pointBackgroundColor: color,

@@ -8,7 +8,7 @@
     models.forEach((m: any) => {
       if (!m.scores) return;
       const s = m.scores[benchmarkKey];
-      if (s) scores[m.name] = { value: s.value, self_reported: s.self_reported };
+      if (s && s.value != null && !isNaN(s.value)) scores[m.name] = { value: s.value, self_reported: s.self_reported || false };
     });
     return Object.entries(scores)
       .map(([name, obj]) => ({ name, value: obj.value, self_reported: obj.self_reported }))
@@ -24,7 +24,7 @@
       {@const m = models.find((mo: any) => mo.name === entry.name)}
       {@const provider = m ? m.provider_id || m.provider : guessProvider(entry.name)}
       {@const color = getProviderColor(provider)}
-      {@const pct = maxVal > 0 ? (entry.value / maxVal * 100).toFixed(1) : '0'}
+      {@const pct = maxVal > 0 ? Math.min(100, (entry.value / maxVal * 100)).toFixed(1) : '0'}
       {@const isWinner = entry.value === maxVal}
       <div class="bar-row">
         <span class="bar-label" title={entry.name}>{entry.name}</span>
