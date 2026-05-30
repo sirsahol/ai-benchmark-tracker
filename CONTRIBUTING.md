@@ -38,13 +38,30 @@ Edit YAML files, run `build_json.py`, then the Svelte components pick up the new
 
 ## Verification Status
 
-All scores should have verification status:
+All scores must have a verification status. Four trust tiers are enforced by CI:
 
-- `verified` — Independently confirmed by third-party evaluators
-- `unverified` — Self-reported by the model provider only
-- `partially_verified` — Some scores verified, others pending
+| Tier | Tag | Requirements | Auto-merge? |
+|------|-----|-------------|-------------|
+| **Verified** | `verified` | Requires `verified_by`, `verified_at` (date), `source_url` | No |
+| **Auto-populated** | `auto_populated` | Set by automated score fetcher only | Fill-only |
+| **Self-reported** | `unverified` | Provider-claimed, no independent confirmation | No |
+| **Estimated** | `estimated` | Derived or inferred score | No |
 
-Always note the verification source and date.
+- `verified` scores require a human PR review — no automated process can promote to `verified`
+- `auto_populated` is set only by `.github/scripts/auto_populate_scores.py` and cannot be written by hand
+- Always note the verification source and date for `verified` scores
+
+## External Contribution Policy
+
+External PRs should be scoped to `data/models/*.yaml` (score data). Changes to the following require a maintainer to open the PR:
+
+- `.github/workflows/` — CI/CD pipeline configuration
+- `.github/scripts/` — validation and build tooling
+- `src/` — dashboard source code (Svelte, TypeScript, styles)
+- `vite.config.ts`, `svelte.config.js`, `tsconfig.json` — build configuration
+- `index.html` — app shell and security headers
+
+If your PR touches both data files and code, split into two PRs.
 
 ## Local Development
 
@@ -131,6 +148,9 @@ If the build workflow commits back to `main`, it uses `[skip ci]` in the commit 
 5. **Dates are YYYY-MM-DD** — `2026-02-19` not `Feb 19, 2026`
 6. **Keep benchmark keys consistent** — check `data/benchmarks/benchmarks.yaml` before adding new score keys to model files
 7. **Pricing uses input_per_m / output_per_m / cache_per_m** — `composite_per_m` is derived in code, not stored
+8. **Deprecated models are frozen** — once `superseded_by` is set, its scores cannot be added, modified, or removed. This is enforced by CI.
+9. **No circular deprecation** — a model cannot point to a model that (directly or transitively) points back to it, and `superseded_by` must reference an existing model ID. Enforced by CI.
+10. **No reanimation** — removing `superseded_by` from a model that was previously deprecated requires a human-reviewed PR (same gate as `verified` promotion)
 
 ## PR Checklist
 

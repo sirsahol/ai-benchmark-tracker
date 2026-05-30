@@ -90,4 +90,7 @@ models:
         source: "https://artificialanalysis.ai/leaderboards/models"
     verification:
       status: verified
+      verified_by: "Artificial Analysis"
+      verified_at: "2026-02-11"
+      source_url: "https://artificialanalysis.ai/leaderboards/models"
     notes: "Used as Claude Opus/Sonnet/Haiku mapping target in Z.ai/Antigravity MCP setup"

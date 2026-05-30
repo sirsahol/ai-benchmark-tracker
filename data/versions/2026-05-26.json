@@ -1,7 +1,9 @@
 {
-  "meta": {
-    "built_at": "2026-05-26T06:30:43.658777Z",
+  "_build_metadata": {
+    "built_at": "2026-05-26T08:32:32.836174Z",
     "schema_version": "3",
+    "commit_sha": "14ff44796e9ef339f430d96adb6d1e94f7e6d404",
+    "yaml_integrity": "sha256:ff0082f8f9b998cc6fbf797d01d93e4bd52c72f16ef95d16fc426c7b321364a7",
     "model_count": 32,
     "benchmark_count": 16
   },
@@ -402,7 +404,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Multiple (SiliconFlow, LLM Stats)",
+        "verified_at": "2025-04-01",
+        "source_url": "https://llm-stats.com/models/compare/grok-4-fast-vs-llama-4-scout"
       },
       "provider_id": "meta",
       "provider_name": "Meta",
@@ -432,7 +437,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "SiliconFlow",
+        "verified_at": "2025-04-01",
+        "source_url": "https://www.siliconflow.com/articles/benchmark"
       },
       "provider_id": "meta",
       "provider_name": "Meta",
@@ -514,6 +522,9 @@
       },
       "verification": {
         "status": "verified",
+        "verified_by": "Multiple (VentureBeat, SWE-Bench leaderboard)",
+        "verified_at": "2025-07-11",
+        "source_url": "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free",
         "notes": "SWE-Bench and LiveCodeBench verified via official leaderboards"
       },
       "provider_id": "moonshot",
@@ -811,6 +822,9 @@
       },
       "verification": {
         "status": "verified",
+        "verified_by": "Google DeepMind",
+        "verified_at": "2026-02-19",
+        "source_url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
         "notes": "All scores from official Google DeepMind model card"
       },
       "provider_id": "google",
@@ -865,7 +879,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Multiple (Artificial Analysis, LM Council)",
+        "verified_at": "2026-04-02",
+        "source_url": "https://artificialanalysis.ai/leaderboards/models"
       },
       "provider_id": "openai",
       "provider_name": "OpenAI",
@@ -1067,6 +1084,9 @@
       },
       "verification": {
         "status": "verified",
+        "verified_by": "Multiple (Anthropic, Artificial Analysis, Google DeepMind)",
+        "verified_at": "2026-02-09",
+        "source_url": "https://www.anthropic.com/news/claude-opus-4-6",
         "notes": "All major scores verified by Artificial Analysis and Google DeepMind model card"
       },
       "provider_id": "anthropic",
@@ -1151,7 +1171,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Multiple (Artificial Analysis, Google DeepMind, DataStudio)",
+        "verified_at": "2026-02-19",
+        "source_url": "https://artificialanalysis.ai/leaderboards/models"
       },
       "provider_id": "anthropic",
       "provider_name": "Anthropic",
@@ -1296,7 +1319,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Multiple (Artificial Analysis, Google DeepMind, LM Council)",
+        "verified_at": "2026-02-19",
+        "source_url": "https://artificialanalysis.ai/leaderboards/models"
       },
       "provider_id": "openai",
       "provider_name": "OpenAI",
@@ -1344,7 +1370,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Multiple (Artificial Analysis, LM Council)",
+        "verified_at": "2026-02-11",
+        "source_url": "https://artificialanalysis.ai/leaderboards/models"
       },
       "provider_id": "anthropic",
       "provider_name": "Anthropic",
@@ -1643,7 +1672,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Google DeepMind",
+        "verified_at": "2026-02-19",
+        "source_url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
       },
       "provider_id": "google",
       "provider_name": "Google DeepMind",
@@ -1731,7 +1763,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Artificial Analysis",
+        "verified_at": "2026-04-02",
+        "source_url": "https://artificialanalysis.ai/leaderboards/models"
       },
       "provider_id": "openai",
       "provider_name": "OpenAI",
@@ -1864,6 +1899,9 @@
       },
       "verification": {
         "status": "verified",
+        "verified_by": "Google DeepMind",
+        "verified_at": "2025-12-17",
+        "source_url": "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/",
         "notes": "SWE-Bench and GPQA scores from official Google blog"
       },
       "provider_id": "google",
@@ -1947,7 +1985,10 @@
         }
       },
       "verification": {
-        "status": "verified"
+        "status": "verified",
+        "verified_by": "Artificial Analysis",
+        "verified_at": "2026-02-11",
+        "source_url": "https://artificialanalysis.ai/leaderboards/models"
       },
       "notes": "Used as Claude Opus/Sonnet/Haiku mapping target in Z.ai/Antigravity MCP setup",
       "provider_id": "zai",

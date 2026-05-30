@@ -40,7 +40,7 @@
   });
 
   let updatedLabel = $derived.by(() => {
-    const builtAt = $data.meta?.built_at;
+    const builtAt = $data._build_metadata?.built_at;
     if (builtAt) {
       const d = new Date(builtAt);
       if (!isNaN(d.getTime())) {

@@ -71,6 +71,9 @@ models:
         source: "https://www.anthropic.com/news/claude-opus-4-6"
     verification:
       status: verified
+      verified_by: "Multiple (Anthropic, Artificial Analysis, Google DeepMind)"
+      verified_at: "2026-02-09"
+      source_url: "https://www.anthropic.com/news/claude-opus-4-6"
       notes: "All major scores verified by Artificial Analysis and Google DeepMind model card"
 
   - id: claude-opus-4-7
@@ -141,6 +144,9 @@ models:
         source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
     verification:
       status: verified
+      verified_by: "Multiple (Artificial Analysis, Google DeepMind, DataStudio)"
+      verified_at: "2026-02-19"
+      source_url: "https://artificialanalysis.ai/leaderboards/models"
 
   - id: claude-opus-4.5
     name: Claude Opus 4.5
@@ -169,3 +175,6 @@ models:
         source: "https://wandb.ai/byyoung3/ml-news/reports/GLM-5-Benchmark-Scores---VmlldzoxNTkwOTk2MQ"
     verification:
       status: verified
+      verified_by: "Multiple (Artificial Analysis, LM Council)"
+      verified_at: "2026-02-11"
+      source_url: "https://artificialanalysis.ai/leaderboards/models"

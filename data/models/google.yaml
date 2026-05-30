@@ -87,6 +87,9 @@ models:
         notes: "Weaker than Claude on expert knowledge work despite leading raw benchmarks"
     verification:
       status: verified
+      verified_by: "Google DeepMind"
+      verified_at: "2026-02-19"
+      source_url: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
       notes: "All scores from official Google DeepMind model card"
 
   - id: gemini-3-pro
@@ -139,6 +142,9 @@ models:
         source: "https://almcorp.com/blog/gemini-3-1-pro-complete-guide/"
     verification:
       status: verified
+      verified_by: "Google DeepMind"
+      verified_at: "2026-02-19"
+      source_url: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
 
   - id: gemini-3-flash
     name: Gemini 3 Flash
@@ -188,6 +194,9 @@ models:
         notes: "Up from 28.1% on previous Flash model"
     verification:
       status: verified
+      verified_by: "Google DeepMind"
+      verified_at: "2025-12-17"
+      source_url: "https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/"
       notes: "SWE-Bench and GPQA scores from official Google blog"
 
   - id: gemini-3-5-flash

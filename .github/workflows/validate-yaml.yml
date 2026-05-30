@@ -27,5 +27,16 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Audit dependencies
+        run: |
+          npm install -g pnpm
+          pnpm install --frozen-lockfile
+          pnpm audit --audit-level=high || echo "::warning::Dependency audit found vulnerabilities"
+
       - name: Run YAML schema validator
         run: python .github/scripts/validate_yaml.py

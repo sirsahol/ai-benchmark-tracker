@@ -33,6 +33,9 @@ models:
         source: "https://lmcouncil.ai/benchmarks"
     verification:
       status: verified
+      verified_by: "Multiple (Artificial Analysis, LM Council)"
+      verified_at: "2026-04-02"
+      source_url: "https://artificialanalysis.ai/leaderboards/models"
 
   - id: gpt-5.3-codex
     name: GPT-5.3 Codex
@@ -126,6 +129,9 @@ models:
         source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
     verification:
       status: verified
+      verified_by: "Multiple (Artificial Analysis, Google DeepMind, LM Council)"
+      verified_at: "2026-02-19"
+      source_url: "https://artificialanalysis.ai/leaderboards/models"
 
   - id: gpt-5.1
     name: GPT-5.1
@@ -144,6 +150,9 @@ models:
         source: "https://artificialanalysis.ai/leaderboards/models"
     verification:
       status: verified
+      verified_by: "Artificial Analysis"
+      verified_at: "2026-04-02"
+      source_url: "https://artificialanalysis.ai/leaderboards/models"
 
   - id: gpt-5-5
     name: GPT-5.5

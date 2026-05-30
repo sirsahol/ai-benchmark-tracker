@@ -4,28 +4,31 @@
 
   let kpis = $derived.by(() => {
     const models: any[] = $data.models || [];
-    const validModels = models.filter((m: any) => m.scores?.intelligence_index?.value != null);
+    const activeModels = models.filter((m: any) => !m.superseded_by);
+    const validModels = activeModels.filter((m: any) => m.scores?.intelligence_index?.value != null);
     const topModel = [...validModels].sort((a: any, b: any) =>
       (b.scores?.intelligence_index?.value ?? 0) - (a.scores?.intelligence_index?.value ?? 0)
     )[0];
 
-    const priced = models
+    const priced = activeModels
       .map((m: any) => ({ ...m, _price: getCompositePrice(m) }))
       .filter((m: any) => m._price != null);
     const cheapest = priced.length > 0
       ? priced.reduce((a: any, b: any) => a._price < b._price ? a : b)
       : null;
 
-    const speeded = models
+    const speeded = activeModels
       .map((m: any) => ({ ...m, _speed: getSpeed(m) }))
       .filter((m: any) => m._speed != null);
     const fastest = speeded.length > 0
       ? speeded.reduce((a: any, b: any) => a._speed > b._speed ? a : b)
       : null;
 
-    const latest = [...models].sort((a: any, b: any) =>
+    const latest = [...activeModels].sort((a: any, b: any) =>
       new Date(b.released).getTime() - new Date(a.released).getTime()
     )[0];
+
+    const count = activeModels.length;
 
     return [
       {
@@ -44,7 +47,7 @@
         color: 'var(--color-accent)',
       },
       {
-        value: String(models.length),
+        value: String(count),
         label: 'Models Tracked',
         color: 'var(--color-text)',
       },

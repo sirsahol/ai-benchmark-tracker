@@ -19,7 +19,10 @@ Run: python .github/scripts/build_json.py [--dry-run]
 """
 
 import argparse
+import hashlib
 import json
+import os
+import subprocess
 import sys
 import yaml
 from datetime import date, datetime
@@ -37,6 +40,29 @@ YELLOW = "\033[93m"
 CYAN   = "\033[96m"
 RESET  = "\033[0m"
 BOLD   = "\033[1m"
+
+
+def get_commit_sha() -> str | None:
+    """Return the current commit SHA, or None if not in a git repo."""
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=REPO_ROOT, stderr=subprocess.DEVNULL, text=True
+        ).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pass
+    sha = os.environ.get("GITHUB_SHA")
+    return sha
+
+
+def compute_yaml_hash() -> str:
+    """Compute sha256 of all YAML input files concatenated."""
+    hasher = hashlib.sha256()
+    for f in sorted(MODELS_DIR.glob("*.yaml")):
+        hasher.update(f.read_bytes())
+    if BENCH_FILE.exists():
+        hasher.update(BENCH_FILE.read_bytes())
+    return hasher.hexdigest()
 
 
 def load_yaml(path: Path) -> dict:
@@ -112,10 +138,15 @@ def build_payload() -> dict:
     for m in models:
         del m["_intelligence"]
 
+    sha = get_commit_sha()
+    yaml_hash = compute_yaml_hash()
+
     return {
-        "meta": {
+        "_build_metadata": {
             "built_at":        build_ts,
             "schema_version":  "3",
+            "commit_sha":      sha or "unknown",
+            "yaml_integrity":  f"sha256:{yaml_hash}",
             "model_count":     len(models),
             "benchmark_count": len(benchmarks),
         },
@@ -144,9 +175,9 @@ def main():
     payload   = build_payload()
     today_str = date.today().isoformat()
 
-    print(f"  Models     : {payload['meta']['model_count']}")
-    print(f"  Benchmarks : {payload['meta']['benchmark_count']}")
-    print(f"  Built at   : {payload['meta']['built_at']}\n")
+    print(f"  Models     : {payload['_build_metadata']['model_count']}")
+    print(f"  Benchmarks : {payload['_build_metadata']['benchmark_count']}")
+    print(f"  Built at   : {payload['_build_metadata']['built_at']}\n")
 
     write_json(OUT_LATEST, payload, dry_run=args.dry_run)
     write_json(OUT_VERS / f"{today_str}.json", payload, dry_run=args.dry_run)

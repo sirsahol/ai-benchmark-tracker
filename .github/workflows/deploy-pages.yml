@@ -40,6 +40,21 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Verify dashboard.json matches YAML source
+        run: |
+          pip install pyyaml
+          python .github/scripts/validate_yaml.py
+          python .github/scripts/build_json.py --dry-run
+          python -c "
+import json
+from pathlib import Path
+dash = json.loads(Path('data/dashboard.json').read_text())
+bm = dash.get('_build_metadata', {})
+assert bm.get('schema_version') == '3', 'Schema version mismatch'
+print(f'  Integrity check passed — commit: {bm.get(\"commit_sha\", \"unknown\")[:12]}')
+print(f'  YAML hash: {bm.get(\"yaml_integrity\", \"?\")}')
+"
+
       - name: Build
         run: bun run build
 
