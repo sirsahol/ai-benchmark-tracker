@@ -1,0 +1,3 @@
+source: src/main.ts
+kind: object
+purpose: Svelte application mount entrypoint into DOM root

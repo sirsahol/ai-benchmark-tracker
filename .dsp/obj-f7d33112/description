@@ -1,0 +1,3 @@
+source: src/App.svelte
+kind: object
+purpose: Benchmark dashboard layout, model charts, and interactive metric filters

@@ -1,0 +1,3 @@
+source: package.json
+kind: object
+purpose: Svelte + Vite AI benchmark tracking dashboard root manifest
