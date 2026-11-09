@@ -107,27 +107,33 @@ def fetch_json(url: str, timeout: int = 30) -> dict | list | None:
     return None
 
 # ---------------------------------------------------------------------------
-# Data source: HuggingFace Open LLM Leaderboard
+# Data source: HuggingFace Open LLM Leaderboard (v2 & Dataset API)
 # ---------------------------------------------------------------------------
-HF_LEADERBOARD_URL = (
-    "https://huggingface.co/api/spaces/open-llm-leaderboard/open_llm_leaderboard"
-    "/api/v1/leaderboard"
-)
+HF_LEADERBOARD_URLS = [
+    "https://open-llm-leaderboard-open-llm-leaderboard.hf.space/api/v1/leaderboard",
+    "https://datasets-server.huggingface.co/rows?dataset=open-llm-leaderboard%2Fcontents&config=default&split=train&limit=200",
+]
 
 def fetch_huggingface_leaderboard() -> list[dict]:
     """Return list of {model, benchmarks} dicts from HF leaderboard."""
     print(f"\n{CYAN}Fetching HuggingFace leaderboard...{RESET}")
-    data = fetch_json(HF_LEADERBOARD_URL)
-    if not data or not isinstance(data, list):
-        print(f"  {YELLOW}No data returned from HuggingFace API{RESET}")
+    data = None
+    for url in HF_LEADERBOARD_URLS:
+        data = fetch_json(url)
+        if data:
+            break
+
+    if not data:
+        print(f"  {YELLOW}No data returned from HuggingFace API (endpoints unreachable or updated){RESET}")
         return []
 
+    entries = data if isinstance(data, list) else data.get("rows", data.get("data", []))
     results = []
-    for entry in data[:200]:  # cap to first 200 entries
-        model_name = entry.get("model") or entry.get("model_name") or ""
+    for raw_entry in entries[:200]:
+        entry = raw_entry.get("row", raw_entry) if isinstance(raw_entry, dict) else {}
+        model_name = entry.get("model") or entry.get("model_name") or entry.get("name") or ""
         if not model_name:
             continue
-        # Normalise: strip org prefix for matching (e.g. "openai/gpt-5.4" -> "gpt-5.4")
         short = model_name.split("/")[-1].lower().replace(" ", "-")
         scores: dict[str, float] = {}
         for ext_key, int_key in BENCHMARK_MAP.items():
@@ -138,24 +144,28 @@ def fetch_huggingface_leaderboard() -> list[dict]:
                 except (TypeError, ValueError):
                     pass
         if scores:
-            results.append({"model": short, "scores": scores,
-                            "source": "huggingface"})
+            results.append({"model": short, "scores": scores, "source": "huggingface"})
     print(f"  Found scores for {len(results)} models")
     return results
 
 # ---------------------------------------------------------------------------
-# Data source: Artificial Analysis
+# Data source: Artificial Analysis & CTS Aggregator Fallback
 # ---------------------------------------------------------------------------
-AA_LEADERBOARD_URL = (
-    "https://artificialanalysis.ai/api/leaderboard/models"
-)
+AA_LEADERBOARD_URL = "https://artificialanalysis.ai/api/leaderboard/models"
+CTS_AGGREGATOR_URL = "https://api.creativetechstudios.org/v1/benchmarks/summary"
 
 def fetch_artificial_analysis() -> list[dict]:
-    """Return list of model score dicts from Artificial Analysis."""
-    print(f"\n{CYAN}Fetching Artificial Analysis leaderboard...{RESET}")
+    """Return list of model score dicts from Artificial Analysis with CTS fallback."""
+    print(f"\n{CYAN}Fetching Artificial Analysis / CTS Aggregator...{RESET}")
     data = fetch_json(AA_LEADERBOARD_URL)
+    source_name = "artificial_analysis"
     if not data:
-        print(f"  {YELLOW}No data returned from Artificial Analysis API{RESET}")
+        # Fallback to CTS aggregator
+        data = fetch_json(CTS_AGGREGATOR_URL)
+        source_name = "cts_aggregator"
+
+    if not data:
+        print(f"  {YELLOW}No data returned from Artificial Analysis or CTS aggregator{RESET}")
         return []
 
     models_list = data if isinstance(data, list) else data.get("models", [])
@@ -173,8 +183,7 @@ def fetch_artificial_analysis() -> list[dict]:
                 except (TypeError, ValueError):
                     pass
         if scores:
-            results.append({"model": name, "scores": scores,
-                            "source": "artificial_analysis"})
+            results.append({"model": name, "scores": scores, "source": source_name})
     print(f"  Found scores for {len(results)} models")
     return results
 
@@ -271,8 +280,8 @@ def main():
     all_fetched.extend(fetch_artificial_analysis())
 
     if not all_fetched:
-        print(f"\n{RED}No data fetched from any source. Exiting.{RESET}")
-        sys.exit(1)
+        print(f"\n{YELLOW}No external score updates available at this time. Preserving existing verified scores.{RESET}")
+        sys.exit(0)
 
     # Process each YAML file
     total_updates = 0

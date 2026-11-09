@@ -39,5 +39,5 @@ jobs:
 
             Please review before merging.
           branch: auto-populate/scores
-          base: master
+          base: main
           labels: automated,data-update

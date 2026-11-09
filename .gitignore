@@ -5,3 +5,8 @@ dist/
 
 .claude/
 .workflow_state/
+
+# Unified Agent Control Plane
+.agent/session_skills/
+.research_state/
+.DS_Store
