@@ -107,10 +107,10 @@ def fetch_json(url: str, timeout: int = 30) -> dict | list | None:
     return None
 
 # ---------------------------------------------------------------------------
-# Data source: HuggingFace Open LLM Leaderboard (v2 & Dataset API)
+# Data source: HuggingFace Open LLM Leaderboard (v2 API & Formatted Feed)
 # ---------------------------------------------------------------------------
 HF_LEADERBOARD_URLS = [
-    "https://open-llm-leaderboard-open-llm-leaderboard.hf.space/api/v1/leaderboard",
+    "https://open-llm-leaderboard-open-llm-leaderboard.hf.space/api/leaderboard/formatted",
     "https://datasets-server.huggingface.co/rows?dataset=open-llm-leaderboard%2Fcontents&config=default&split=train&limit=200",
 ]
 
@@ -129,22 +129,52 @@ def fetch_huggingface_leaderboard() -> list[dict]:
 
     entries = data if isinstance(data, list) else data.get("rows", data.get("data", []))
     results = []
-    for raw_entry in entries[:200]:
-        entry = raw_entry.get("row", raw_entry) if isinstance(raw_entry, dict) else {}
-        model_name = entry.get("model") or entry.get("model_name") or entry.get("name") or ""
-        if not model_name:
+    for raw_entry in entries:
+        if not isinstance(raw_entry, dict):
             continue
-        short = model_name.split("/")[-1].lower().replace(" ", "-")
+        entry = raw_entry.get("row", raw_entry)
+
+        model_name = ""
         scores: dict[str, float] = {}
-        for ext_key, int_key in BENCHMARK_MAP.items():
-            val = entry.get(ext_key)
-            if val is not None:
-                try:
-                    scores[int_key] = float(val)
-                except (TypeError, ValueError):
-                    pass
-        if scores:
-            results.append({"model": short, "scores": scores, "source": "huggingface"})
+
+        # Check v2 formatted schema
+        model_obj = entry.get("model")
+        if isinstance(model_obj, dict) and model_obj.get("name"):
+            model_name = model_obj.get("name", "")
+            evals = entry.get("evaluations", {})
+            if isinstance(evals, dict):
+                for bench_k, bench_data in evals.items():
+                    if isinstance(bench_data, dict):
+                        val = bench_data.get("normalized_score")
+                        if val is None:
+                            val = bench_data.get("value")
+                        if val is not None:
+                            int_key = BENCHMARK_MAP.get(bench_k)
+                            if int_key:
+                                try:
+                                    scores[int_key] = round(float(val), 2)
+                                except (TypeError, ValueError):
+                                    pass
+            avg = model_obj.get("average_score")
+            if avg is not None:
+                scores["average"] = round(float(avg), 2)
+        else:
+            # legacy flat schema
+            model_name = entry.get("model") or entry.get("model_name") or entry.get("name") or ""
+            for ext_key, int_key in BENCHMARK_MAP.items():
+                val = entry.get(ext_key)
+                if val is not None:
+                    try:
+                        scores[int_key] = round(float(val), 2)
+                    except (TypeError, ValueError):
+                        pass
+
+        if not model_name or not scores:
+            continue
+
+        short = model_name.split("/")[-1].lower().replace(" ", "-")
+        results.append({"model": short, "scores": scores, "source": "huggingface"})
+
     print(f"  Found scores for {len(results)} models")
     return results
 

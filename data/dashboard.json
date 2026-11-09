@@ -1,9 +1,9 @@
 {
   "_build_metadata": {
-    "built_at": "2026-05-30T08:44:49.021841Z",
+    "built_at": "2026-11-09T11:11:11.283516Z",
     "schema_version": "3",
-    "commit_sha": "7b12d9841f9472e90f3eb342d882e3037259ce3a",
-    "yaml_integrity": "sha256:ff0082f8f9b998cc6fbf797d01d93e4bd52c72f16ef95d16fc426c7b321364a7",
+    "commit_sha": "20540a3f89924276bf25ad2a8f368e1a773fa3e1",
+    "yaml_integrity": "sha256:9cc5e5e85909aba87d90b8db4a64295527eb5120f748bb00ea7150f9650ae64b",
     "model_count": 32,
     "benchmark_count": 16
   },
@@ -518,6 +518,34 @@
           "benchmark_date": "2025-07-11",
           "source": "https://venturebeat.com/ai/moonshot-ais-kimi-k2-outperforms-gpt-4-in-key-benchmarks-and-its-free",
           "notes": "Kimi K2 Thinking variant leads LiveCodeBench among open-weight models per Vellum"
+        },
+        "ifeval": {
+          "value": 22.52,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
+        },
+        "gpqa_diamond": {
+          "value": 3.58,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
+        },
+        "mmlu_pro": {
+          "value": 22.27,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
+        },
+        "average": {
+          "value": 14.64,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
         }
       },
       "verification": {
@@ -1728,6 +1756,27 @@
           "benchmark_date": "2026-03-01",
           "source": "https://www.siliconflow.com/articles/benchmark",
           "notes": "Self-reported via SiliconFlow aggregation"
+        },
+        "gpqa_diamond": {
+          "value": 3.58,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
+        },
+        "mmlu_pro": {
+          "value": 22.27,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
+        },
+        "average": {
+          "value": 14.64,
+          "self_reported": false,
+          "benchmark_date": "2026-11-09",
+          "source": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+          "notes": null
         }
       },
       "verification": {

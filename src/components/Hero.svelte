@@ -1,4 +1,15 @@
 <script lang="ts">
+  import { data } from '../stores/data';
+  let dateSubtitle = $derived.by(() => {
+    const builtAt = $data._build_metadata?.built_at;
+    if (builtAt) {
+      const d = new Date(builtAt);
+      if (!isNaN(d.getTime())) {
+        return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      }
+    }
+    return new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  });
 </script>
 
 <header class="hero container">
@@ -18,5 +29,5 @@
     </svg>
   </div>
   <h1>Frontier AI Benchmark Tracker</h1>
-  <p>Live model intelligence comparison &mdash; April 2026</p>
+  <p>Live model intelligence comparison &mdash; {dateSubtitle}</p>
 </header>
