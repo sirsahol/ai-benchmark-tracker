@@ -1,8 +1,8 @@
 {
   "_build_metadata": {
-    "built_at": "2026-11-09T11:11:11.283516Z",
+    "built_at": "2026-11-09T12:04:42.814872Z",
     "schema_version": "3",
-    "commit_sha": "20540a3f89924276bf25ad2a8f368e1a773fa3e1",
+    "commit_sha": "a61aff8c8f4249ce4c39e29db94b24ebf91e5907",
     "yaml_integrity": "sha256:9cc5e5e85909aba87d90b8db4a64295527eb5120f748bb00ea7150f9650ae64b",
     "model_count": 32,
     "benchmark_count": 16
